@@ -1,0 +1,964 @@
+fileFormatVersion: 2
+guid: f86a215886445a64a97c7f56793fa3a1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8235070421005969016
+    second: CopperHelmetRunningAttackAnimation_0
+  - first:
+      213: -7788292862599143125
+    second: CopperHelmetRunningAttackAnimation_1
+  - first:
+      213: 2485167252015437225
+    second: CopperHelmetRunningAttackAnimation_2
+  - first:
+      213: -8442481394640602168
+    second: CopperHelmetRunningAttackAnimation_3
+  - first:
+      213: 2021565550485424162
+    second: CopperHelmetRunningAttackAnimation_4
+  - first:
+      213: 3980925559363141936
+    second: CopperHelmetRunningAttackAnimation_5
+  - first:
+      213: -4186926910203425341
+    second: CopperHelmetRunningAttackAnimation_6
+  - first:
+      213: -1429673828321247305
+    second: CopperHelmetRunningAttackAnimation_7
+  - first:
+      213: 9038446012366066607
+    second: CopperHelmetRunningAttackAnimation_8
+  - first:
+      213: -6559981342661196053
+    second: CopperHelmetRunningAttackAnimation_9
+  - first:
+      213: 3285152362350353685
+    second: CopperHelmetRunningAttackAnimation_10
+  - first:
+      213: 9029338522956359275
+    second: CopperHelmetRunningAttackAnimation_11
+  - first:
+      213: 6193938515293861576
+    second: CopperHelmetRunningAttackAnimation_12
+  - first:
+      213: -6297232303929255912
+    second: CopperHelmetRunningAttackAnimation_13
+  - first:
+      213: 4562950560500848993
+    second: CopperHelmetRunningAttackAnimation_14
+  - first:
+      213: -2142874626880139529
+    second: CopperHelmetRunningAttackAnimation_15
+  - first:
+      213: -5461243897099188517
+    second: CopperHelmetRunningAttackAnimation_16
+  - first:
+      213: 6243054646643906907
+    second: CopperHelmetRunningAttackAnimation_17
+  - first:
+      213: -4893356705011430465
+    second: CopperHelmetRunningAttackAnimation_18
+  - first:
+      213: -8438488558906929757
+    second: CopperHelmetRunningAttackAnimation_19
+  - first:
+      213: 7943580436412672538
+    second: CopperHelmetRunningAttackAnimation_20
+  - first:
+      213: -7608711238113763300
+    second: CopperHelmetRunningAttackAnimation_21
+  - first:
+      213: 4922519385330475767
+    second: CopperHelmetRunningAttackAnimation_22
+  - first:
+      213: 5198645174453517484
+    second: CopperHelmetRunningAttackAnimation_23
+  - first:
+      213: 4348947108516443965
+    second: CopperHelmetRunningAttackAnimation_24
+  - first:
+      213: 4062737444789514244
+    second: CopperHelmetRunningAttackAnimation_25
+  - first:
+      213: 1457771388980679284
+    second: CopperHelmetRunningAttackAnimation_26
+  - first:
+      213: -3351067852598270487
+    second: CopperHelmetRunningAttackAnimation_27
+  - first:
+      213: 8487435073673472365
+    second: CopperHelmetRunningAttackAnimation_28
+  - first:
+      213: 1989002179584581356
+    second: CopperHelmetRunningAttackAnimation_29
+  - first:
+      213: 3403540600265303872
+    second: CopperHelmetRunningAttackAnimation_30
+  - first:
+      213: 4139719478506652860
+    second: CopperHelmetRunningAttackAnimation_31
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 889dc97551727bd80800000000000000
+      internalID: -8235070421005969016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b216116d7ec6ae390800000000000000
+      internalID: -7788292862599143125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a550dfd2761d7220800000000000000
+      internalID: 2485167252015437225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cb3a99d6e746da80800000000000000
+      internalID: -8442481394640602168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 228c9de482b0e0c10800000000000000
+      internalID: 2021565550485424162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0310d1354b61f3730800000000000000
+      internalID: 3980925559363141936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cd0dc0982c05e5c0800000000000000
+      internalID: -4186926910203425341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bf3d365a37c82ce0800000000000000
+      internalID: -1429673828321247305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa310a0b2c20f6d70800000000000000
+      internalID: 9038446012366066607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_9
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be64d71a9b346f4a0800000000000000
+      internalID: -6559981342661196053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51d9de60ba4379d20800000000000000
+      internalID: 3285152362350353685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_11
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6660911c87ae4d70800000000000000
+      internalID: 9029338522956359275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_12
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c673b4434a45f550800000000000000
+      internalID: 6193938515293861576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_13
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8189e20759cbb98a0800000000000000
+      internalID: -6297232303929255912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_14
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1699256fb5bd25f30800000000000000
+      internalID: 4562950560500848993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_15
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fe8c9a51eaf242e0800000000000000
+      internalID: -2142874626880139529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd602a94c93c534b0800000000000000
+      internalID: -5461243897099188517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_17
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b59df8ebf19c3a650800000000000000
+      internalID: 6243054646643906907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_18
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbb848eb00e471cb0800000000000000
+      internalID: -4893356705011430465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_19
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ad872d5d5774ea80800000000000000
+      internalID: -8438488558906929757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_20
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1aae1de1544d3e60800000000000000
+      internalID: 7943580436412672538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_21
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c10e4bd017d686690800000000000000
+      internalID: -7608711238113763300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_22
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f2e892ec4d405440800000000000000
+      internalID: 4922519385330475767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_23
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cacb9981e3c452840800000000000000
+      internalID: 5198645174453517484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d37b51e7a509a5c30800000000000000
+      internalID: 4348947108516443965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_25
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4007b544e2eb16830800000000000000
+      internalID: 4062737444789514244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_26
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 472dbebca5b0b3410800000000000000
+      internalID: 1457771388980679284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_27
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e526a3fa8d9e71d0800000000000000
+      internalID: -3351067852598270487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_28
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d69af7c2b3d69c570800000000000000
+      internalID: 8487435073673472365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_29
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ceedd93b1fa5a9b10800000000000000
+      internalID: 1989002179584581356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_30
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 047ee69a42ecb3f20800000000000000
+      internalID: 3403540600265303872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CopperHelmetRunningAttackAnimation_31
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb4872abeec337930800000000000000
+      internalID: 4139719478506652860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3e4e05265219d9b4a8d7c264a372df87
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      CopperHelmetRunningAttackAnimation_0: -8235070421005969016
+      CopperHelmetRunningAttackAnimation_1: -7788292862599143125
+      CopperHelmetRunningAttackAnimation_10: 3285152362350353685
+      CopperHelmetRunningAttackAnimation_11: 9029338522956359275
+      CopperHelmetRunningAttackAnimation_12: 6193938515293861576
+      CopperHelmetRunningAttackAnimation_13: -6297232303929255912
+      CopperHelmetRunningAttackAnimation_14: 4562950560500848993
+      CopperHelmetRunningAttackAnimation_15: -2142874626880139529
+      CopperHelmetRunningAttackAnimation_16: -5461243897099188517
+      CopperHelmetRunningAttackAnimation_17: 6243054646643906907
+      CopperHelmetRunningAttackAnimation_18: -4893356705011430465
+      CopperHelmetRunningAttackAnimation_19: -8438488558906929757
+      CopperHelmetRunningAttackAnimation_2: 2485167252015437225
+      CopperHelmetRunningAttackAnimation_20: 7943580436412672538
+      CopperHelmetRunningAttackAnimation_21: -7608711238113763300
+      CopperHelmetRunningAttackAnimation_22: 4922519385330475767
+      CopperHelmetRunningAttackAnimation_23: 5198645174453517484
+      CopperHelmetRunningAttackAnimation_24: 4348947108516443965
+      CopperHelmetRunningAttackAnimation_25: 4062737444789514244
+      CopperHelmetRunningAttackAnimation_26: 1457771388980679284
+      CopperHelmetRunningAttackAnimation_27: -3351067852598270487
+      CopperHelmetRunningAttackAnimation_28: 8487435073673472365
+      CopperHelmetRunningAttackAnimation_29: 1989002179584581356
+      CopperHelmetRunningAttackAnimation_3: -8442481394640602168
+      CopperHelmetRunningAttackAnimation_30: 3403540600265303872
+      CopperHelmetRunningAttackAnimation_31: 4139719478506652860
+      CopperHelmetRunningAttackAnimation_4: 2021565550485424162
+      CopperHelmetRunningAttackAnimation_5: 3980925559363141936
+      CopperHelmetRunningAttackAnimation_6: -4186926910203425341
+      CopperHelmetRunningAttackAnimation_7: -1429673828321247305
+      CopperHelmetRunningAttackAnimation_8: 9038446012366066607
+      CopperHelmetRunningAttackAnimation_9: -6559981342661196053
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

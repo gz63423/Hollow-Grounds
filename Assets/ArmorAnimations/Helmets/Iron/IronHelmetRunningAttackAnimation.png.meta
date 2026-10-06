@@ -1,0 +1,964 @@
+fileFormatVersion: 2
+guid: 229b8161fadba6f45b5208a1d77becf9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8484282614064183666
+    second: IronHelmetRunningAttackAnimation_0
+  - first:
+      213: 7941725564603557683
+    second: IronHelmetRunningAttackAnimation_1
+  - first:
+      213: 9134274529550787834
+    second: IronHelmetRunningAttackAnimation_2
+  - first:
+      213: 6434820968940669241
+    second: IronHelmetRunningAttackAnimation_3
+  - first:
+      213: 3551840905543388478
+    second: IronHelmetRunningAttackAnimation_4
+  - first:
+      213: -2618648936452914144
+    second: IronHelmetRunningAttackAnimation_5
+  - first:
+      213: -211565133146540069
+    second: IronHelmetRunningAttackAnimation_6
+  - first:
+      213: 3819231449294786299
+    second: IronHelmetRunningAttackAnimation_7
+  - first:
+      213: -6574195824468081024
+    second: IronHelmetRunningAttackAnimation_8
+  - first:
+      213: -8397315133260551284
+    second: IronHelmetRunningAttackAnimation_9
+  - first:
+      213: -4811967384623222970
+    second: IronHelmetRunningAttackAnimation_10
+  - first:
+      213: -5341972861110772523
+    second: IronHelmetRunningAttackAnimation_11
+  - first:
+      213: 1367772113795549047
+    second: IronHelmetRunningAttackAnimation_12
+  - first:
+      213: -2534997429942821089
+    second: IronHelmetRunningAttackAnimation_13
+  - first:
+      213: -3772904430033487424
+    second: IronHelmetRunningAttackAnimation_14
+  - first:
+      213: 2520123501602237849
+    second: IronHelmetRunningAttackAnimation_15
+  - first:
+      213: -4511057078286613897
+    second: IronHelmetRunningAttackAnimation_16
+  - first:
+      213: -8373390730700974586
+    second: IronHelmetRunningAttackAnimation_17
+  - first:
+      213: 6414365741839132424
+    second: IronHelmetRunningAttackAnimation_18
+  - first:
+      213: 5247617205994448768
+    second: IronHelmetRunningAttackAnimation_19
+  - first:
+      213: 8613401288453777731
+    second: IronHelmetRunningAttackAnimation_20
+  - first:
+      213: -6239204621343375898
+    second: IronHelmetRunningAttackAnimation_21
+  - first:
+      213: 1376002678015340102
+    second: IronHelmetRunningAttackAnimation_22
+  - first:
+      213: 1627095316008175948
+    second: IronHelmetRunningAttackAnimation_23
+  - first:
+      213: -312393982942339824
+    second: IronHelmetRunningAttackAnimation_24
+  - first:
+      213: -4630919891223636096
+    second: IronHelmetRunningAttackAnimation_25
+  - first:
+      213: 2740728138204816884
+    second: IronHelmetRunningAttackAnimation_26
+  - first:
+      213: -1775693767808444498
+    second: IronHelmetRunningAttackAnimation_27
+  - first:
+      213: 4507153887315255470
+    second: IronHelmetRunningAttackAnimation_28
+  - first:
+      213: 7829439271821193682
+    second: IronHelmetRunningAttackAnimation_29
+  - first:
+      213: 7015635344975199191
+    second: IronHelmetRunningAttackAnimation_30
+  - first:
+      213: -2267816688852553529
+    second: IronHelmetRunningAttackAnimation_31
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2797159f51a3eb570800000000000000
+      internalID: 8484282614064183666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33765dde25da63e60800000000000000
+      internalID: 7941725564603557683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af4e5c60a4673ce70800000000000000
+      internalID: 9134274529550787834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93981fef3931d4950800000000000000
+      internalID: 6434820968940669241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3d8d913c7caa4130800000000000000
+      internalID: 3551840905543388478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 024054f9aa0b8abd0800000000000000
+      internalID: -2618648936452914144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd731ffd1ae501df0800000000000000
+      internalID: -211565133146540069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfe473a94c2a00530800000000000000
+      internalID: 3819231449294786299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08649beaab3c3c4a0800000000000000
+      internalID: -6574195824468081024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_9
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8b2efe806eb67b80800000000000000
+      internalID: -8397315133260551284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64f64c89825783db0800000000000000
+      internalID: -4811967384623222970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_11
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dc17bd5cff7dd5b0800000000000000
+      internalID: -5341972861110772523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_12
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7770870ad7d4bf210800000000000000
+      internalID: 1367772113795549047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_13
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1fdab9b441e1dcd0800000000000000
+      internalID: -2534997429942821089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_14
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c93b5c1963f3abc0800000000000000
+      internalID: -3772904430033487424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_15
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99d6d17f8f649f220800000000000000
+      internalID: 2520123501602237849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7720737ec718561c0800000000000000
+      internalID: -4511057078286613897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_17
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 606150b9e7dbbcb80800000000000000
+      internalID: -8373390730700974586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_18
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 807a1cd48a7640950800000000000000
+      internalID: 6414365741839132424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_19
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 087e688bb0843d840800000000000000
+      internalID: 5247617205994448768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_20
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 349ed2a06d2f88770800000000000000
+      internalID: 8613401288453777731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_21
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ed3adf1474e969a0800000000000000
+      internalID: -6239204621343375898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_22
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64e2711352b881310800000000000000
+      internalID: 1376002678015340102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_23
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c498e56b19a949610800000000000000
+      internalID: 1627095316008175948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01d90c0e3572aabf0800000000000000
+      internalID: -312393982942339824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_25
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 087135405eaabbfb0800000000000000
+      internalID: -4630919891223636096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_26
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f5ad9f78b5090620800000000000000
+      internalID: 2740728138204816884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_27
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea717eb1de77b57e0800000000000000
+      internalID: -1775693767808444498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_28
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea06271a490ac8e30800000000000000
+      internalID: 4507153887315255470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_29
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d1356b1981c7ac60800000000000000
+      internalID: 7829439271821193682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_30
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dbfbe20d2b8c5160800000000000000
+      internalID: 7015635344975199191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IronHelmetRunningAttackAnimation_31
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c0bd35acb81780e0800000000000000
+      internalID: -2267816688852553529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3188e32f2d80744499f72df8a805cea1
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      IronHelmetRunningAttackAnimation_0: 8484282614064183666
+      IronHelmetRunningAttackAnimation_1: 7941725564603557683
+      IronHelmetRunningAttackAnimation_10: -4811967384623222970
+      IronHelmetRunningAttackAnimation_11: -5341972861110772523
+      IronHelmetRunningAttackAnimation_12: 1367772113795549047
+      IronHelmetRunningAttackAnimation_13: -2534997429942821089
+      IronHelmetRunningAttackAnimation_14: -3772904430033487424
+      IronHelmetRunningAttackAnimation_15: 2520123501602237849
+      IronHelmetRunningAttackAnimation_16: -4511057078286613897
+      IronHelmetRunningAttackAnimation_17: -8373390730700974586
+      IronHelmetRunningAttackAnimation_18: 6414365741839132424
+      IronHelmetRunningAttackAnimation_19: 5247617205994448768
+      IronHelmetRunningAttackAnimation_2: 9134274529550787834
+      IronHelmetRunningAttackAnimation_20: 8613401288453777731
+      IronHelmetRunningAttackAnimation_21: -6239204621343375898
+      IronHelmetRunningAttackAnimation_22: 1376002678015340102
+      IronHelmetRunningAttackAnimation_23: 1627095316008175948
+      IronHelmetRunningAttackAnimation_24: -312393982942339824
+      IronHelmetRunningAttackAnimation_25: -4630919891223636096
+      IronHelmetRunningAttackAnimation_26: 2740728138204816884
+      IronHelmetRunningAttackAnimation_27: -1775693767808444498
+      IronHelmetRunningAttackAnimation_28: 4507153887315255470
+      IronHelmetRunningAttackAnimation_29: 7829439271821193682
+      IronHelmetRunningAttackAnimation_3: 6434820968940669241
+      IronHelmetRunningAttackAnimation_30: 7015635344975199191
+      IronHelmetRunningAttackAnimation_31: -2267816688852553529
+      IronHelmetRunningAttackAnimation_4: 3551840905543388478
+      IronHelmetRunningAttackAnimation_5: -2618648936452914144
+      IronHelmetRunningAttackAnimation_6: -211565133146540069
+      IronHelmetRunningAttackAnimation_7: 3819231449294786299
+      IronHelmetRunningAttackAnimation_8: -6574195824468081024
+      IronHelmetRunningAttackAnimation_9: -8397315133260551284
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,955 @@
+fileFormatVersion: 2
+guid: e3b2d10e98503c24ea1ab2e874dcaa63
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -650216180605774603
+    second: LeatherLeggingsRunningAttackAnimation_0
+  - first:
+      213: -6945838581238995633
+    second: LeatherLeggingsRunningAttackAnimation_1
+  - first:
+      213: 541703211975648852
+    second: LeatherLeggingsRunningAttackAnimation_2
+  - first:
+      213: 1720648970489967325
+    second: LeatherLeggingsRunningAttackAnimation_3
+  - first:
+      213: 2537970499848546136
+    second: LeatherLeggingsRunningAttackAnimation_4
+  - first:
+      213: 5506755703906746158
+    second: LeatherLeggingsRunningAttackAnimation_5
+  - first:
+      213: 5996603764474613129
+    second: LeatherLeggingsRunningAttackAnimation_6
+  - first:
+      213: -6431921782262212725
+    second: LeatherLeggingsRunningAttackAnimation_7
+  - first:
+      213: -8306384802329117258
+    second: LeatherLeggingsRunningAttackAnimation_8
+  - first:
+      213: 8894515747734143021
+    second: LeatherLeggingsRunningAttackAnimation_9
+  - first:
+      213: -846634521291139075
+    second: LeatherLeggingsRunningAttackAnimation_10
+  - first:
+      213: 7151289978185472341
+    second: LeatherLeggingsRunningAttackAnimation_11
+  - first:
+      213: 4965664394192737534
+    second: LeatherLeggingsRunningAttackAnimation_12
+  - first:
+      213: 4484003585813445267
+    second: LeatherLeggingsRunningAttackAnimation_13
+  - first:
+      213: 525113463989775687
+    second: LeatherLeggingsRunningAttackAnimation_14
+  - first:
+      213: 3030353641677304357
+    second: LeatherLeggingsRunningAttackAnimation_15
+  - first:
+      213: -2240601345375319216
+    second: LeatherLeggingsRunningAttackAnimation_16
+  - first:
+      213: 3835061097413025233
+    second: LeatherLeggingsRunningAttackAnimation_17
+  - first:
+      213: 8492458747273485370
+    second: LeatherLeggingsRunningAttackAnimation_18
+  - first:
+      213: -4126541008684597936
+    second: LeatherLeggingsRunningAttackAnimation_19
+  - first:
+      213: 3618031393884186841
+    second: LeatherLeggingsRunningAttackAnimation_20
+  - first:
+      213: 62343955873056061
+    second: LeatherLeggingsRunningAttackAnimation_21
+  - first:
+      213: -7663621363620813046
+    second: LeatherLeggingsRunningAttackAnimation_22
+  - first:
+      213: 5735362165681510277
+    second: LeatherLeggingsRunningAttackAnimation_23
+  - first:
+      213: -9142366953653090584
+    second: LeatherLeggingsRunningAttackAnimation_24
+  - first:
+      213: 7894756912478739125
+    second: LeatherLeggingsRunningAttackAnimation_25
+  - first:
+      213: 2729207811990705741
+    second: LeatherLeggingsRunningAttackAnimation_26
+  - first:
+      213: -6555093519822831896
+    second: LeatherLeggingsRunningAttackAnimation_27
+  - first:
+      213: -8263522901628164680
+    second: LeatherLeggingsRunningAttackAnimation_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f418c724d7f9f6f0800000000000000
+      internalID: -650216180605774603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f45eb0a6c9c6b9f90800000000000000
+      internalID: -6945838581238995633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4562f738334848700800000000000000
+      internalID: 541703211975648852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd2323d4f19f0e710800000000000000
+      internalID: 1720648970489967325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 857a4ed09bea83320800000000000000
+      internalID: 2537970499848546136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2fb73cf22deb6c40800000000000000
+      internalID: 5506755703906746158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98d87483a57383350800000000000000
+      internalID: 5996603764474613129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b87d92187393db6a0800000000000000
+      internalID: -6431921782262212725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bd3879080bc9bc80800000000000000
+      internalID: -8306384802329117258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_9
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d20cfc882faaf6b70800000000000000
+      internalID: 8894515747734143021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df7dbd773662044f0800000000000000
+      internalID: -846634521291139075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_11
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5595e83985c7e3360800000000000000
+      internalID: 7151289978185472341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_12
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef4d9a1157599e440800000000000000
+      internalID: 4965664394192737534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_13
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39afcf701816a3e30800000000000000
+      internalID: 4484003585813445267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_14
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74da2efc9e3994700800000000000000
+      internalID: 525113463989775687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_15
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 522bcf3e49afd0a20800000000000000
+      internalID: 3030353641677304357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05b44a592f8c7e0e0800000000000000
+      internalID: -2240601345375319216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_17
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1dd1933cfbfd83530800000000000000
+      internalID: 3835061097413025233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_18
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3c15e45c364bd570800000000000000
+      internalID: 8492458747273485370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_19
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05db542e0d49bb6c0800000000000000
+      internalID: -4126541008684597936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_20
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d8ada23264d53230800000000000000
+      internalID: 3618031393884186841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_21
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d35c4bf5f7d7dd000800000000000000
+      internalID: 62343955873056061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_22
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a07694039f855a590800000000000000
+      internalID: -7663621363620813046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_23
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58759af9089189f40800000000000000
+      internalID: 5735362165681510277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e6cc39a1b9cf1180800000000000000
+      internalID: -9142366953653090584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_25
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bada5c659fcf8d60800000000000000
+      internalID: 7894756912478739125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_26
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d465de78b0810e520800000000000000
+      internalID: 2729207811990705741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_27
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8eebe719c21a705a0800000000000000
+      internalID: -6555093519822831896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_28
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b5e527f3b1125d80800000000000000
+      internalID: -8263522901628164680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_29
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3e57edf4c6e8784aa026a8406e0fea3
+      internalID: 58484464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_30
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ad70cfc49d475b4d83ad480dac12307
+      internalID: -1984643283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherLeggingsRunningAttackAnimation_31
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07936a51768137743af2bff0161e2b40
+      internalID: -101877943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: d0e43fab5e7802342b630ed422d63ce0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      LeatherLeggingsRunningAttackAnimation_0: -650216180605774603
+      LeatherLeggingsRunningAttackAnimation_1: -6945838581238995633
+      LeatherLeggingsRunningAttackAnimation_10: -846634521291139075
+      LeatherLeggingsRunningAttackAnimation_11: 7151289978185472341
+      LeatherLeggingsRunningAttackAnimation_12: 4965664394192737534
+      LeatherLeggingsRunningAttackAnimation_13: 4484003585813445267
+      LeatherLeggingsRunningAttackAnimation_14: 525113463989775687
+      LeatherLeggingsRunningAttackAnimation_15: 3030353641677304357
+      LeatherLeggingsRunningAttackAnimation_16: -2240601345375319216
+      LeatherLeggingsRunningAttackAnimation_17: 3835061097413025233
+      LeatherLeggingsRunningAttackAnimation_18: 8492458747273485370
+      LeatherLeggingsRunningAttackAnimation_19: -4126541008684597936
+      LeatherLeggingsRunningAttackAnimation_2: 541703211975648852
+      LeatherLeggingsRunningAttackAnimation_20: 3618031393884186841
+      LeatherLeggingsRunningAttackAnimation_21: 62343955873056061
+      LeatherLeggingsRunningAttackAnimation_22: -7663621363620813046
+      LeatherLeggingsRunningAttackAnimation_23: 5735362165681510277
+      LeatherLeggingsRunningAttackAnimation_24: -9142366953653090584
+      LeatherLeggingsRunningAttackAnimation_25: 7894756912478739125
+      LeatherLeggingsRunningAttackAnimation_26: 2729207811990705741
+      LeatherLeggingsRunningAttackAnimation_27: -6555093519822831896
+      LeatherLeggingsRunningAttackAnimation_28: -8263522901628164680
+      LeatherLeggingsRunningAttackAnimation_29: 58484464
+      LeatherLeggingsRunningAttackAnimation_3: 1720648970489967325
+      LeatherLeggingsRunningAttackAnimation_30: -1984643283
+      LeatherLeggingsRunningAttackAnimation_31: -101877943
+      LeatherLeggingsRunningAttackAnimation_4: 2537970499848546136
+      LeatherLeggingsRunningAttackAnimation_5: 5506755703906746158
+      LeatherLeggingsRunningAttackAnimation_6: 5996603764474613129
+      LeatherLeggingsRunningAttackAnimation_7: -6431921782262212725
+      LeatherLeggingsRunningAttackAnimation_8: -8306384802329117258
+      LeatherLeggingsRunningAttackAnimation_9: 8894515747734143021
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,964 @@
+fileFormatVersion: 2
+guid: e3325c2c3a07588408c8b86b9888d926
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6475055386831151438
+    second: LeatherHelmetRunningAttackAnimation_0
+  - first:
+      213: -7719827919579244414
+    second: LeatherHelmetRunningAttackAnimation_1
+  - first:
+      213: 4795981866956816715
+    second: LeatherHelmetRunningAttackAnimation_2
+  - first:
+      213: -4141648317793902223
+    second: LeatherHelmetRunningAttackAnimation_3
+  - first:
+      213: 6554232975491592932
+    second: LeatherHelmetRunningAttackAnimation_4
+  - first:
+      213: 8736234392338032936
+    second: LeatherHelmetRunningAttackAnimation_5
+  - first:
+      213: 630900168784999743
+    second: LeatherHelmetRunningAttackAnimation_6
+  - first:
+      213: -3135423785374211870
+    second: LeatherHelmetRunningAttackAnimation_7
+  - first:
+      213: -1746739617089385726
+    second: LeatherHelmetRunningAttackAnimation_8
+  - first:
+      213: -6708865856274381215
+    second: LeatherHelmetRunningAttackAnimation_9
+  - first:
+      213: -3350788453024701220
+    second: LeatherHelmetRunningAttackAnimation_10
+  - first:
+      213: 7801097145280338067
+    second: LeatherHelmetRunningAttackAnimation_11
+  - first:
+      213: 7297258819970533386
+    second: LeatherHelmetRunningAttackAnimation_12
+  - first:
+      213: -5556656719941884143
+    second: LeatherHelmetRunningAttackAnimation_13
+  - first:
+      213: 4752441946466013803
+    second: LeatherHelmetRunningAttackAnimation_14
+  - first:
+      213: -2552119974635642436
+    second: LeatherHelmetRunningAttackAnimation_15
+  - first:
+      213: -8565623193134317745
+    second: LeatherHelmetRunningAttackAnimation_16
+  - first:
+      213: -4319559543923677393
+    second: LeatherHelmetRunningAttackAnimation_17
+  - first:
+      213: -8976639690507434342
+    second: LeatherHelmetRunningAttackAnimation_18
+  - first:
+      213: 1864615886543019349
+    second: LeatherHelmetRunningAttackAnimation_19
+  - first:
+      213: 9124748101826555872
+    second: LeatherHelmetRunningAttackAnimation_20
+  - first:
+      213: 9054456794298864939
+    second: LeatherHelmetRunningAttackAnimation_21
+  - first:
+      213: -614618544427002478
+    second: LeatherHelmetRunningAttackAnimation_22
+  - first:
+      213: 3714420040780412199
+    second: LeatherHelmetRunningAttackAnimation_23
+  - first:
+      213: -4531654706481803205
+    second: LeatherHelmetRunningAttackAnimation_24
+  - first:
+      213: -5379747281867561116
+    second: LeatherHelmetRunningAttackAnimation_25
+  - first:
+      213: -3187077147062482873
+    second: LeatherHelmetRunningAttackAnimation_26
+  - first:
+      213: -7080262804346641842
+    second: LeatherHelmetRunningAttackAnimation_27
+  - first:
+      213: 2033853543910480695
+    second: LeatherHelmetRunningAttackAnimation_28
+  - first:
+      213: 4519716526886182070
+    second: LeatherHelmetRunningAttackAnimation_29
+  - first:
+      213: -4971346660484729605
+    second: LeatherHelmetRunningAttackAnimation_30
+  - first:
+      213: -6672345749865318327
+    second: LeatherHelmetRunningAttackAnimation_31
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e41ec0961940cd950800000000000000
+      internalID: 6475055386831151438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28816569869add490800000000000000
+      internalID: -7719827919579244414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b410d290910ce8240800000000000000
+      internalID: 4795981866956816715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 171ec416cc8e586c0800000000000000
+      internalID: -4141648317793902223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e2f3575a2055fa50800000000000000
+      internalID: 6554232975491592932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 829ebdda4e65d3970800000000000000
+      internalID: 8736234392338032936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f35f9216c5861c800800000000000000
+      internalID: 630900168784999743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e0a57cedacbc74d0800000000000000
+      internalID: -3135423785374211870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20b0948a29552c7e0800000000000000
+      internalID: -1746739617089385726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_9
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 166c40f7c0255e2a0800000000000000
+      internalID: -6708865856274381215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd46bfbb7ab9f71d0800000000000000
+      internalID: -3350788453024701220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_11
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3989fba8580134c60800000000000000
+      internalID: 7801097145280338067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_12
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a080e66fb32154560800000000000000
+      internalID: 7297258819970533386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_13
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 117a315572ac2e2b0800000000000000
+      internalID: -5556656719941884143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_14
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b62d5c255c014f140800000000000000
+      internalID: 4752441946466013803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_15
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb1e9af976c059cd0800000000000000
+      internalID: -2552119974635642436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4fb165a61bc02980800000000000000
+      internalID: -8565623193134317745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_17
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f27e7461b77dd04c0800000000000000
+      internalID: -4319559543923677393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_18
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a96c1a203c19c6380800000000000000
+      internalID: -8976639690507434342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_19
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55d52f7054270e910800000000000000
+      internalID: 1864615886543019349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_20
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0efaa4abd0e91ae70800000000000000
+      internalID: 9124748101826555872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_21
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b255e4a5b74e7ad70800000000000000
+      internalID: 9054456794298864939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_22
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2959f03b0bf6877f0800000000000000
+      internalID: -614618544427002478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_23
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 725fe45e8554c8330800000000000000
+      internalID: 3714420040780412199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b30dc6fdd045c11c0800000000000000
+      internalID: -4531654706481803205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_25
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46729eaa95c4755b0800000000000000
+      internalID: -5379747281867561116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_26
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7484399783a35c3d0800000000000000
+      internalID: -3187077147062482873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_27
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e42e1860e7addbd90800000000000000
+      internalID: -7080262804346641842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_28
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73b14f9b503b93c10800000000000000
+      internalID: 2033853543910480695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_29
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bc53861c3249be30800000000000000
+      internalID: 4519716526886182070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_30
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf4bb763d8a320bb0800000000000000
+      internalID: -4971346660484729605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LeatherHelmetRunningAttackAnimation_31
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 948b0b064e01763a0800000000000000
+      internalID: -6672345749865318327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: d916307d674341f49883b544f1542a92
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      LeatherHelmetRunningAttackAnimation_0: 6475055386831151438
+      LeatherHelmetRunningAttackAnimation_1: -7719827919579244414
+      LeatherHelmetRunningAttackAnimation_10: -3350788453024701220
+      LeatherHelmetRunningAttackAnimation_11: 7801097145280338067
+      LeatherHelmetRunningAttackAnimation_12: 7297258819970533386
+      LeatherHelmetRunningAttackAnimation_13: -5556656719941884143
+      LeatherHelmetRunningAttackAnimation_14: 4752441946466013803
+      LeatherHelmetRunningAttackAnimation_15: -2552119974635642436
+      LeatherHelmetRunningAttackAnimation_16: -8565623193134317745
+      LeatherHelmetRunningAttackAnimation_17: -4319559543923677393
+      LeatherHelmetRunningAttackAnimation_18: -8976639690507434342
+      LeatherHelmetRunningAttackAnimation_19: 1864615886543019349
+      LeatherHelmetRunningAttackAnimation_2: 4795981866956816715
+      LeatherHelmetRunningAttackAnimation_20: 9124748101826555872
+      LeatherHelmetRunningAttackAnimation_21: 9054456794298864939
+      LeatherHelmetRunningAttackAnimation_22: -614618544427002478
+      LeatherHelmetRunningAttackAnimation_23: 3714420040780412199
+      LeatherHelmetRunningAttackAnimation_24: -4531654706481803205
+      LeatherHelmetRunningAttackAnimation_25: -5379747281867561116
+      LeatherHelmetRunningAttackAnimation_26: -3187077147062482873
+      LeatherHelmetRunningAttackAnimation_27: -7080262804346641842
+      LeatherHelmetRunningAttackAnimation_28: 2033853543910480695
+      LeatherHelmetRunningAttackAnimation_29: 4519716526886182070
+      LeatherHelmetRunningAttackAnimation_3: -4141648317793902223
+      LeatherHelmetRunningAttackAnimation_30: -4971346660484729605
+      LeatherHelmetRunningAttackAnimation_31: -6672345749865318327
+      LeatherHelmetRunningAttackAnimation_4: 6554232975491592932
+      LeatherHelmetRunningAttackAnimation_5: 8736234392338032936
+      LeatherHelmetRunningAttackAnimation_6: 630900168784999743
+      LeatherHelmetRunningAttackAnimation_7: -3135423785374211870
+      LeatherHelmetRunningAttackAnimation_8: -1746739617089385726
+      LeatherHelmetRunningAttackAnimation_9: -6708865856274381215
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

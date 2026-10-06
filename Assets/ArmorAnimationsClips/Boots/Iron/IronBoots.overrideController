@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: IronBoots
+  m_Controller: {fileID: 9100000, guid: 337fc6e2ac50ae343a6e3db92a6acfc4, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 82173e4d5c9797846b975ee82057cce8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e52055891e61a724aa82fb9700c32a62, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 730d3724e9b616e4a82c613adbb734ee, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 81f201f56bb5b6a459a6c630a474a669, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ec8cd620a8b77ab4a8a1cb96b8eb99f9, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fe3ca6c47f0295e47ad2af4071f7e667, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 7e425f14f5e51e642a314f9d84f02c41, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8ac8f84ea47f81d4bb0c2fe8546c5d75, type: 2}
