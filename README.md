@@ -432,15 +432,15 @@ Steam: \[The Hollow Grounds](https://store.steampowered.com/app/5212390/The\_Hol
 
 
 
-YouTube: \[The Hollow Grounds YouTube Channel](https://www.youtube.com/@the\_hollow\_grounds)
+YouTube: \[The Hollow Grounds](https://www.youtube.com/@the\_hollow\_grounds)
 
 
 
-Instagram: \[The Hollow Grounds Instagram](https://www.instagram.com/the\_hollow\_grounds/)
+Instagram: \[The Hollow Grounds](https://www.instagram.com/the\_hollow\_grounds/)
 
 
 
-TikTok: \[The Hollow Grounds TikTok](https://www.tiktok.com/@the\_hollow\_grounds)
+TikTok: \[The Hollow Grounds](https://www.tiktok.com/@the\_hollow\_grounds)
 
 
 
