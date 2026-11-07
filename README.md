@@ -432,7 +432,7 @@ Steam: \[The Hollow Grounds](https://store.steampowered.com/app/5212390/The\_Hol
 
 
 
-YouTube: Search for "The Hollow Grounds" on YouTube to find the official development channel and gameplay videos. 
+YouTube: https://www.youtube.com/shorts/PF2XB16Qc3c
 
 
 
