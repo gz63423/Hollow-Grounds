@@ -428,15 +428,19 @@ PROJECT LINKS
 
 
 
-\- Steam: \[The Hollow Grounds](https://store.steampowered.com/app/5212390/The\_Hollow\_Grounds/)
-
-\- YouTube: \[@the\_hollow\_grounds](https://www.youtube.com/@the\_hollow\_grounds)
-
-\- Instagram: \[@the\_hollow\_grounds](https://www.instagram.com/the\_hollow\_grounds)
-
-\- TikTok: \[@the\_hollow\_grounds](https://www.tiktok.com/@the\_hollow\_grounds)
+Steam: <a href="https://store.steampowered.com/app/5212390/The\_Hollow\_Grounds/">The Hollow Grounds</a>
 
 
+
+YouTube: <a href="https://www.youtube.com/@the\_hollow\_grounds">@the\_hollow\_grounds</a>
+
+
+
+Instagram: <a href="https://www.instagram.com/the\_hollow\_grounds/">@the\_hollow\_grounds</a>
+
+
+
+TikTok: <a href="https://www.tiktok.com/@the\_hollow\_grounds">@the\_hollow\_grounds</a>
 
 
 
