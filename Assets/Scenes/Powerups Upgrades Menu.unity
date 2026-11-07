@@ -14659,7 +14659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &881715524
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22501,8 +22501,8 @@ MonoBehaviour:
   maxLevel: 10
   passiveIndex: 0
   lockedValue: 0
-  unlockValue: 2.5
-  maxValue: 25
+  unlockValue: 5
+  maxValue: 50
   upgradePrices: 01000000020000000300000005000000070000000a0000000d000000100000001400000019000000
   unlockButton: {fileID: 1224921511}
   unlockButtonText: {fileID: 259853776}
@@ -27706,7 +27706,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerup: {fileID: 1995917836}
   powerupIndex: 2
-  powerupIcon: {fileID: 1408421260}
+  powerupIcon: {fileID: 725886459}
   activeEquip: {fileID: 1995917835}
   dragIconSize: 50
   canvas: {fileID: 1059680505}
@@ -31591,7 +31591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1995917833
 RectTransform:
   m_ObjectHideFlags: 0

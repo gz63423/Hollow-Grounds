@@ -73,9 +73,7 @@ public class SteamLeaderboard : MonoBehaviour
             "Finding or creating Steam leaderboards for display..."
         );
 
-        // CHANGED:
-        // FindOrCreateLeaderboard() will find the leaderboard if it
-        // already exists, or create it if it does not exist.
+        // FindOrCreateLeaderboard() will find the leaderboard if it already exists, or create it if it does not exist.
         SteamAPICall_t netWorthCall =
             SteamUserStats.FindOrCreateLeaderboard(
                 netWorthLeaderboardName,
@@ -83,8 +81,7 @@ public class SteamLeaderboard : MonoBehaviour
                 ELeaderboardDisplayType.k_ELeaderboardDisplayTypeNumeric
             );
 
-        // CHANGED:
-        // Same behavior for Highest Wave.
+
         SteamAPICall_t highestWaveCall =
             SteamUserStats.FindOrCreateLeaderboard(
                 highestWaveLeaderboardName,
@@ -363,9 +360,7 @@ public class SteamLeaderboard : MonoBehaviour
             );
         }
 
-        // =========================================================
-        // FAKE #1 TEST ENTRY
-        // =========================================================
+        //Fake #1 to help with testing
 
         if (showFakeNumberOne)
         {
@@ -407,9 +402,7 @@ public class SteamLeaderboard : MonoBehaviour
             );
         }
 
-        // =========================================================
-        // REAL STEAM ENTRIES
-        // =========================================================
+
 
         for (
             int i = 0;

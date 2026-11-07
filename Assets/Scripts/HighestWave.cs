@@ -23,7 +23,6 @@ public class HighestWave : MonoBehaviour
                     0
                 );
 
-            // Highest completed wave can start at 0.
             if (HighestWaveReached < 0)
             {
                 HighestWaveReached = 0;
@@ -45,7 +44,6 @@ public class HighestWave : MonoBehaviour
 
     public void ReachedWave(int wave)
     {
-        // This method should be called when the wave is COMPLETED.
         if (wave <= HighestWaveReached)
             return;
 
@@ -63,7 +61,6 @@ public class HighestWave : MonoBehaviour
             HighestWaveReached
         );
 
-        // Tell Steam leaderboard system that the value changed.
         if (SteamLeaderboardUploader.Instance != null)
         {
             SteamLeaderboardUploader.Instance
@@ -89,7 +86,6 @@ public class HighestWave : MonoBehaviour
             "HIGHEST WAVE RESET TO 0"
         );
 
-        // Update Steam immediately after reset.
         if (SteamLeaderboardUploader.Instance != null)
         {
             SteamLeaderboardUploader.Instance

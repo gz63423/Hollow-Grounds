@@ -15,35 +15,45 @@ public class HelmetAnimationsManager : MonoBehaviour
 
     private int currentHelmetTier;
 
-
     // ============================================================
     // AWAKE
     // ============================================================
 
     void Awake()
     {
-        currentHelmetTier =
-            PlayerPrefs.GetInt(
-                "HelmetTier",
-                0
-            );
+        currentHelmetTier = PlayerPrefs.GetInt("HelmetTier", 0);
 
         ApplyHelmet();
     }
-
 
     // ============================================================
     // LATE UPDATE
     // ============================================================
 
-    void LateUpdate()
+    private void LateUpdate()
     {
-        if (helmetAnimator == null)
+        if (Player.Instance == null ||
+            Player.Instance.animator == null ||
+            helmetAnimator == null ||
+            !helmetAnimator.isActiveAndEnabled)
+        {
             return;
+        }
 
-        SyncParameters();
+        Animator playerAnimator = Player.Instance.animator;
+
+        // Match the player's animation playback speed.
+        helmetAnimator.speed = playerAnimator.speed;
+
+        // Match movement and facing parameters.
+        helmetAnimator.SetFloat("InputX", playerAnimator.GetFloat("InputX"));
+        helmetAnimator.SetFloat("InputY", playerAnimator.GetFloat("InputY"));
+        helmetAnimator.SetFloat("LastInputX", playerAnimator.GetFloat("LastInputX"));
+        helmetAnimator.SetFloat("LastInputY", playerAnimator.GetFloat("LastInputY"));
+
+        helmetAnimator.SetBool("isWalking", playerAnimator.GetBool("isWalking"));
+        helmetAnimator.SetBool("isRunning", playerAnimator.GetBool("isRunning"));
     }
-
 
     // ============================================================
     // APPLY HELMET
@@ -54,10 +64,7 @@ public class HelmetAnimationsManager : MonoBehaviour
         if (helmetAnimator == null)
             return;
 
-
-        // ========================================================
         // TIER 0 = HAIR
-        // ========================================================
 
         if (currentHelmetTier == 0)
         {
@@ -73,21 +80,16 @@ public class HelmetAnimationsManager : MonoBehaviour
             return;
         }
 
-
-        // ========================================================
         // TIER 1-5
-        // ========================================================
 
         if (helmetObject != null)
             helmetObject.SetActive(true);
-
 
         int index = Mathf.Clamp(
             currentHelmetTier - 1,
             0,
             helmetOverrides.Length - 1
         );
-
 
         if (helmetOverrides[index] != null)
         {
@@ -96,91 +98,64 @@ public class HelmetAnimationsManager : MonoBehaviour
         }
     }
 
-
     // ============================================================
-    // SYNC PLAYER PARAMETERS
+    // SYNCHRONIZE WITH PLAYER
     // ============================================================
 
     void SyncParameters()
     {
-        Player player =
-            Player.Instance;
+        Player player = Player.Instance;
 
-
-        if (player == null)
+        if (player == null || player.animator == null)
             return;
 
+        Animator playerAnimator = player.animator;
 
-        Animator playerAnimator =
-            player.animator;
-
-
-        if (playerAnimator == null)
+        if (!helmetAnimator.isActiveAndEnabled)
             return;
 
+        // Keep the armor animation playback speed identical.
+        helmetAnimator.speed = playerAnimator.speed;
 
-        // ========================================================
-        // MOVEMENT PARAMETERS
-        // ========================================================
-
+        // Synchronize animation parameters.
         helmetAnimator.SetFloat(
             "InputX",
             playerAnimator.GetFloat("InputX")
         );
-
 
         helmetAnimator.SetFloat(
             "InputY",
             playerAnimator.GetFloat("InputY")
         );
 
-
-        // ========================================================
-        // LAST FACING DIRECTION
-        // ========================================================
-
         helmetAnimator.SetFloat(
             "LastInputX",
             playerAnimator.GetFloat("LastInputX")
         );
-
 
         helmetAnimator.SetFloat(
             "LastInputY",
             playerAnimator.GetFloat("LastInputY")
         );
 
-
-        // ========================================================
-        // MOVEMENT STATES
-        // ========================================================
-
         helmetAnimator.SetBool(
             "isWalking",
             playerAnimator.GetBool("isWalking")
         );
-
 
         helmetAnimator.SetBool(
             "isRunning",
             playerAnimator.GetBool("isRunning")
         );
 
-
-        // ========================================================
-        // FORCE ANIMATION STATE SYNC
-        // ========================================================
-
+        // Keep the helmet on the same animation state and frame.
         AnimatorStateInfo playerState =
             playerAnimator.GetCurrentAnimatorStateInfo(0);
-
 
         AnimatorStateInfo helmetState =
             helmetAnimator.GetCurrentAnimatorStateInfo(0);
 
-
-        if (playerState.fullPathHash !=
-            helmetState.fullPathHash)
+        if (playerState.fullPathHash != helmetState.fullPathHash)
         {
             helmetAnimator.Play(
                 playerState.fullPathHash,
@@ -188,19 +163,31 @@ public class HelmetAnimationsManager : MonoBehaviour
                 playerState.normalizedTime
             );
 
-
             helmetAnimator.Update(0f);
         }
+        else
+        {
+            // Correct timing differences without restarting the animation.
+            float timeDifference = Mathf.Abs(
+                Mathf.Repeat(playerState.normalizedTime, 1f) -
+                Mathf.Repeat(helmetState.normalizedTime, 1f)
+            );
 
+            if (timeDifference > 0.5f)
+                timeDifference = 1f - timeDifference;
 
-        // ========================================================
-        // KEEP ANIMATION SPEED IDENTICAL
-        // ========================================================
+            if (timeDifference > 0.02f)
+            {
+                helmetAnimator.Play(
+                    playerState.fullPathHash,
+                    0,
+                    playerState.normalizedTime
+                );
 
-        helmetAnimator.speed =
-            playerAnimator.speed;
+                helmetAnimator.Update(0f);
+            }
+        }
     }
-
 
     // ============================================================
     // TRIGGER ATTACK
@@ -211,17 +198,9 @@ public class HelmetAnimationsManager : MonoBehaviour
         if (helmetAnimator == null)
             return;
 
-
-        helmetAnimator.ResetTrigger(
-            "Attack"
-        );
-
-
-        helmetAnimator.SetTrigger(
-            "Attack"
-        );
+        helmetAnimator.ResetTrigger("Attack");
+        helmetAnimator.SetTrigger("Attack");
     }
-
 
     // ============================================================
     // TRIGGER HURT
@@ -232,17 +211,9 @@ public class HelmetAnimationsManager : MonoBehaviour
         if (helmetAnimator == null)
             return;
 
-
-        helmetAnimator.ResetTrigger(
-            "Hurt"
-        );
-
-
-        helmetAnimator.SetTrigger(
-            "Hurt"
-        );
+        helmetAnimator.ResetTrigger("Hurt");
+        helmetAnimator.SetTrigger("Hurt");
     }
-
 
     // ============================================================
     // TRIGGER DIE
@@ -253,17 +224,9 @@ public class HelmetAnimationsManager : MonoBehaviour
         if (helmetAnimator == null)
             return;
 
-
-        helmetAnimator.ResetTrigger(
-            "Die"
-        );
-
-
-        helmetAnimator.SetTrigger(
-            "Die"
-        );
+        helmetAnimator.ResetTrigger("Die");
+        helmetAnimator.SetTrigger("Die");
     }
-
 
     // ============================================================
     // RESPAWN RESET
@@ -274,51 +237,31 @@ public class HelmetAnimationsManager : MonoBehaviour
         if (helmetAnimator == null)
             return;
 
-
-        currentHelmetTier =
-            PlayerPrefs.GetInt(
-                "HelmetTier",
-                0
-            );
-
+        currentHelmetTier = PlayerPrefs.GetInt("HelmetTier", 0);
 
         ApplyHelmet();
 
-
         helmetAnimator.Rebind();
-
-
         helmetAnimator.Update(0f);
-
 
         if (helmetObject != null &&
             helmetObject.activeInHierarchy)
         {
-            helmetAnimator.Play(
-                "Idle",
-                0,
-                0f
-            );
-
-
+            helmetAnimator.Play("Idle", 0, 0f);
             helmetAnimator.Update(0f);
         }
 
-
-        helmetAnimator.speed =
-            1f;
+        helmetAnimator.speed = 1f;
     }
 
-
     // ============================================================
-    // ANIMATION EVENT FUNCTIONS
+    // ANIMATION EVENTS
     // ============================================================
 
     public void DealAttackDamage()
     {
         // Intentionally empty.
     }
-
 
     public void EndAttack()
     {

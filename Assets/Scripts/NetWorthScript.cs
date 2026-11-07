@@ -27,10 +27,6 @@ public class NetWorth : MonoBehaviour
 
 
 
-    // ============================================================
-    // LOAD NET WORTH
-    // ============================================================
-
     private void LoadNetWorth()
     {
         TotalNetWorth =
@@ -47,10 +43,6 @@ public class NetWorth : MonoBehaviour
     }
 
 
-
-    // ============================================================
-    // ADD MONEY EARNED
-    // ============================================================
 
     public void AddMoneyEarned(float amount)
     {
@@ -71,7 +63,6 @@ public class NetWorth : MonoBehaviour
         );
 
 
-        // Tell Steam immediately that Net Worth changed.
         if (SteamLeaderboardUploader.Instance != null)
         {
             SteamLeaderboardUploader.Instance
@@ -80,10 +71,6 @@ public class NetWorth : MonoBehaviour
     }
 
 
-
-    // ============================================================
-    // SAVE NET WORTH
-    // ============================================================
 
     private void SaveNetWorth()
     {
@@ -97,9 +84,6 @@ public class NetWorth : MonoBehaviour
 
 
 
-    // ============================================================
-    // RESET NET WORTH
-    // ============================================================
 
     public void ResetNetWorth()
     {
@@ -112,13 +96,6 @@ public class NetWorth : MonoBehaviour
             "NET WORTH RESET TO $0.00"
         );
 
-
-        // NOTE:
-        // This does NOT happen during rebirth unless
-        // something specifically calls ResetNetWorth().
-        //
-        // If you intentionally reset Net Worth, Steam
-        // will be notified of the reset.
 
         if (SteamLeaderboardUploader.Instance != null)
         {

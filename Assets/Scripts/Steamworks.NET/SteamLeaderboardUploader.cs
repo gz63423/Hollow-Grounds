@@ -42,9 +42,7 @@ public class SteamLeaderboardUploader : MonoBehaviour
 
     private void Awake()
     {
-        // =========================================================
-        // FORCE ENABLE
-        // =========================================================
+
 
         enabled = true;
 
@@ -94,8 +92,6 @@ public class SteamLeaderboardUploader : MonoBehaviour
                 "STEAM LEADERBOARD UPLOADER: Duplicate instance detected. Destroying this uploader component only."
             );
 
-            // Do NOT destroy the GameObject because this component
-            // is attached to the SteamManager GameObject.
             Destroy(this);
 
             return;
@@ -146,9 +142,6 @@ public class SteamLeaderboardUploader : MonoBehaviour
 
     private void Start()
     {
-        // =========================================================
-        // FORCE ENABLE
-        // =========================================================
 
         enabled = true;
 
@@ -194,9 +187,9 @@ public class SteamLeaderboardUploader : MonoBehaviour
         }
 
 
-        // =========================================================
-        // STEAM ACCOUNT DIAGNOSTIC
-        // =========================================================
+
+        // Steam Acc
+
 
         CSteamID steamID =
             SteamUser.GetSteamID();
@@ -330,9 +323,6 @@ public class SteamLeaderboardUploader : MonoBehaviour
 
     private void Update()
     {
-        // =========================================================
-        // FORCE ENABLE
-        // =========================================================
 
         if (!enabled)
         {
@@ -1041,8 +1031,6 @@ public class SteamLeaderboardUploader : MonoBehaviour
             pendingHighestWave;
 
 
-        // Highest Wave can legitimately be 0
-        // because it represents completed waves.
 
 
         Debug.Log(

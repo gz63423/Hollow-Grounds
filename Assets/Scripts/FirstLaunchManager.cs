@@ -9,14 +9,14 @@ public class FirstLaunchManager : MonoBehaviour
 
     private void Awake()
     {
-        // If the intro has already been watched, skip it.
+        //If intro has already been watched, skip
         if (PlayerPrefs.GetInt("IntroPlayed", 0) == 1)
         {
             SceneManager.LoadScene(mainMenuSceneIndex);
         }
     }
 
-    // Call this at the END of the intro cutscene
+    //call at the end of the intro cutscene
     public static void MarkIntroAsPlayed()
     {
         PlayerPrefs.SetInt("IntroPlayed", 1);

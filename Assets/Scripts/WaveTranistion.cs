@@ -13,6 +13,13 @@ public class WaveTransition : MonoBehaviour
     public Image progressFill;
     public WaveSpawner waveSpawner;
 
+    [Header("Player")]
+    [Tooltip("Player that should be re-enabled when the tutorial wave scene begins.")]
+    public Player player;
+
+    [Tooltip("If true, movement/sprinting/attacking will be enabled when this scene starts.")]
+    public bool enablePlayerOnStart = true;
+
     [Header("Transition Timing")]
     public float fadeInDuration = 1f;
     public float holdDuration = 1f;
@@ -35,6 +42,12 @@ public class WaveTransition : MonoBehaviour
     [Header("Progress Bar")]
     public float progressBarFadeDuration = 0.35f;
 
+    [Header("Tutorial Kill Progress")]
+    [Tooltip("Number of kills required to completely fill the progress bar.")]
+    public int tutorialKillsRequired = 5;
+
+    private int tutorialKills = 0;
+
     private RectTransform textRect;
 
     private Vector2 startPosition;
@@ -44,6 +57,8 @@ public class WaveTransition : MonoBehaviour
     private Color originalBackgroundColor;
     private Color originalUIBackgroundColor;
 
+    private bool transitionFinished;
+
 
     // ==========================================
     // START
@@ -51,11 +66,35 @@ public class WaveTransition : MonoBehaviour
 
     private void Start()
     {
+        FindPlayer();
+
+        if (waveSpawner == null)
+        {
+            waveSpawner =
+                FindFirstObjectByType<WaveSpawner>();
+        }
+
+        // --------------------------------------------------
+        // The previous TutorialStartup may have disabled
+        // the persistent Player before changing scenes.
+        //
+        // The tutorial-wave scene takes control of the
+        // player here.
+        // --------------------------------------------------
+
+        EnablePlayerForWave();
+
+
+        // ==========================================
+        // REFERENCES
+        // ==========================================
+
         if (waveText == null)
         {
             Debug.LogError(
                 "WaveTransition: Wave Text reference is missing."
             );
+
             return;
         }
 
@@ -64,6 +103,7 @@ public class WaveTransition : MonoBehaviour
             Debug.LogError(
                 "WaveTransition: Background Image reference is missing."
             );
+
             return;
         }
 
@@ -72,17 +112,10 @@ public class WaveTransition : MonoBehaviour
             Debug.LogError(
                 "WaveTransition: UI Background Image reference is missing."
             );
+
             return;
         }
 
-        // Automatically find WaveSpawner if
-        // it wasn't assigned in the Inspector.
-
-        if (waveSpawner == null)
-        {
-            waveSpawner =
-                FindFirstObjectByType<WaveSpawner>();
-        }
 
         textRect =
             waveText.GetComponent<RectTransform>();
@@ -110,22 +143,40 @@ public class WaveTransition : MonoBehaviour
         // ==========================================
 
         SetBackgroundAlpha(0f);
+
         SetUIBackgroundAlpha(0f);
+
         SetTextAlpha(0f);
+
+
+        // ==========================================
+        // INITIALIZE PROGRESS BAR
+        // ==========================================
 
         if (progressBar != null)
         {
+            progressBar.gameObject.SetActive(true);
+
+            progressBar.minValue = 0f;
+            progressBar.maxValue = 1f;
             progressBar.value = 0f;
+
             SetProgressBarAlpha(0f);
         }
 
-        // Hide the actual Fill until
-        // the first enemy is killed.
+
+        // Hide Fill until progress exists.
 
         if (progressFill != null)
         {
             progressFill.gameObject.SetActive(false);
         }
+
+
+        // Reset tutorial kill count.
+
+        tutorialKills = 0;
+
 
         textRect.anchoredPosition =
             startPosition;
@@ -148,6 +199,53 @@ public class WaveTransition : MonoBehaviour
 
 
     // ==========================================
+    // FIND PLAYER
+    // ==========================================
+
+    private void FindPlayer()
+    {
+        if (player != null)
+            return;
+
+        player =
+            Player.Instance;
+
+        if (player == null)
+        {
+            player =
+                FindFirstObjectByType<Player>();
+        }
+    }
+
+
+    // ==========================================
+    // ENABLE PLAYER FOR WAVE
+    // ==========================================
+
+    private void EnablePlayerForWave()
+    {
+        if (!enablePlayerOnStart)
+            return;
+
+        FindPlayer();
+
+        if (player == null)
+        {
+            Debug.LogWarning(
+                "WaveTransition: Could not find Player. " +
+                "Player movement was not automatically enabled."
+            );
+
+            return;
+        }
+
+        player.movementEnabled = true;
+        player.sprintEnabled = true;
+        player.attacksEnabled = true;
+    }
+
+
+    // ==========================================
     // GET CORRECT WAVE TEXT
     // ==========================================
 
@@ -156,9 +254,12 @@ public class WaveTransition : MonoBehaviour
         if (waveText == null)
             return;
 
+
         if (waveSpawner == null)
         {
-            waveText.text = "Wave 1";
+            waveText.text =
+                "Wave 1";
+
             return;
         }
 
@@ -226,13 +327,18 @@ public class WaveTransition : MonoBehaviour
 
         while (timer < fadeInDuration)
         {
-            timer += Time.deltaTime;
+            timer +=
+                Time.unscaledDeltaTime;
 
             float t =
                 Mathf.Clamp01(
                     timer /
-                    fadeInDuration
+                    Mathf.Max(
+                        0.01f,
+                        fadeInDuration
+                    )
                 );
+
 
             SetBackgroundAlpha(
                 Mathf.Lerp(
@@ -244,8 +350,8 @@ public class WaveTransition : MonoBehaviour
 
             SetTextAlpha(t);
 
-            // UI background remains completely hidden.
             SetUIBackgroundAlpha(0f);
+
 
             if (progressBar != null)
             {
@@ -255,6 +361,7 @@ public class WaveTransition : MonoBehaviour
             yield return null;
         }
 
+
         SetBackgroundAlpha(
             maxBackgroundAlpha
         );
@@ -263,12 +370,13 @@ public class WaveTransition : MonoBehaviour
 
         SetUIBackgroundAlpha(0f);
 
+
         if (progressBar != null)
         {
             SetProgressBarAlpha(0f);
         }
 
-        // Make absolutely sure Fill is hidden.
+
         if (progressFill != null)
         {
             progressFill.gameObject.SetActive(false);
@@ -280,9 +388,12 @@ public class WaveTransition : MonoBehaviour
         // HOLD
         // ==========================================
 
-        yield return new WaitForSeconds(
-            holdDuration
-        );
+        if (holdDuration > 0f)
+        {
+            yield return new WaitForSecondsRealtime(
+                holdDuration
+            );
+        }
 
 
         // ==========================================
@@ -295,16 +406,21 @@ public class WaveTransition : MonoBehaviour
 
         while (timer < moveOutDuration)
         {
-            timer += Time.deltaTime;
+            timer +=
+                Time.unscaledDeltaTime;
 
             float t =
                 Mathf.Clamp01(
                     timer /
-                    moveOutDuration
+                    Mathf.Max(
+                        0.01f,
+                        moveOutDuration
+                    )
                 );
 
 
-            // Move straight upward.
+            // Move upward.
+
             textRect.anchoredPosition =
                 Vector2.Lerp(
                     startPosition,
@@ -314,6 +430,7 @@ public class WaveTransition : MonoBehaviour
 
 
             // Shrink.
+
             float scale =
                 Mathf.Lerp(
                     1f,
@@ -322,10 +439,12 @@ public class WaveTransition : MonoBehaviour
                 );
 
             waveText.transform.localScale =
-                Vector3.one * scale;
+                Vector3.one *
+                scale;
 
 
             // Fade main background out.
+
             SetBackgroundAlpha(
                 Mathf.Lerp(
                     maxBackgroundAlpha,
@@ -334,12 +453,9 @@ public class WaveTransition : MonoBehaviour
                 )
             );
 
-
-            // UI background remains completely hidden.
             SetUIBackgroundAlpha(0f);
 
 
-            // Progress bar remains completely hidden.
             if (progressBar != null)
             {
                 SetProgressBarAlpha(0f);
@@ -380,6 +496,8 @@ public class WaveTransition : MonoBehaviour
 
         if (progressBar != null)
         {
+            progressBar.gameObject.SetActive(true);
+
             yield return StartCoroutine(
                 FadeInProgressBar()
             );
@@ -390,9 +508,6 @@ public class WaveTransition : MonoBehaviour
         // ENDLESS MODE
         // ==========================================
 
-        // Make absolutely sure Endless Mode
-        // remains at 100%.
-
         if (
             waveSpawner != null &&
             waveSpawner.IsEndlessMode
@@ -400,6 +515,9 @@ public class WaveTransition : MonoBehaviour
         {
             SetWaveProgress(1f);
         }
+
+
+        transitionFinished = true;
     }
 
 
@@ -409,17 +527,26 @@ public class WaveTransition : MonoBehaviour
 
     private IEnumerator FadeInUI()
     {
+        float duration =
+            Mathf.Max(
+                0.01f,
+                progressBarFadeDuration
+            );
+
         float timer = 0f;
 
-        while (timer < progressBarFadeDuration)
+
+        while (timer < duration)
         {
-            timer += Time.deltaTime;
+            timer +=
+                Time.unscaledDeltaTime;
 
             float t =
                 Mathf.Clamp01(
                     timer /
-                    progressBarFadeDuration
+                    duration
                 );
+
 
             SetUIBackgroundAlpha(
                 Mathf.Lerp(
@@ -431,6 +558,7 @@ public class WaveTransition : MonoBehaviour
 
             yield return null;
         }
+
 
         SetUIBackgroundAlpha(
             uiBackgroundAlpha
@@ -444,24 +572,113 @@ public class WaveTransition : MonoBehaviour
 
     private IEnumerator FadeInProgressBar()
     {
+        if (progressBar == null)
+            yield break;
+
+
+        progressBar.gameObject.SetActive(true);
+
+
+        float duration =
+            Mathf.Max(
+                0.01f,
+                progressBarFadeDuration
+            );
+
         float timer = 0f;
 
-        while (timer < progressBarFadeDuration)
+
+        while (timer < duration)
         {
-            timer += Time.deltaTime;
+            timer +=
+                Time.unscaledDeltaTime;
 
             float t =
                 Mathf.Clamp01(
                     timer /
-                    progressBarFadeDuration
+                    duration
                 );
+
 
             SetProgressBarAlpha(t);
 
             yield return null;
         }
 
+
         SetProgressBarAlpha(1f);
+    }
+
+
+    // ==========================================
+    // REGISTER TUTORIAL KILL
+    // ==========================================
+
+    public void RegisterTutorialKill()
+    {
+        // Make sure the required amount is valid.
+
+        int required =
+            Mathf.Max(
+                1,
+                tutorialKillsRequired
+            );
+
+
+        // Do not allow the count to go above 5.
+
+        if (tutorialKills >= required)
+            return;
+
+
+        // Add exactly one kill.
+
+        tutorialKills++;
+
+
+        // Convert the kill count into 0-1 progress.
+
+        float progress =
+            (float)tutorialKills /
+            required;
+
+
+        // Update the actual Slider.
+
+        SetWaveProgress(progress);
+
+
+        Debug.Log(
+            "Tutorial Kill Progress: " +
+            tutorialKills +
+            "/" +
+            required +
+            " (" +
+            Mathf.RoundToInt(progress * 100f) +
+            "%)"
+        );
+    }
+
+
+    // ==========================================
+    // RESET TUTORIAL KILL PROGRESS
+    // ==========================================
+
+    public void ResetTutorialKillProgress()
+    {
+        tutorialKills = 0;
+
+        SetWaveProgress(0f);
+    }
+
+
+    // ==========================================
+    // GET TUTORIAL KILL COUNT
+    // ==========================================
+
+    public int GetTutorialKillCount()
+    {
+        return tutorialKills;
     }
 
 
@@ -473,6 +690,14 @@ public class WaveTransition : MonoBehaviour
     {
         if (progressBar == null)
             return;
+
+
+        // Make sure the Slider itself is visible.
+
+        if (!progressBar.gameObject.activeSelf)
+        {
+            progressBar.gameObject.SetActive(true);
+        }
 
 
         // Endless Mode is always 100%.
@@ -496,7 +721,7 @@ public class WaveTransition : MonoBehaviour
 
 
         // Hide Fill at 0%.
-        // Show it as soon as progress exists.
+        // Show Fill as soon as progress exists.
 
         if (progressFill != null)
         {
@@ -505,6 +730,11 @@ public class WaveTransition : MonoBehaviour
             );
         }
     }
+
+
+    // ==========================================
+    // HIDE PROGRESS BAR
+    // ==========================================
 
     public void HideProgressBar()
     {
@@ -532,7 +762,10 @@ public class WaveTransition : MonoBehaviour
             waveSpawner.IsEndlessMode
         )
         {
+            progressBar.gameObject.SetActive(true);
+
             progressBar.value = 1f;
+
 
             if (progressFill != null)
             {
@@ -543,10 +776,10 @@ public class WaveTransition : MonoBehaviour
         }
 
 
+        progressBar.gameObject.SetActive(true);
+
         progressBar.value = 0f;
 
-
-        // Hide Fill again for the new wave.
 
         if (progressFill != null)
         {
@@ -564,12 +797,15 @@ public class WaveTransition : MonoBehaviour
         if (background == null)
             return;
 
+
         Color color =
             originalBackgroundColor;
 
-        color.a = alpha;
+        color.a =
+            alpha;
 
-        background.color = color;
+        background.color =
+            color;
     }
 
 
@@ -582,12 +818,15 @@ public class WaveTransition : MonoBehaviour
         if (uiBackground == null)
             return;
 
+
         Color color =
             originalUIBackgroundColor;
 
-        color.a = alpha;
+        color.a =
+            alpha;
 
-        uiBackground.color = color;
+        uiBackground.color =
+            color;
     }
 
 
@@ -600,12 +839,15 @@ public class WaveTransition : MonoBehaviour
         if (waveText == null)
             return;
 
+
         Color color =
             originalTextColor;
 
-        color.a = alpha;
+        color.a =
+            alpha;
 
-        waveText.color = color;
+        waveText.color =
+            color;
     }
 
 
@@ -619,10 +861,6 @@ public class WaveTransition : MonoBehaviour
             return;
 
 
-        // Get every Image underneath the Slider.
-        // This controls the Background, Fill,
-        // Outline, and any other Image components.
-
         Image[] images =
             progressBar.GetComponentsInChildren<Image>(
                 true
@@ -631,8 +869,8 @@ public class WaveTransition : MonoBehaviour
 
         foreach (Image image in images)
         {
-            // Don't change the Fill's alpha here
-            // while it is disabled.
+            // Don't alter Fill alpha here.
+            // Its visibility is controlled separately.
 
             if (
                 progressFill != null &&
@@ -646,10 +884,11 @@ public class WaveTransition : MonoBehaviour
             Color color =
                 image.color;
 
-            color.a = alpha;
+            color.a =
+                alpha;
 
-            image.color = color;
+            image.color =
+                color;
         }
     }
 }
-

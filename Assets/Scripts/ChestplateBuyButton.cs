@@ -28,7 +28,7 @@ public class ChestplateBuyButton : MonoBehaviour
     [Header("Chestplate Images")]
     public Image currentChestplateImage;
 
-    // 0 = default, 1-5 = upgrades
+
     public Sprite[] chestplateTierSprites = new Sprite[6];
 
 
@@ -97,7 +97,7 @@ public class ChestplateBuyButton : MonoBehaviour
         bool canPay = false;
 
 
-        // Gameplay scene
+
         if (Player.Instance != null)
         {
             float money =
@@ -121,7 +121,7 @@ public class ChestplateBuyButton : MonoBehaviour
         }
 
 
-        // Upgrade scene
+
         else
         {
             float money =

@@ -215,17 +215,43 @@ public partial class TutorialStartup
     // FINISH MOVEMENT REQUIREMENT
     // ============================================================
 
+    // ============================================================
+    // FINISH MOVEMENT REQUIREMENT
+    // ============================================================
+
     private IEnumerator FinishMovementRequirement()
     {
+        // IMPORTANT:
+        // Lock all dialogue input immediately.
+        //
+        // Without this, there is a small window after the final
+        // WASD key is completed where a mouse click can still be
+        // processed. That click can restart the WASD requirement
+        // and reset the checklist back to X's.
+        transitionInProgress = true;
+
+        // Make absolutely sure all four checklist items remain checked.
+        wCompleted = true;
+        aCompleted = true;
+        sCompleted = true;
+        dCompleted = true;
+
+        SetChecklistSprite(wImage, true);
+        SetChecklistSprite(aImage, true);
+        SetChecklistSprite(sImage, true);
+        SetChecklistSprite(dImage, true);
+
+        // Enable movement.
         if (player != null)
         {
             player.movementEnabled = true;
         }
 
-        yield return new WaitForSecondsRealtime(
-            0.25f
-        );
+        // Brief pause so the player can see all four completed checks.
+        // Dialogue input remains completely locked during this time.
+        yield return new WaitForSecondsRealtime(0.25f);
 
+        // Fade the checklist out.
         if (dialogue2Tab != null)
         {
             yield return StartCoroutine(
@@ -238,6 +264,10 @@ public partial class TutorialStartup
             );
         }
 
+        // Move to Dialogue 2 Part 2.
+        //
+        // StartDialogue2Part2() keeps transitionInProgress true
+        // while it changes the dialogue UI and starts the typewriter.
         yield return StartCoroutine(
             StartDialogue2Part2()
         );

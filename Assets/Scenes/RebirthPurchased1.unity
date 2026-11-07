@@ -1162,7 +1162,7 @@ MonoBehaviour:
   text2Content: Your earnings multiplier has increased
   text3Content: 1.00x -> 2.00x
   text4Content: Click anywhere to continue
-  mainMenuSceneIndex: 1
+  mainMenuSceneIndex: 3
   hideTextAtStart: 1
   enableTextObjects: 1
 --- !u!4 &1773484924

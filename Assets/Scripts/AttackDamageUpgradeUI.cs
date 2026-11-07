@@ -32,7 +32,7 @@ public class AttackDamageUpgradeUI : MonoBehaviour
 
         int currentLevel = upgrade.CurrentLevel;
 
-        // MAX LEVEL
+        //Maxed
         if (currentLevel >= upgrade.maxLevel)
         {
             if (costText != null)
@@ -54,7 +54,7 @@ public class AttackDamageUpgradeUI : MonoBehaviour
             return;
         }
 
-        // COST
+        //Cost
         int cost = upgrade.GetCurrentUpgradeCost();
 
         if (costText != null)
@@ -62,7 +62,6 @@ public class AttackDamageUpgradeUI : MonoBehaviour
             costText.text = cost.ToString();
         }
 
-        // CURRENT AND NEXT DAMAGE
         int currentDamage =
             Mathf.RoundToInt(
                 upgrade.GetCurrentDamage()

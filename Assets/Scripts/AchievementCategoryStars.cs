@@ -50,7 +50,7 @@ public class AchievementCategoryStars : MonoBehaviour
         }
 
 
-        // Stars light from LEFT to RIGHT
+        // Stars light from left to right
         for (int i = 0; i < stars.Length; i++)
         {
             if (stars[i] == null)

@@ -4,10 +4,6 @@ using TMPro;
 
 public class HouseUpgradeButton : MonoBehaviour
 {
-    // =========================================================
-    // UI
-    // =========================================================
-
     [Header("UI")]
     public TextMeshProUGUI priceText;
     public TextMeshProUGUI currentHpText;
@@ -15,10 +11,6 @@ public class HouseUpgradeButton : MonoBehaviour
     public Image currentHouseImage;
     public Image nextHouseImage;
 
-
-    // =========================================================
-    // MAX LEVEL 50 REWARDS
-    // =========================================================
 
     [Header("Max Level 50 Rewards")]
     public TextMeshProUGUI removeTMPText;
@@ -62,27 +54,18 @@ public class HouseUpgradeButton : MonoBehaviour
     public bool removeDemoMaxText2 = false;
 
 
-    // =========================================================
-    // UPGRADE BAR NUMBERS
-    // =========================================================
 
     [Header("Upgrade Bar Numbers")]
     public TextMeshProUGUI[] upgradeNumberTexts =
         new TextMeshProUGUI[10];
 
 
-    // =========================================================
-    // HOUSE UPGRADE SPRITES
-    // =========================================================
 
     [Header("House Upgrade Sprites")]
     public Sprite[] houseLevelSprites =
         new Sprite[5];
 
 
-    // =========================================================
-    // HOUSE UPGRADE XP REWARDS
-    // =========================================================
 
     [Header("House Upgrade XP Rewards")]
     public int level1To10XP = 10;
@@ -92,40 +75,28 @@ public class HouseUpgradeButton : MonoBehaviour
     public int level41To50XP = 250;
 
 
-    // =========================================================
-    // DEMO
-    // =========================================================
 
     [Header("Demo")]
     [Tooltip("Demo mode limits the house to displayed Level 20.")]
     public bool demo = false;
 
 
-    // =========================================================
-    // INTERNAL
-    // =========================================================
 
     [Header("Internal")]
     public int currentLevel;
 
 
-    // =========================================================
-    // CONSTANTS
-    // =========================================================
 
-    // Internal level 49 = displayed Level 50.
+
+
     private const int NORMAL_MAX_INTERNAL_LEVEL = 49;
 
-    // Internal level 19 = displayed Level 20.
     private const int DEMO_MAX_INTERNAL_LEVEL = 19;
 
-    // Floating-point money tolerance.
+    // Float point money tolerance
     private const float MONEY_TOLERANCE = 0.005f;
 
 
-    // =========================================================
-    // START
-    // =========================================================
 
     private void Start()
     {
@@ -161,9 +132,6 @@ public class HouseUpgradeButton : MonoBehaviour
     }
 
 
-    // =========================================================
-    // MAX LEVEL HELPERS
-    // =========================================================
 
     private int GetMaxInternalLevel()
     {
@@ -179,9 +147,6 @@ public class HouseUpgradeButton : MonoBehaviour
     }
 
 
-    // =========================================================
-    // UPGRADE HOUSE
-    // =========================================================
 
     public void UpgradeHouse()
     {
@@ -214,9 +179,6 @@ public class HouseUpgradeButton : MonoBehaviour
         bool canPay = false;
 
 
-        // =====================================================
-        // GAMEPLAY MONEY
-        // =====================================================
 
         if (Player.Instance != null)
         {
@@ -226,9 +188,6 @@ public class HouseUpgradeButton : MonoBehaviour
 
             if (money >= price - MONEY_TOLERANCE)
             {
-                // If the player is only short by the tolerance,
-                // spend their exact remaining money instead of
-                // allowing a tiny negative floating-point balance.
                 float amountToSpend =
                     Mathf.Min(
                         price,
@@ -246,9 +205,6 @@ public class HouseUpgradeButton : MonoBehaviour
         }
 
 
-        // =====================================================
-        // PLAYERPREFS MONEY
-        // =====================================================
 
         else
         {
@@ -263,7 +219,7 @@ public class HouseUpgradeButton : MonoBehaviour
             {
                 money -= price;
 
-                // Prevent tiny negative floating-point balances.
+                // Prevent tiny negative float point balances
                 if (money < 0f)
                 {
                     money = 0f;
@@ -284,9 +240,6 @@ public class HouseUpgradeButton : MonoBehaviour
         }
 
 
-        // =====================================================
-        // NOT ENOUGH MONEY
-        // =====================================================
 
         if (!canPay)
         {
@@ -298,9 +251,6 @@ public class HouseUpgradeButton : MonoBehaviour
         }
 
 
-        // =====================================================
-        // UPGRADE
-        // =====================================================
 
         currentLevel++;
 
@@ -314,24 +264,15 @@ public class HouseUpgradeButton : MonoBehaviour
         PlayerPrefs.Save();
 
 
-        // =====================================================
-        // REFRESH ACTUAL HOUSE
-        // =====================================================
 
         RefreshActualHouse();
 
 
-        // =====================================================
-        // ACHIEVEMENTS
-        // =====================================================
 
         AchievementStats.AddUpgradesPurchased(1);
         AchievementStats.UpdateHighestHouseLevel();
 
 
-        // =====================================================
-        // SOUND
-        // =====================================================
 
         if (SoundManager.Instance != null)
         {
@@ -339,16 +280,10 @@ public class HouseUpgradeButton : MonoBehaviour
         }
 
 
-        // =====================================================
-        // XP
-        // =====================================================
 
         GiveHouseXP();
 
 
-        // =====================================================
-        // REFRESH UI
-        // =====================================================
 
         UpdateUI();
         UpdateUpgradeBars();
@@ -363,9 +298,6 @@ public class HouseUpgradeButton : MonoBehaviour
     }
 
 
-    // =========================================================
-    // REFRESH ACTUAL HOUSE
-    // =========================================================
 
     private void RefreshActualHouse()
     {
@@ -386,9 +318,6 @@ public class HouseUpgradeButton : MonoBehaviour
     }
 
 
-    // =========================================================
-    // GIVE HOUSE XP
-    // =========================================================
 
     private void GiveHouseXP()
     {
@@ -438,9 +367,6 @@ public class HouseUpgradeButton : MonoBehaviour
     }
 
 
-    // =========================================================
-    // CHECK MAX LEVEL
-    // =========================================================
 
     private void CheckMaxLevel()
     {
@@ -586,9 +512,6 @@ public class HouseUpgradeButton : MonoBehaviour
     }
 
 
-    // =========================================================
-    // UPDATE UI
-    // =========================================================
 
     public void UpdateUI()
     {
@@ -704,9 +627,6 @@ public class HouseUpgradeButton : MonoBehaviour
     }
 
 
-    // =========================================================
-    // UPDATE UPGRADE BARS
-    // =========================================================
 
     private void UpdateUpgradeBars()
     {
@@ -727,9 +647,6 @@ public class HouseUpgradeButton : MonoBehaviour
     }
 
 
-    // =========================================================
-    // UPDATE UPGRADE NUMBERS
-    // =========================================================
 
     private void UpdateUpgradeNumbers()
     {
@@ -756,9 +673,6 @@ public class HouseUpgradeButton : MonoBehaviour
     }
 
 
-    // =========================================================
-    // GET CURRENT HOUSE HP
-    // =========================================================
 
     public int GetCurrentHouseHP()
     {

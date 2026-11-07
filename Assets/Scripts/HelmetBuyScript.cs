@@ -28,7 +28,7 @@ public class HelmetBuyButton : MonoBehaviour
     [Header("Helmet Images")]
     public Image currentHelmetImage;
 
-    // 0 = Default, 1-5 = upgrades
+
     public Sprite[] helmetTierSprites = new Sprite[6];
 
 
@@ -97,7 +97,6 @@ public class HelmetBuyButton : MonoBehaviour
         bool canPay = false;
 
 
-        // Gameplay scene
         if (Player.Instance != null)
         {
             float money =
@@ -121,7 +120,6 @@ public class HelmetBuyButton : MonoBehaviour
         }
 
 
-        // Upgrade scene
         else
         {
             float money =

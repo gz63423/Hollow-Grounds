@@ -8,6 +8,10 @@ public class RebirthTabFadeIn : MonoBehaviour
     public float delayBeforeFade = 34f;
     public float fadeDuration = 4f;
 
+    [Header("Button Activation")]
+    [Tooltip("This button will become interactable once the tab has fully faded in.")]
+    public Button buttonToActivate;
+
     private CanvasGroup canvasGroup;
     private Button[] buttons;
 
@@ -31,10 +35,16 @@ public class RebirthTabFadeIn : MonoBehaviour
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
 
-        // Make sure every button is disabled
+        // Disable every button inside this tab
         foreach (Button button in buttons)
         {
             button.interactable = false;
+        }
+
+        // Also make sure the specifically assigned button starts disabled
+        if (buttonToActivate != null)
+        {
+            buttonToActivate.interactable = false;
         }
 
         StartCoroutine(FadeIn());
@@ -64,10 +74,16 @@ public class RebirthTabFadeIn : MonoBehaviour
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
 
-        // Enable buttons
+        // Enable all buttons inside this tab
         foreach (Button button in buttons)
         {
             button.interactable = true;
+        }
+
+        // Explicitly activate the assigned button
+        if (buttonToActivate != null)
+        {
+            buttonToActivate.interactable = true;
         }
     }
 }

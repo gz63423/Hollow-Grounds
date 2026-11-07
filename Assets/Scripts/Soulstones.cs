@@ -59,19 +59,6 @@ public class Soulstones : MonoBehaviour
 
         TotalSoulstonesEarned += amount;
 
-        // ========================================================
-        // ACHIEVEMENT: SOULBOUND
-        // ========================================================
-        //
-        // Every Soulstone obtained anywhere in the game is counted.
-        //
-        // This includes:
-        // - Enemy drops
-        // - Achievement rewards
-        // - Future Soulstone sources
-        //
-        // Because this is inside AddSoulstones(), individual sources
-        // do not need to manually update AchievementStats.
 
         AchievementStats.AddSoulstonesEarned(
             amount

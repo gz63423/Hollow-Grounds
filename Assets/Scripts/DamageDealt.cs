@@ -47,22 +47,6 @@ public class DamageDealt : MonoBehaviour
         );
 
 
-        // ============================================================
-        // ACHIEVEMENT: BRUTALITY
-        // ============================================================
-        //
-        // Tracks ALL damage dealt over the lifetime of the account.
-        //
-        // This does NOT reset on rebirth.
-        //
-        // Every source that calls AddDamage() is automatically counted:
-        // - Normal enemies
-        // - Ranged enemies
-        // - Bosses
-        //
-        // DamageDealt.AddDamage() is the single central damage tracker,
-        // so damage cannot accidentally be counted twice by each enemy.
-        // ============================================================
 
         AchievementStats.AddDamageDealt(
             amount

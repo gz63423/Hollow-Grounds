@@ -46,6 +46,15 @@ public class GameStartup : MonoBehaviour
     [Tooltip("Final logo scale during the click transition.")]
     public float logoExpandedScale = 1.5f;
 
+    // ============================================================
+    // BEGIN BUTTON
+    // ============================================================
+
+    [Header("Begin Button")]
+
+    [Tooltip("Full-screen UI Button that starts the game.")]
+    public Button beginButton;
+
 
     // ============================================================
     // BEGIN TEXT
@@ -89,10 +98,7 @@ public class GameStartup : MonoBehaviour
     // CLICK SETTINGS
     // ============================================================
 
-    [Header("Click Settings")]
 
-    [Tooltip("Allows clicking anywhere with the left mouse button to begin.")]
-    public bool clickAnywhereToBegin = true;
 
 
     // ============================================================
@@ -213,9 +219,16 @@ public class GameStartup : MonoBehaviour
 
     [Header("Scene Loading")]
 
-    public string targetSceneName = "Main Menu";
+    [Tooltip("Scene index for the first tutorial scene.")]
+    public int tutorialSceneBuildIndex = 1;
 
-    public int targetSceneBuildIndex = 2;
+    [Tooltip("Scene index for the Main Menu after tutorial completion.")]
+    public int mainMenuSceneBuildIndex = 3;
+
+    // Tracks which scene the current pixel transition is loading.
+    private int transitionTargetSceneBuildIndex = -1;
+
+    private const string TutorialCompletedKey = "TutorialCompleted";
 
 
     // ============================================================
@@ -448,14 +461,7 @@ public class GameStartup : MonoBehaviour
         if (sceneChanging)
             return;
 
-        if (!clickAnywhereToBegin)
-            return;
 
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            BeginGame();
-        }
     }
 
 
@@ -474,14 +480,11 @@ public class GameStartup : MonoBehaviour
         );
 
 
-        if (scene.buildIndex ==
-            targetSceneBuildIndex)
+        if (scene.buildIndex == transitionTargetSceneBuildIndex)
         {
             if (clickedToBegin)
             {
-                StartCoroutine(
-                    FinishSceneTransition()
-                );
+                StartCoroutine(FinishSceneTransition());
             }
         }
     }
@@ -924,76 +927,61 @@ public class GameStartup : MonoBehaviour
     // BEGIN GAME
     // ============================================================
 
+
     public void BeginGame()
     {
+        Debug.Log("GameStartup: Begin Button clicked.");
+
         if (!startupRunning)
+        {
+            Debug.LogWarning("BeginGame blocked: startupRunning is false.");
             return;
+        }
 
         if (!startupReady)
+        {
+            Debug.LogWarning("BeginGame blocked: startupReady is false.");
             return;
+        }
 
-        if (clickedToBegin)
+        if (clickedToBegin || sceneChanging)
+        {
+            Debug.Log("BeginGame ignored: transition already started.");
             return;
-
-        if (sceneChanging)
-            return;
-
+        }
 
         clickedToBegin = true;
 
+        Debug.Log("GameStartup: Starting Begin animation and pixel transition.");
 
-        // --------------------------------------------------------
-        // STOP IDLE ANIMATIONS
-        // --------------------------------------------------------
-
+        // Stop logo idle animation.
         if (logoIdleCoroutine != null)
         {
-            StopCoroutine(
-                logoIdleCoroutine
-            );
-
+            StopCoroutine(logoIdleCoroutine);
             logoIdleCoroutine = null;
         }
 
-
+        // Stop Begin text flashing.
         if (beginTextFlashCoroutine != null)
         {
-            StopCoroutine(
-                beginTextFlashCoroutine
-            );
-
+            StopCoroutine(beginTextFlashCoroutine);
             beginTextFlashCoroutine = null;
         }
 
-
-        // --------------------------------------------------------
-        // START CENTER LIGHT FADE
-        // --------------------------------------------------------
-
+        // Activate the center light effect.
         if (centerUILight != null)
         {
             if (centerLightFadeCoroutine != null)
-            {
-                StopCoroutine(
-                    centerLightFadeCoroutine
-                );
-            }
+                StopCoroutine(centerLightFadeCoroutine);
 
             centerLightFadeCoroutine =
-                StartCoroutine(
-                    CenterLightFadeRoutine()
-                );
+                StartCoroutine(CenterLightFadeRoutine());
         }
 
-
-        // --------------------------------------------------------
-        // START CLICK TRANSITION
-        // --------------------------------------------------------
-
-        StartCoroutine(
-            ClickSequenceRoutine()
-        );
+        // Start the transition animation.
+        StartCoroutine(ClickSequenceRoutine());
     }
+
 
 
     // ============================================================
@@ -1715,28 +1703,42 @@ public class GameStartup : MonoBehaviour
     // LOAD TARGET SCENE
     // ============================================================
 
+    // ============================================================
+    // LOAD TARGET SCENE
+    // ============================================================
+
     private void LoadTargetScene()
     {
         if (sceneChanging)
             return;
 
-
         sceneChanging = true;
 
+        // If the tutorial has been completed, go directly
+        // to the Main Menu. Otherwise, start Tutorial Scene 1.
+        bool tutorialCompleted =
+            PlayerPrefs.GetInt(TutorialCompletedKey, 0) == 1;
+
+        transitionTargetSceneBuildIndex = tutorialCompleted
+            ? mainMenuSceneBuildIndex
+            : tutorialSceneBuildIndex;
 
         Debug.Log(
             "GameStartup: Pixel transition finished."
         );
 
-
         Debug.Log(
-            "GameStartup: Loading target scene: " +
-            targetSceneBuildIndex
+            "GameStartup: Tutorial completed = " +
+            tutorialCompleted
         );
 
+        Debug.Log(
+            "GameStartup: Loading scene index " +
+            transitionTargetSceneBuildIndex
+        );
 
         SceneManager.LoadScene(
-            targetSceneBuildIndex
+            transitionTargetSceneBuildIndex
         );
     }
 

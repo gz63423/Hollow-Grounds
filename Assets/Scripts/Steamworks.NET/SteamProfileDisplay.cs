@@ -115,7 +115,7 @@ public class SteamProfileDisplay : MonoBehaviour
 
         if (avatarHandle == -1)
         {
-            // Steam is still loading the avatar.
+            // Steam is still loading the avatar
             Invoke(
                 nameof(DisplaySteamAvatar),
                 0.5f
@@ -313,10 +313,6 @@ public class SteamProfileDisplay : MonoBehaviour
 
     private void TryStartRankDownloads()
     {
-        // We specifically download Net Worth first.
-        // Steam only allows one outstanding leaderboard
-        // download call at a time.
-
         if (
             !netWorthRankDownloaded &&
             netWorthLeaderboardFound

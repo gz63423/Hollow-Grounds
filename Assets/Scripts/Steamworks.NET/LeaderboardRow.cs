@@ -30,7 +30,7 @@ public class LeaderboardRow : MonoBehaviour
         CSteamID steamID
     )
     {
-        // Set the leaderboard row data.
+        // Set the leaderboard row data
         if (rankText != null)
         {
             rankText.text =
@@ -63,7 +63,7 @@ public class LeaderboardRow : MonoBehaviour
         }
 
 
-        // Profile picture.
+        // Pfp
         if (
             profileTexture != null &&
             profilePicture != null
@@ -74,13 +74,13 @@ public class LeaderboardRow : MonoBehaviour
         }
 
 
-        // Only make the CURRENT PLAYER'S row green.
+        // Only make the CURRENT PLAYER'S row green
         SetPlayerRowColor(
             steamID
         );
 
 
-        // Load Steam avatar.
+        // Load Steam avatar
         LoadSteamAvatar(
             steamID
         );
@@ -88,9 +88,9 @@ public class LeaderboardRow : MonoBehaviour
 
 
 
-    // ============================================================
+
     // PLAYER ROW COLOR
-    // ============================================================
+
 
     private void SetPlayerRowColor(
         CSteamID steamID
@@ -106,8 +106,7 @@ public class LeaderboardRow : MonoBehaviour
             SteamUser.GetSteamID();
 
 
-        // Only color the row green if this is
-        // the actual player currently playing.
+
         if (steamID == currentPlayerID)
         {
             SetTextGreen(rankText);
@@ -134,9 +133,9 @@ public class LeaderboardRow : MonoBehaviour
 
 
 
-    // ============================================================
+
     // LOAD STEAM AVATAR
-    // ============================================================
+
 
     private void LoadSteamAvatar(
         CSteamID steamID
@@ -154,14 +153,12 @@ public class LeaderboardRow : MonoBehaviour
 
         if (avatarHandle == -1)
         {
-            // Steam is still loading the avatar.
             return;
         }
 
 
         if (avatarHandle == 0)
         {
-            // No avatar available.
             return;
         }
 

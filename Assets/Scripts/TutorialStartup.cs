@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public partial class TutorialStartup : MonoBehaviour
 {
@@ -66,6 +67,28 @@ public partial class TutorialStartup : MonoBehaviour
 
     [Tooltip("Time between each character appearing in Box 1.")]
     public float characterDelay = 0.03f;
+
+    // ============================================================
+    // DIALOGUE CLICK DELAY
+    // ============================================================
+
+    [Header("Dialogue Click Delay")]
+
+    [Tooltip("Minimum time between dialogue actions.")]
+    public float dialogueClickDelay = 0.5f;
+
+    private float dialogueClickTimer;
+
+    // ============================================================
+    // QUEUED DIALOGUE CLICKS
+    // ============================================================
+
+    [Header("Queued Dialogue Clicks")]
+
+    [Tooltip("Maximum number of clicks that can be stored while the dialogue is busy.")]
+    public int maximumQueuedDialogueClicks = 20;
+
+    private int queuedDialogueClicks;
 
     // ============================================================
     // DIALOGUE BOX 2
@@ -135,7 +158,7 @@ public partial class TutorialStartup : MonoBehaviour
 
     [Header("Sprint Dialogue Box 3")]
 
-    [Tooltip("Third dialogue box UI object with a CanvasGroup component.")]
+    [Tooltip("Third dialogue box UI object with CanvasGroup component.")]
     public CanvasGroup dialogueBox3;
 
     [Tooltip("How long Box 3 takes to fade in/out.")]
@@ -161,12 +184,74 @@ public partial class TutorialStartup : MonoBehaviour
     public float characterDelay3 = 0.03f;
 
     // ============================================================
+    // DIALOGUE BOX 4
+    // ============================================================
+
+    [Header("Dialogue Box 4")]
+
+    [Tooltip("Fourth dialogue box UI object with CanvasGroup component.")]
+    public CanvasGroup dialogueBox4;
+
+    [Tooltip("How long Box 4 takes to fade in/out.")]
+    public float dialogueBox4FadeDuration = 0.5f;
+
+    [Tooltip("How long to wait before showing Box 4.")]
+    public float dialogueBox4Delay = 0f;
+
+    // ============================================================
+    // DIALOGUE 4 - PART 1
+    // ============================================================
+
+    [Header("Dialogue 4 - Part 1")]
+
+    [Tooltip("Text component used for Dialogue 4 Part 1.")]
+    public TMP_Text dialogueText4;
+
+    [Tooltip("Dialogue lines shown in Dialogue 4 Part 1.")]
+    [TextArea(2, 5)]
+    public string[] dialogueLines4;
+
+    [Tooltip("Time between each character appearing in Dialogue 4 Part 1.")]
+    public float characterDelay4 = 0.03f;
+
+    // ============================================================
+    // DIALOGUE 4 - PART 2
+    // ============================================================
+
+    [Header("Dialogue 4 - Part 2")]
+
+    [Tooltip("Text component used for Dialogue 4 Part 2.")]
+    public TMP_Text dialogueText4Part2;
+
+    [Tooltip("Dialogue lines shown in Dialogue 4 Part 2.")]
+    [TextArea(2, 5)]
+    public string[] dialogueLines4Part2;
+
+    [Tooltip("Time between each character appearing in Dialogue 4 Part 2.")]
+    public float characterDelay4Part2 = 0.03f;
+
+    // ============================================================
+    // DIALOGUE 4 TAB / CHECKLIST
+    // ============================================================
+
+    [Header("Dialogue 4 Tab / Checklist")]
+
+    [Tooltip("CanvasGroup containing the Dialogue 4 Part 2 tab/checklist.")]
+    public CanvasGroup dialogue4Tab;
+
+    [Tooltip("How long the Dialogue 4 tab/checklist takes to fade in.")]
+    public float dialogue4TabFadeDuration = 0.5f;
+
+    [Tooltip("How long the Dialogue 4 tab/checklist takes to fade out.")]
+    public float dialogue4TabFadeOutDuration = 0.5f;
+
+    // ============================================================
     // DIALOGUE COMPLETION
     // ============================================================
 
     [Header("Dialogue Completion")]
 
-    [Tooltip("Called after the sprint tutorial has been completed.")]
+    [Tooltip("Called after the tutorial dialogue has been completed.")]
     public UnityEvent onDialogueFinished;
 
     // ============================================================
@@ -176,12 +261,19 @@ public partial class TutorialStartup : MonoBehaviour
     private bool startupStarted;
     private bool dialogueStarted;
     private bool dialogueFinished;
+
     private bool usingDialogueBox2;
     private bool dialogueBox2Part2;
+
     private bool usingDialogueBox3;
+
+    private bool usingDialogueBox4;
+    private bool dialogueBox4Part2;
+
     private bool isTyping;
     private bool movementRequirementActive;
     private bool sprintRequirementActive;
+    private bool attackRequirementActive;
     private bool transitionInProgress;
 
     private int currentDialogueIndex;
@@ -190,13 +282,79 @@ public partial class TutorialStartup : MonoBehaviour
     private Coroutine startupCoroutine;
 
     // ============================================================
+    // PLAYER ATTACK EVENT
+    // ============================================================
+
+    private void SubscribeToPlayerAttack()
+    {
+        FindPlayer();
+
+        if (player != null)
+        {
+            player.OnPlayerAttack -= HandlePlayerAttack;
+            player.OnPlayerAttack += HandlePlayerAttack;
+        }
+    }
+
+    private void UnsubscribeFromPlayerAttack()
+    {
+        if (player != null)
+        {
+            player.OnPlayerAttack -= HandlePlayerAttack;
+        }
+    }
+
+    private void HandlePlayerAttack()
+    {
+        if (!attackRequirementActive)
+            return;
+
+        if (attackCompletionTriggered)
+            return;
+
+        attackCount++;
+
+        attackCount = Mathf.Clamp(
+            attackCount,
+            0,
+            Mathf.Max(0, attackRequiredCount)
+        );
+
+        UpdateAttackProgressText();
+
+        if (attackCount >= Mathf.Max(0, attackRequiredCount))
+        {
+            attackCompletionTriggered = true;
+            attackRequirementActive = false;
+
+            // Stop the tutorial from accepting anything
+            // while the final box is being prepared.
+            ClearQueuedDialogueClicks();
+
+            StartCoroutine(
+                FinishAttackRequirement()
+            );
+        }
+    }
+
+    // ============================================================
     // AWAKE
     // ============================================================
 
     private void Awake()
     {
         FindPlayer();
+        SubscribeToPlayerAttack();
         ResetTutorialState();
+    }
+
+    // ============================================================
+    // DESTROY
+    // ============================================================
+
+    private void OnDestroy()
+    {
+        UnsubscribeFromPlayerAttack();
     }
 
     // ============================================================
@@ -226,6 +384,27 @@ public partial class TutorialStartup : MonoBehaviour
     }
 
     // ============================================================
+    // RESET QUEUED CLICKS
+    // ============================================================
+
+    private void ClearQueuedDialogueClicks()
+    {
+        queuedDialogueClicks = 0;
+    }
+
+    // ============================================================
+    // QUEUE DIALOGUE CLICK
+    // ============================================================
+
+    private void QueueDialogueClick()
+    {
+        if (queuedDialogueClicks >= maximumQueuedDialogueClicks)
+            return;
+
+        queuedDialogueClicks++;
+    }
+
+    // ============================================================
     // RESET TUTORIAL STATE
     // ============================================================
 
@@ -237,16 +416,30 @@ public partial class TutorialStartup : MonoBehaviour
 
         usingDialogueBox2 = false;
         dialogueBox2Part2 = false;
+
         usingDialogueBox3 = false;
+
+        usingDialogueBox4 = false;
+        dialogueBox4Part2 = false;
 
         isTyping = false;
 
         movementRequirementActive = false;
         sprintRequirementActive = false;
+        attackRequirementActive = false;
 
         transitionInProgress = false;
 
         currentDialogueIndex = 0;
+
+        dialogueClickTimer = 0f;
+
+        ClearQueuedDialogueClicks();
+
+        attackCount = 0;
+        attackCompletionTriggered = false;
+
+        UpdateAttackProgressText();
 
         sprintTime = 0f;
         sprintCompletionTriggered = false;
@@ -257,18 +450,13 @@ public partial class TutorialStartup : MonoBehaviour
             typewriterCoroutine = null;
         }
 
-        if (enableSprintCoroutine != null)
-        {
-            StopCoroutine(enableSprintCoroutine);
-            enableSprintCoroutine = null;
-        }
-
         FindPlayer();
 
         if (player != null)
         {
             player.movementEnabled = false;
             player.sprintEnabled = false;
+            player.attacksEnabled = false;
         }
 
         if (blackImage != null)
@@ -344,6 +532,38 @@ public partial class TutorialStartup : MonoBehaviour
             dialogueText3.color = color;
         }
 
+        if (dialogueBox4 != null)
+        {
+            dialogueBox4.alpha = 0f;
+            dialogueBox4.interactable = false;
+            dialogueBox4.blocksRaycasts = false;
+        }
+
+        if (dialogueText4 != null)
+        {
+            dialogueText4.text = "";
+
+            Color color = dialogueText4.color;
+            color.a = 1f;
+            dialogueText4.color = color;
+        }
+
+        if (dialogueText4Part2 != null)
+        {
+            dialogueText4Part2.text = "";
+
+            Color color = dialogueText4Part2.color;
+            color.a = 0f;
+            dialogueText4Part2.color = color;
+        }
+
+        if (dialogue4Tab != null)
+        {
+            dialogue4Tab.alpha = 0f;
+            dialogue4Tab.interactable = false;
+            dialogue4Tab.blocksRaycasts = false;
+        }
+
         UpdateSprintProgressText();
 
         if (staminaBar != null)
@@ -359,6 +579,12 @@ public partial class TutorialStartup : MonoBehaviour
         }
 
         ResetChecklist();
+
+        // --------------------------------------------------------
+        // RESET FINAL BOX
+        // --------------------------------------------------------
+
+        ResetFinalBox();
     }
 
     // ============================================================
@@ -457,23 +683,29 @@ public partial class TutorialStartup : MonoBehaviour
             return;
 
         if (dialogueLines == null || dialogueLines.Length == 0)
-        {
             return;
-        }
 
         dialogueStarted = true;
         dialogueFinished = false;
 
         usingDialogueBox2 = false;
         dialogueBox2Part2 = false;
+
         usingDialogueBox3 = false;
+
+        usingDialogueBox4 = false;
+        dialogueBox4Part2 = false;
 
         movementRequirementActive = false;
         sprintRequirementActive = false;
+        attackRequirementActive = false;
 
         transitionInProgress = false;
 
         currentDialogueIndex = 0;
+
+        dialogueClickTimer = 0f;
+        ClearQueuedDialogueClicks();
 
         if (dialogueText != null)
         {
@@ -511,12 +743,39 @@ public partial class TutorialStartup : MonoBehaviour
             dialogueText3.color = color;
         }
 
+        if (dialogueText4 != null)
+        {
+            dialogueText4.text = "";
+
+            Color color = dialogueText4.color;
+            color.a = 1f;
+            dialogueText4.color = color;
+        }
+
+        if (dialogueText4Part2 != null)
+        {
+            dialogueText4Part2.text = "";
+
+            Color color = dialogueText4Part2.color;
+            color.a = 0f;
+            dialogueText4Part2.color = color;
+        }
+
         ResetChecklist();
+        ResetFinalBox();
+
+        if (dialogue4Tab != null)
+        {
+            dialogue4Tab.alpha = 0f;
+            dialogue4Tab.interactable = false;
+            dialogue4Tab.blocksRaycasts = false;
+        }
 
         if (player != null)
         {
             player.movementEnabled = false;
             player.sprintEnabled = false;
+            player.attacksEnabled = false;
         }
 
         if (dialogueBox != null)
@@ -546,7 +805,11 @@ public partial class TutorialStartup : MonoBehaviour
         TMP_Text targetText = null;
         string targetLine = "";
 
-        if (!usingDialogueBox2 && !usingDialogueBox3)
+        if (
+            !usingDialogueBox2 &&
+            !usingDialogueBox3 &&
+            !usingDialogueBox4
+        )
         {
             targetText = dialogueText;
 
@@ -561,7 +824,10 @@ public partial class TutorialStartup : MonoBehaviour
                 ];
             }
         }
-        else if (usingDialogueBox2 && !dialogueBox2Part2)
+        else if (
+            usingDialogueBox2 &&
+            !dialogueBox2Part2
+        )
         {
             targetText = dialogueText2;
 
@@ -576,7 +842,10 @@ public partial class TutorialStartup : MonoBehaviour
                 ];
             }
         }
-        else if (usingDialogueBox2 && dialogueBox2Part2)
+        else if (
+            usingDialogueBox2 &&
+            dialogueBox2Part2
+        )
         {
             targetText = dialogueText2Part2;
 
@@ -606,6 +875,42 @@ public partial class TutorialStartup : MonoBehaviour
                 ];
             }
         }
+        else if (
+            usingDialogueBox4 &&
+            !dialogueBox4Part2
+        )
+        {
+            targetText = dialogueText4;
+
+            if (
+                dialogueLines4 != null &&
+                currentDialogueIndex >= 0 &&
+                currentDialogueIndex < dialogueLines4.Length
+            )
+            {
+                targetLine = dialogueLines4[
+                    currentDialogueIndex
+                ];
+            }
+        }
+        else if (
+            usingDialogueBox4 &&
+            dialogueBox4Part2
+        )
+        {
+            targetText = dialogueText4Part2;
+
+            if (
+                dialogueLines4Part2 != null &&
+                currentDialogueIndex >= 0 &&
+                currentDialogueIndex < dialogueLines4Part2.Length
+            )
+            {
+                targetLine = dialogueLines4Part2[
+                    currentDialogueIndex
+                ];
+            }
+        }
 
         if (targetText == null)
             return;
@@ -628,6 +933,12 @@ public partial class TutorialStartup : MonoBehaviour
         {
             targetCharacterDelay = characterDelay3;
         }
+        else if (usingDialogueBox4)
+        {
+            targetCharacterDelay = dialogueBox4Part2
+                ? characterDelay4Part2
+                : characterDelay4;
+        }
 
         typewriterCoroutine = StartCoroutine(
             TypeDialogue(
@@ -649,7 +960,8 @@ public partial class TutorialStartup : MonoBehaviour
     {
         isTyping = true;
 
-        targetText.text = "";
+        if (targetText != null)
+            targetText.text = "";
 
         float delay = Mathf.Max(
             0.001f,
@@ -658,20 +970,30 @@ public partial class TutorialStartup : MonoBehaviour
 
         for (int i = 0; i < line.Length; i++)
         {
-            targetText.text = line.Substring(
-                0,
-                i + 1
-            );
+            if (targetText != null)
+                targetText.text = line.Substring(0, i + 1);
 
-            yield return new WaitForSecondsRealtime(
-                delay
-            );
+            yield return new WaitForSecondsRealtime(delay);
         }
 
-        targetText.text = line;
+        if (targetText != null)
+            targetText.text = line;
 
         isTyping = false;
         typewriterCoroutine = null;
+
+        // Box 3's final line automatically starts sprint training.
+        if (
+            usingDialogueBox3 &&
+            dialogueLines3 != null &&
+            currentDialogueIndex >= 0 &&
+            currentDialogueIndex == dialogueLines3.Length - 1 &&
+            !sprintRequirementActive &&
+            !sprintCompletionTriggered
+        )
+        {
+            BeginSprintRequirement();
+        }
     }
 
     // ============================================================
@@ -680,14 +1002,32 @@ public partial class TutorialStartup : MonoBehaviour
 
     private void Update()
     {
-        if (!dialogueStarted)
-            return;
-
-        if (dialogueFinished)
+        if (!dialogueStarted || dialogueFinished)
             return;
 
         if (transitionInProgress)
             return;
+
+        // --------------------------------------------------------
+        // FINAL BOX
+        // --------------------------------------------------------
+
+        if (finalBoxActive)
+        {
+            UpdateFinalBox();
+            return;
+        }
+
+        // --------------------------------------------------------
+        // NEVER ACCEPT CLICKS WHILE TYPING
+        // --------------------------------------------------------
+
+        if (isTyping)
+            return;
+
+        // --------------------------------------------------------
+        // REQUIREMENTS
+        // --------------------------------------------------------
 
         if (movementRequirementActive)
         {
@@ -701,13 +1041,21 @@ public partial class TutorialStartup : MonoBehaviour
             return;
         }
 
+        if (attackRequirementActive)
+        {
+            return;
+        }
+
+        // --------------------------------------------------------
+        // NORMAL DIALOGUE CLICK
+        // --------------------------------------------------------
+
         if (Input.GetMouseButtonDown(0))
         {
-            if (isTyping)
-            {
-                CompleteCurrentLine();
-                return;
-            }
+            dialogueClickTimer = Mathf.Max(
+                0f,
+                dialogueClickDelay
+            );
 
             AdvanceToNextDialogue();
         }
@@ -733,9 +1081,7 @@ public partial class TutorialStartup : MonoBehaviour
         isTyping = false;
 
         if (dialogueText != null)
-        {
             dialogueText.text = "";
-        }
 
         if (dialogueBox != null)
         {
@@ -746,6 +1092,8 @@ public partial class TutorialStartup : MonoBehaviour
         usingDialogueBox2 = true;
         dialogueBox2Part2 = false;
         usingDialogueBox3 = false;
+        usingDialogueBox4 = false;
+        dialogueBox4Part2 = false;
 
         currentDialogueIndex = 0;
 
@@ -801,10 +1149,10 @@ public partial class TutorialStartup : MonoBehaviour
 
         if (dialogueBox2 != null)
         {
-            dialogueBox2.interactable = true;
-            dialogueBox2.blocksRaycasts = true;
+            dialogueBox2.interactable = false;
+            dialogueBox2.blocksRaycasts = false;
 
-            StartCoroutine(
+            yield return StartCoroutine(
                 FadeDialogueBox(
                     dialogueBox2,
                     0f,
@@ -812,6 +1160,9 @@ public partial class TutorialStartup : MonoBehaviour
                     dialogueBox2FadeDuration
                 )
             );
+
+            dialogueBox2.interactable = true;
+            dialogueBox2.blocksRaycasts = true;
         }
 
         if (dialogue2Tab != null)
@@ -878,6 +1229,10 @@ public partial class TutorialStartup : MonoBehaviour
 
     private IEnumerator StartDialogue2Part2()
     {
+        transitionInProgress = true;
+
+        dialogueClickTimer = 0f;
+
         if (typewriterCoroutine != null)
         {
             StopCoroutine(typewriterCoroutine);
@@ -934,7 +1289,15 @@ public partial class TutorialStartup : MonoBehaviour
 
     private void AdvanceToNextDialogue()
     {
-        if (!usingDialogueBox2 && !usingDialogueBox3)
+        // --------------------------------------------------------
+        // DIALOGUE BOX 1
+        // --------------------------------------------------------
+
+        if (
+            !usingDialogueBox2 &&
+            !usingDialogueBox3 &&
+            !usingDialogueBox4
+        )
         {
             currentDialogueIndex++;
 
@@ -951,7 +1314,14 @@ public partial class TutorialStartup : MonoBehaviour
             return;
         }
 
-        if (usingDialogueBox2 && !dialogueBox2Part2)
+        // --------------------------------------------------------
+        // DIALOGUE BOX 2 PART 1
+        // --------------------------------------------------------
+
+        if (
+            usingDialogueBox2 &&
+            !dialogueBox2Part2
+        )
         {
             currentDialogueIndex++;
 
@@ -968,7 +1338,14 @@ public partial class TutorialStartup : MonoBehaviour
             return;
         }
 
-        if (usingDialogueBox2 && dialogueBox2Part2)
+        // --------------------------------------------------------
+        // DIALOGUE BOX 2 PART 2
+        // --------------------------------------------------------
+
+        if (
+            usingDialogueBox2 &&
+            dialogueBox2Part2
+        )
         {
             currentDialogueIndex++;
 
@@ -985,16 +1362,71 @@ public partial class TutorialStartup : MonoBehaviour
             return;
         }
 
+        // --------------------------------------------------------
+        // DIALOGUE BOX 3
+        // --------------------------------------------------------
+
         if (usingDialogueBox3)
         {
             currentDialogueIndex++;
 
             if (
-                currentDialogueIndex >=
-                dialogueLines3.Length
+                dialogueLines3 == null ||
+                currentDialogueIndex >= dialogueLines3.Length
             )
             {
                 BeginSprintRequirement();
+                return;
+            }
+
+            ShowDialogueLine();
+            return;
+        }
+
+        // --------------------------------------------------------
+        // DIALOGUE BOX 4 PART 1
+        // --------------------------------------------------------
+
+        if (
+            usingDialogueBox4 &&
+            !dialogueBox4Part2
+        )
+        {
+            currentDialogueIndex++;
+
+            if (
+                dialogueLines4 != null &&
+                currentDialogueIndex >= dialogueLines4.Length
+            )
+            {
+                StartCoroutine(
+                    StartDialogue4Part2()
+                );
+
+                return;
+            }
+
+            ShowDialogueLine();
+            return;
+        }
+
+        // --------------------------------------------------------
+        // DIALOGUE BOX 4 PART 2
+        // --------------------------------------------------------
+
+        if (
+            usingDialogueBox4 &&
+            dialogueBox4Part2
+        )
+        {
+            currentDialogueIndex++;
+
+            if (
+                dialogueLines4Part2 != null &&
+                currentDialogueIndex >= dialogueLines4Part2.Length
+            )
+            {
+                BeginAttackRequirement();
                 return;
             }
 
@@ -1022,14 +1454,10 @@ public partial class TutorialStartup : MonoBehaviour
         isTyping = false;
 
         if (dialogueText2 != null)
-        {
             dialogueText2.text = "";
-        }
 
         if (dialogueText2Part2 != null)
-        {
             dialogueText2Part2.text = "";
-        }
 
         if (dialogueBox2 != null)
         {
@@ -1054,9 +1482,15 @@ public partial class TutorialStartup : MonoBehaviour
 
         usingDialogueBox2 = false;
         dialogueBox2Part2 = false;
+
         usingDialogueBox3 = true;
 
+        usingDialogueBox4 = false;
+        dialogueBox4Part2 = false;
+
         currentDialogueIndex = 0;
+
+        dialogueClickTimer = 0f;
 
         if (dialogueText3 != null)
         {
@@ -1104,10 +1538,10 @@ public partial class TutorialStartup : MonoBehaviour
 
         if (dialogueBox3 != null)
         {
-            dialogueBox3.interactable = true;
-            dialogueBox3.blocksRaycasts = true;
+            dialogueBox3.interactable = false;
+            dialogueBox3.blocksRaycasts = false;
 
-            StartCoroutine(
+            yield return StartCoroutine(
                 FadeDialogueBox(
                     dialogueBox3,
                     0f,
@@ -1115,45 +1549,249 @@ public partial class TutorialStartup : MonoBehaviour
                     dialogueBox3FadeDuration
                 )
             );
+
+            dialogueBox3.interactable = true;
+            dialogueBox3.blocksRaycasts = true;
+        }
+
+        transitionInProgress = false;
+        dialogueClickTimer = 0f;
+
+        ShowDialogueLine();
+    }
+
+    // ============================================================
+    // START DIALOGUE BOX 4
+    // ============================================================
+
+    private void StartDialogueBox4()
+    {
+        if (transitionInProgress)
+            return;
+
+        transitionInProgress = true;
+
+        if (typewriterCoroutine != null)
+        {
+            StopCoroutine(typewriterCoroutine);
+            typewriterCoroutine = null;
+        }
+
+        isTyping = false;
+
+        sprintRequirementActive = false;
+
+        if (dialogueText3 != null)
+        {
+            Color color = dialogueText3.color;
+            color.a = 0f;
+            dialogueText3.color = color;
+            dialogueText3.text = "";
+        }
+
+        if (dialogueBox3 != null)
+        {
+            dialogueBox3.interactable = false;
+            dialogueBox3.blocksRaycasts = false;
+        }
+
+        if (sprintTab != null)
+        {
+            sprintTab.interactable = false;
+            sprintTab.blocksRaycasts = false;
+
+            StartCoroutine(
+                FadeCanvasGroup(
+                    sprintTab,
+                    sprintTab.alpha,
+                    0f,
+                    sprintTabFadeOutDuration
+                )
+            );
+        }
+
+        if (staminaBar != null)
+        {
+            staminaBar.gameObject.SetActive(false);
+        }
+
+        usingDialogueBox3 = false;
+
+        usingDialogueBox4 = true;
+        dialogueBox4Part2 = false;
+
+        currentDialogueIndex = 0;
+
+        if (dialogueText4 != null)
+        {
+            dialogueText4.text = "";
+
+            Color color = dialogueText4.color;
+            color.a = 1f;
+            dialogueText4.color = color;
+        }
+
+        if (dialogueText4Part2 != null)
+        {
+            dialogueText4Part2.text = "";
+
+            Color color = dialogueText4Part2.color;
+            color.a = 0f;
+            dialogueText4Part2.color = color;
+        }
+
+        if (dialogue4Tab != null)
+        {
+            dialogue4Tab.alpha = 0f;
+            dialogue4Tab.interactable = false;
+            dialogue4Tab.blocksRaycasts = false;
+        }
+
+        StartCoroutine(
+            TransitionToDialogueBox4()
+        );
+    }
+
+    // ============================================================
+    // TRANSITION TO DIALOGUE BOX 4
+    // ============================================================
+
+    private IEnumerator TransitionToDialogueBox4()
+    {
+        if (dialogueBox3 != null)
+        {
+            yield return StartCoroutine(
+                FadeDialogueBox(
+                    dialogueBox3,
+                    dialogueBox3.alpha,
+                    0f,
+                    dialogueBox3FadeDuration
+                )
+            );
+        }
+
+        if (dialogueBox4Delay > 0f)
+        {
+            yield return new WaitForSecondsRealtime(
+                dialogueBox4Delay
+            );
+        }
+
+        if (dialogueBox4 != null)
+        {
+            dialogueBox4.interactable = false;
+            dialogueBox4.blocksRaycasts = false;
+
+            yield return StartCoroutine(
+                FadeDialogueBox(
+                    dialogueBox4,
+                    0f,
+                    1f,
+                    dialogueBox4FadeDuration
+                )
+            );
+
+            dialogueBox4.interactable = true;
+            dialogueBox4.blocksRaycasts = true;
         }
 
         transitionInProgress = false;
 
+        dialogueClickTimer = 0f;
+
         ShowDialogueLine();
-
-        yield return StartCoroutine(
-            WaitForDialogue3()
-        );
-
-        BeginSprintRequirement();
     }
 
     // ============================================================
-    // WAIT FOR DIALOGUE 3
+    // START DIALOGUE 4 PART 2
     // ============================================================
 
-    private IEnumerator WaitForDialogue3()
+    private IEnumerator StartDialogue4Part2()
     {
-        if (
-            dialogueLines3 == null ||
-            dialogueLines3.Length == 0
-        )
+        transitionInProgress = true;
+
+        if (typewriterCoroutine != null)
         {
-            yield break;
+            StopCoroutine(typewriterCoroutine);
+            typewriterCoroutine = null;
         }
 
-        while (
-            currentDialogueIndex <
-            dialogueLines3.Length - 1
-        )
+        isTyping = false;
+
+        if (dialogueText4 != null)
         {
-            yield return null;
+            yield return StartCoroutine(
+                FadeText(
+                    dialogueText4,
+                    1f,
+                    0f,
+                    dialogueBox4FadeDuration
+                )
+            );
+
+            dialogueText4.text = "";
         }
 
-        while (isTyping)
+        dialogueBox4Part2 = true;
+        currentDialogueIndex = 0;
+
+        if (dialogueText4Part2 != null)
         {
-            yield return null;
+            Color color = dialogueText4Part2.color;
+            color.a = 0f;
+            dialogueText4Part2.color = color;
+
+            ShowDialogueLine();
+
+            yield return StartCoroutine(
+                FadeText(
+                    dialogueText4Part2,
+                    0f,
+                    1f,
+                    dialogueBox4FadeDuration
+                )
+            );
         }
+        else
+        {
+            ShowDialogueLine();
+        }
+
+        if (dialogue4Tab != null)
+        {
+            dialogue4Tab.alpha = 0f;
+            dialogue4Tab.interactable = true;
+            dialogue4Tab.blocksRaycasts = true;
+
+            yield return StartCoroutine(
+                FadeCanvasGroup(
+                    dialogue4Tab,
+                    0f,
+                    1f,
+                    dialogue4TabFadeDuration
+                )
+            );
+        }
+
+        // ========================================================
+        // IMPORTANT:
+        // ATTACKS ARE ENABLED AS DIALOGUE 4 PART 2 LOADS.
+        // ========================================================
+
+        FindPlayer();
+
+        if (player != null)
+        {
+            player.movementEnabled = true;
+            player.sprintEnabled = true;
+            player.attacksEnabled = true;
+        }
+
+        // Start the attack requirement here so the player can
+        // attack as soon as Part 2 is loaded.
+        BeginAttackRequirement();
+
+        transitionInProgress = false;
     }
 
     // ============================================================
@@ -1174,7 +1812,11 @@ public partial class TutorialStartup : MonoBehaviour
         TMP_Text targetText = null;
         string[] targetLines = null;
 
-        if (!usingDialogueBox2 && !usingDialogueBox3)
+        if (
+            !usingDialogueBox2 &&
+            !usingDialogueBox3 &&
+            !usingDialogueBox4
+        )
         {
             targetText = dialogueText;
             targetLines = dialogueLines;
@@ -1200,6 +1842,22 @@ public partial class TutorialStartup : MonoBehaviour
             targetText = dialogueText3;
             targetLines = dialogueLines3;
         }
+        else if (
+            usingDialogueBox4 &&
+            !dialogueBox4Part2
+        )
+        {
+            targetText = dialogueText4;
+            targetLines = dialogueLines4;
+        }
+        else if (
+            usingDialogueBox4 &&
+            dialogueBox4Part2
+        )
+        {
+            targetText = dialogueText4Part2;
+            targetLines = dialogueLines4Part2;
+        }
 
         if (
             targetText != null &&
@@ -1216,18 +1874,109 @@ public partial class TutorialStartup : MonoBehaviour
     }
 
     // ============================================================
+    // FINISH ATTACK REQUIREMENT
+    // ============================================================
+
+    private IEnumerator FinishAttackRequirement()
+    {
+        // --------------------------------------------------------
+        // Disable attack input immediately after 5 attacks.
+        // --------------------------------------------------------
+
+        FindPlayer();
+
+        if (player != null)
+        {
+            player.attacksEnabled = false;
+        }
+
+        attackRequirementActive = false;
+
+        ClearQueuedDialogueClicks();
+
+        // Give the player a tiny pause after the fifth attack.
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        if (dialogueFinished)
+            yield break;
+
+        // --------------------------------------------------------
+        // Hide Dialogue 4.
+        // --------------------------------------------------------
+
+        if (dialogue4Tab != null)
+        {
+            dialogue4Tab.interactable = false;
+            dialogue4Tab.blocksRaycasts = false;
+
+            StartCoroutine(
+                FadeCanvasGroup(
+                    dialogue4Tab,
+                    dialogue4Tab.alpha,
+                    0f,
+                    dialogue4TabFadeOutDuration
+                )
+            );
+        }
+
+        if (dialogueBox4 != null)
+        {
+            dialogueBox4.interactable = false;
+            dialogueBox4.blocksRaycasts = false;
+
+            yield return StartCoroutine(
+                FadeDialogueBox(
+                    dialogueBox4,
+                    dialogueBox4.alpha,
+                    0f,
+                    dialogueBox4FadeDuration
+                )
+            );
+        }
+
+        if (dialogueText4 != null)
+            dialogueText4.text = "";
+
+        if (dialogueText4Part2 != null)
+            dialogueText4Part2.text = "";
+
+        // --------------------------------------------------------
+        // Show final box.
+        // --------------------------------------------------------
+
+        StartFinalBox();
+    }
+
+    // ============================================================
     // FINISH DIALOGUE
     // ============================================================
 
     private void FinishDialogue()
     {
+        if (
+            usingDialogueBox3 &&
+            !usingDialogueBox4 &&
+            !dialogueFinished
+        )
+        {
+            ClearQueuedDialogueClicks();
+
+            StartDialogueBox4();
+            return;
+        }
+
         dialogueFinished = true;
         isTyping = false;
 
         movementRequirementActive = false;
         sprintRequirementActive = false;
+        attackRequirementActive = false;
 
         transitionInProgress = false;
+
+        ClearQueuedDialogueClicks();
+
+        dialogueClickTimer = 0f;
 
         if (typewriterCoroutine != null)
         {
@@ -1235,16 +1984,11 @@ public partial class TutorialStartup : MonoBehaviour
             typewriterCoroutine = null;
         }
 
-        if (enableSprintCoroutine != null)
-        {
-            StopCoroutine(enableSprintCoroutine);
-            enableSprintCoroutine = null;
-        }
-
         if (player != null)
         {
-            player.sprintEnabled = false;
+            player.sprintEnabled = true;
             player.movementEnabled = true;
+            player.attacksEnabled = true;
         }
 
         if (staminaBar != null)
@@ -1253,19 +1997,19 @@ public partial class TutorialStartup : MonoBehaviour
         }
 
         if (dialogueText2 != null)
-        {
             dialogueText2.text = "";
-        }
 
         if (dialogueText2Part2 != null)
-        {
             dialogueText2Part2.text = "";
-        }
 
         if (dialogueText3 != null)
-        {
             dialogueText3.text = "";
-        }
+
+        if (dialogueText4 != null)
+            dialogueText4.text = "";
+
+        if (dialogueText4Part2 != null)
+            dialogueText4Part2.text = "";
 
         if (dialogueBox2 != null)
         {
@@ -1297,6 +2041,21 @@ public partial class TutorialStartup : MonoBehaviour
             );
         }
 
+        if (dialogueBox4 != null)
+        {
+            dialogueBox4.interactable = false;
+            dialogueBox4.blocksRaycasts = false;
+
+            StartCoroutine(
+                FadeDialogueBox(
+                    dialogueBox4,
+                    dialogueBox4.alpha,
+                    0f,
+                    dialogueBox4FadeDuration
+                )
+            );
+        }
+
         if (dialogue2Tab != null)
         {
             dialogue2Tab.interactable = false;
@@ -1308,6 +2067,21 @@ public partial class TutorialStartup : MonoBehaviour
                     dialogue2Tab.alpha,
                     0f,
                     dialogue2TabFadeOutDuration
+                )
+            );
+        }
+
+        if (dialogue4Tab != null)
+        {
+            dialogue4Tab.interactable = false;
+            dialogue4Tab.blocksRaycasts = false;
+
+            StartCoroutine(
+                FadeCanvasGroup(
+                    dialogue4Tab,
+                    dialogue4Tab.alpha,
+                    0f,
+                    dialogue4TabFadeOutDuration
                 )
             );
         }

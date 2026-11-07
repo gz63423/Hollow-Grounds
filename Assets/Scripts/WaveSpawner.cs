@@ -93,6 +93,12 @@ public class WaveSpawner : MonoBehaviour
     [Tooltip("Time between enemy spawns during the Finale.")]
     public float finaleSpawnDelay = 0.5f;
 
+    [Tooltip("Delay before the first enemy of the run spawns.")]
+    [Min(0f)]
+    public float firstEnemySpawnDelay = 1f;
+
+    private bool isFirstEnemySpawn = true;
+
 
     // ============================================================
     // INTERNAL
@@ -307,92 +313,57 @@ public class WaveSpawner : MonoBehaviour
     // WAVE ROUTINE
     // ============================================================
 
+
     IEnumerator SpawnWaveRoutine()
     {
-        int maximumWaveCount =
-            GetMaximumWaveCount();
-
+        int maximumWaveCount = GetMaximumWaveCount();
 
         while (currentWaveIndex < maximumWaveCount)
         {
-            Wave currentWave =
-                waves[currentWaveIndex];
-
+            Wave currentWave = waves[currentWaveIndex];
 
             aliveEnemies.Clear();
-
             totalEnemiesThisWave = 0;
             enemiesKilledThisWave = 0;
 
-
-            // ====================================================
-            // CALCULATE TOTAL ENEMIES
-            // ====================================================
-
+            // Calculate total enemies in this wave.
             foreach (EnemySpawn spawn in currentWave.enemies)
             {
-                totalEnemiesThisWave +=
-                    spawn.amount;
+                totalEnemiesThisWave += spawn.amount;
             }
 
-
-            // ====================================================
-            // RESET WAVE PROGRESS
-            // ====================================================
-
+            // Reset wave progress.
             if (waveTransition != null)
             {
                 waveTransition.ResetWaveProgress();
             }
 
-
-            // ====================================================
-            // UPDATE WAVE TEXT
-            // ====================================================
-
+            // Update wave text.
             UpdateWaveText();
 
-
             Debug.Log(
-                "WAVE " +
-                (currentWaveIndex + 1) +
-                ": Total enemies = " +
-                totalEnemiesThisWave
+                "WAVE " + (currentWaveIndex + 1) +
+                ": Total enemies = " + totalEnemiesThisWave
             );
 
-
-            // ====================================================
-            // WAVE START SOUND
-            // ====================================================
-
+            // Wave start sound.
             if (SoundManager.Instance != null)
             {
                 SoundManager.Instance.PlayWaveStarted();
             }
 
-
-            // ====================================================
-            // DETERMINE SPAWN DELAY
-            // ====================================================
-
-            float currentSpawnDelay =
-                spawnDelay;
+            // Determine spawn delay.
+            float currentSpawnDelay = spawnDelay;
 
             if (
                 betaVersion &&
-                currentWaveIndex ==
-                GetMaximumWaveCount() - 1
+                currentWaveIndex == maximumWaveCount - 1
             )
             {
-                currentSpawnDelay =
-                    finaleSpawnDelay;
+                currentSpawnDelay = finaleSpawnDelay;
             }
 
-
-            // ====================================================
-            // SPAWN ENEMIES
-            // ====================================================
-
+            // Spawn enemies.
             foreach (EnemySpawn spawn in currentWave.enemies)
             {
                 for (int i = 0; i < spawn.amount; i++)
@@ -402,23 +373,33 @@ public class WaveSpawner : MonoBehaviour
                         yield return null;
                     }
 
+                    // Delay the very first enemy spawn to allow the player to initialize.
+                    if (isFirstEnemySpawn)
+                    {
+                        float delayTimer = 0f;
 
-                    GameObject newEnemy =
-                        SpawnEnemy(
-                            spawn.enemyPrefab
-                        );
+                        while (delayTimer < firstEnemySpawnDelay)
+                        {
+                            while (spawnPaused)
+                            {
+                                yield return null;
+                            }
 
+                            delayTimer += Time.deltaTime;
+                            yield return null;
+                        }
+
+                        isFirstEnemySpawn = false;
+                    }
+
+                    GameObject newEnemy = SpawnEnemy(spawn.enemyPrefab);
 
                     if (newEnemy != null)
                     {
-                        aliveEnemies.Add(
-                            newEnemy
-                        );
+                        aliveEnemies.Add(newEnemy);
                     }
 
-
                     float timer = 0f;
-
 
                     while (timer < currentSpawnDelay)
                     {
@@ -427,169 +408,114 @@ public class WaveSpawner : MonoBehaviour
                             yield return null;
                         }
 
-
-                        timer +=
-                            Time.deltaTime;
-
-
+                        timer += Time.deltaTime;
                         yield return null;
                     }
                 }
             }
 
-
-            // ====================================================
-            // WAIT UNTIL ALL ENEMIES HAVE DIED
-            // ====================================================
-
+            // Wait until all spawned enemies have died.
             while (aliveEnemies.Count > 0)
             {
-                aliveEnemies.RemoveAll(
-                    e => e == null
-                );
-
+                aliveEnemies.RemoveAll(e => e == null);
                 yield return null;
             }
 
-
-            // ====================================================
-            // MAKE SURE WAVE ENDS AT 100%
-            // ====================================================
-
-            enemiesKilledThisWave =
-                totalEnemiesThisWave;
-
+            // Make sure wave progress reaches 100%.
+            enemiesKilledThisWave = totalEnemiesThisWave;
             UpdateWaveProgress();
 
-
-            // ====================================================
-            // SAVE CURRENT RUN WAVE
-            // ====================================================
-
-            int completedWave =
-                currentWaveIndex + 1;
+            // Save current run wave.
+            int completedWave = currentWaveIndex + 1;
 
             PlayerPrefs.SetInt(
                 "CurrentRunHighestWave",
                 completedWave
             );
 
-
-            // ====================================================
-            // SAVE LIFETIME HIGHEST WAVE
-            // ====================================================
-
+            // Save lifetime highest wave.
             if (HighestWave.Instance != null)
             {
-                HighestWave.Instance.ReachedWave(
-                    completedWave
-                );
+                HighestWave.Instance.ReachedWave(completedWave);
             }
 
-
-            // ====================================================
-            // ACHIEVEMENT: DEFIANCE
-            // ====================================================
-
-            AchievementStats.SetHighestWave(
-                completedWave
-            );
-
+            // Achievement: Defiance.
+            AchievementStats.SetHighestWave(completedWave);
 
             PlayerPrefs.Save();
 
-
             // ====================================================
-            // DEMO FINALE
+            // DEMO FINALE COMPLETED
             // ====================================================
 
             if (
                 betaVersion &&
-                currentWaveIndex >=
-                maximumWaveCount - 1
+                currentWaveIndex >= maximumWaveCount - 1
             )
             {
                 Debug.Log(
                     "WAVE SPAWNER: THE FINALE completed at Wave " +
-                    completedWave +
-                    "."
+                    completedWave + "."
                 );
 
+                // Record completion for the final Demo Journey objective.
+                if (DemoJourneyManager.Instance != null)
+                {
+                    DemoJourneyManager.Instance.CompleteDemoFinale();
+                }
+                else
+                {
+                    Debug.LogWarning(
+                        "WAVE SPAWNER: DemoJourneyManager.Instance is null. " +
+                        "The Demo Finale could not be recorded in Demo Journey."
+                    );
+                }
 
-                yield return new WaitForSeconds(
-                    1f
-                );
-
+                yield return new WaitForSeconds(1f);
 
                 StartEndlessMode();
 
                 yield break;
             }
 
-
             // ====================================================
-            // NORMAL FINAL WAVE
+            // NORMAL GAME FINAL WAVE
             // ====================================================
 
             if (
                 !betaVersion &&
-                currentWaveIndex >=
-                maximumWaveCount - 1
+                currentWaveIndex >= maximumWaveCount - 1
             )
             {
-                Debug.Log(
-                    "WAVE SPAWNER: Final wave reached."
-                );
+                Debug.Log("WAVE SPAWNER: Final wave reached.");
 
+                yield return new WaitForSeconds(1f);
 
-                yield return new WaitForSeconds(
-                    1f
-                );
-
-
-                if (
-                    !string.IsNullOrEmpty(
-                        completionSceneName
-                    )
-                )
+                if (!string.IsNullOrEmpty(completionSceneName))
                 {
                     SceneScreenFader fader =
-                        FindFirstObjectByType<
-                            SceneScreenFader
-                        >();
-
+                        FindFirstObjectByType<SceneScreenFader>();
 
                     if (fader != null)
                     {
-                        fader.LoadScene(
-                            completionSceneName
-                        );
+                        fader.LoadScene(completionSceneName);
                     }
                     else
                     {
-                        SceneManager.LoadScene(
-                            completionSceneName
-                        );
+                        SceneManager.LoadScene(completionSceneName);
                     }
                 }
-
 
                 yield break;
             }
 
-
-            // ====================================================
-            // NEXT WAVE
-            // ====================================================
-
+            // Advance to the next wave.
             currentWaveIndex++;
 
-
-            yield return new WaitForSeconds(
-                1f
-            );
+            yield return new WaitForSeconds(1f);
         }
     }
+
 
 
     // ============================================================

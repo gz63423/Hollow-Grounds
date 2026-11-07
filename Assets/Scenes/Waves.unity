@@ -1493,6 +1493,8 @@ MonoBehaviour:
   progressBar: {fileID: 1585961093}
   progressFill: {fileID: 445527544}
   waveSpawner: {fileID: 1626684593}
+  player: {fileID: 0}
+  enablePlayerOnStart: 1
   fadeInDuration: 1
   holdDuration: 1
   moveOutDuration: 1
@@ -1501,6 +1503,7 @@ MonoBehaviour:
   maxBackgroundAlpha: 0.784
   uiBackgroundAlpha: 0.46666667
   progressBarFadeDuration: 1
+  tutorialKillsRequired: 5
 --- !u!4 &187429208
 Transform:
   m_ObjectHideFlags: 0
@@ -4114,7 +4117,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_SortAtRoot: 0
 --- !u!95 &479842772
 Animator:
@@ -14782,6 +14785,10 @@ MonoBehaviour:
   runSpeed: 0.4
   runKey: 304
   animator: {fileID: 1464034658}
+  movementEnabled: 1
+  attacksEnabled: 1
+  sprintEnabled: 1
+  unlimitedStamina: 0
   maxStamina: 200
   stamina: 0
   runStaminaDrainPerSecond: 20
@@ -14813,6 +14820,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   attackBufferTime: 0.2
+  bufferedAttackStartDelay: 0.06
+  synchronizeBufferedArmorAttacks: 1
   attackSpeedMultiplier: 1
   attackKnockbackForce: 0.05
   attackKnockbackDuration: 0.15
@@ -16348,13 +16357,17 @@ MonoBehaviour:
   - waveName: The Finale
     enemies:
     - enemyPrefab: {fileID: 2348126740027424691}
+      amount: 10
+    - enemyPrefab: {fileID: 1239760015}
+      amount: 5
+    - enemyPrefab: {fileID: 2348126740027424691}
       amount: 20
     - enemyPrefab: {fileID: 1239760015}
       amount: 10
     - enemyPrefab: {fileID: 2348126740027424691}
-      amount: 30
+      amount: 20
     - enemyPrefab: {fileID: 1239760015}
-      amount: 15
+      amount: 10
   betaVersion: 1
   betaMaxWave: 10
   endlessEnemyPrefab1: {fileID: 2348126740027424691}
@@ -16391,6 +16404,7 @@ MonoBehaviour:
   - {fileID: 504610991}
   spawnDelay: 2
   finaleSpawnDelay: 1
+  firstEnemySpawnDelay: 0.25
   completionSceneName: WavesCompletion
 --- !u!4 &1626684594
 Transform:
@@ -20140,7 +20154,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_SortAtRoot: 0
 --- !u!95 &1949340417
 Animator:

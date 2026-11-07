@@ -39,7 +39,6 @@ public class SoulstoneDisplayTMP : MonoBehaviour
             0
         );
 
-        // Only update the UI if the amount actually changed.
         if (currentSoulstones != lastSoulstoneAmount)
         {
             UpdateTextFromPrefs();

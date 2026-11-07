@@ -6,14 +6,11 @@ public class LeggingsAnimationsManager : MonoBehaviour
     public GameObject leggingsObject;
     public Animator leggingsAnimator;
 
-
     [Header("Leggings Rarity Overrides")]
     public AnimatorOverrideController[] leggingsOverrides =
         new AnimatorOverrideController[5];
 
-
     private int currentLeggingsTier;
-
 
     // ============================================================
     // AWAKE
@@ -22,29 +19,37 @@ public class LeggingsAnimationsManager : MonoBehaviour
     void Awake()
     {
         currentLeggingsTier =
-            PlayerPrefs.GetInt(
-                "LeggingsTier",
-                0
-            );
-
+            PlayerPrefs.GetInt("LeggingsTier", 0);
 
         ApplyLeggings();
     }
 
-
     // ============================================================
-    // UPDATE
+    // LATE UPDATE
     // ============================================================
 
-    void Update()
+    private void LateUpdate()
     {
-        if (leggingsAnimator == null)
+        if (Player.Instance == null ||
+            Player.Instance.animator == null ||
+            leggingsAnimator == null ||
+            !leggingsAnimator.isActiveAndEnabled)
+        {
             return;
+        }
 
+        Animator playerAnimator = Player.Instance.animator;
 
-        SyncParameters();
+        leggingsAnimator.speed = playerAnimator.speed;
+
+        leggingsAnimator.SetFloat("InputX", playerAnimator.GetFloat("InputX"));
+        leggingsAnimator.SetFloat("InputY", playerAnimator.GetFloat("InputY"));
+        leggingsAnimator.SetFloat("LastInputX", playerAnimator.GetFloat("LastInputX"));
+        leggingsAnimator.SetFloat("LastInputY", playerAnimator.GetFloat("LastInputY"));
+
+        leggingsAnimator.SetBool("isWalking", playerAnimator.GetBool("isWalking"));
+        leggingsAnimator.SetBool("isRunning", playerAnimator.GetBool("isRunning"));
     }
-
 
     // ============================================================
     // APPLY LEGGINGS
@@ -55,35 +60,24 @@ public class LeggingsAnimationsManager : MonoBehaviour
         if (leggingsAnimator == null)
             return;
 
-
-        // ========================================================
         // TIER 0 = NO LEGGINGS
-        // ========================================================
 
         if (currentLeggingsTier == 0)
         {
             if (leggingsObject != null)
                 leggingsObject.SetActive(false);
 
-
             return;
         }
 
-
-        // ========================================================
-        // TIER 1-5
-        // ========================================================
-
         if (leggingsObject != null)
             leggingsObject.SetActive(true);
-
 
         int index = Mathf.Clamp(
             currentLeggingsTier - 1,
             0,
             leggingsOverrides.Length - 1
         );
-
 
         if (leggingsOverrides[index] != null)
         {
@@ -92,76 +86,96 @@ public class LeggingsAnimationsManager : MonoBehaviour
         }
     }
 
-
     // ============================================================
-    // SYNC PLAYER PARAMETERS
+    // SYNCHRONIZE WITH PLAYER
     // ============================================================
 
     void SyncParameters()
     {
-        Player player =
-            Player.Instance;
+        Player player = Player.Instance;
 
-
-        if (player == null)
+        if (player == null || player.animator == null)
             return;
 
+        Animator playerAnimator = player.animator;
 
-        Animator playerAnimator =
-            player.animator;
-
-
-        if (playerAnimator == null)
+        if (!leggingsAnimator.isActiveAndEnabled)
             return;
 
+        leggingsAnimator.speed = playerAnimator.speed;
 
-        // Movement
         leggingsAnimator.SetFloat(
             "InputX",
             playerAnimator.GetFloat("InputX")
         );
-
 
         leggingsAnimator.SetFloat(
             "InputY",
             playerAnimator.GetFloat("InputY")
         );
 
-
-        // Last facing direction
         leggingsAnimator.SetFloat(
             "LastInputX",
             playerAnimator.GetFloat("LastInputX")
         );
-
 
         leggingsAnimator.SetFloat(
             "LastInputY",
             playerAnimator.GetFloat("LastInputY")
         );
 
-
-        // Movement states
         leggingsAnimator.SetBool(
             "isWalking",
             playerAnimator.GetBool("isWalking")
         );
-
 
         leggingsAnimator.SetBool(
             "isRunning",
             playerAnimator.GetBool("isRunning")
         );
 
+        // Synchronize animation state and timing.
+        AnimatorStateInfo playerState =
+            playerAnimator.GetCurrentAnimatorStateInfo(0);
 
-        // Keep playback speed identical
-        leggingsAnimator.speed =
-            playerAnimator.speed;
+        AnimatorStateInfo leggingsState =
+            leggingsAnimator.GetCurrentAnimatorStateInfo(0);
+
+        if (playerState.fullPathHash != leggingsState.fullPathHash)
+        {
+            leggingsAnimator.Play(
+                playerState.fullPathHash,
+                0,
+                playerState.normalizedTime
+            );
+
+            leggingsAnimator.Update(0f);
+        }
+        else
+        {
+            float timeDifference = Mathf.Abs(
+                Mathf.Repeat(playerState.normalizedTime, 1f) -
+                Mathf.Repeat(leggingsState.normalizedTime, 1f)
+            );
+
+            if (timeDifference > 0.5f)
+                timeDifference = 1f - timeDifference;
+
+            if (timeDifference > 0.02f)
+            {
+                leggingsAnimator.Play(
+                    playerState.fullPathHash,
+                    0,
+                    playerState.normalizedTime
+                );
+
+                leggingsAnimator.Update(0f);
+            }
+        }
     }
 
-
     // ============================================================
-    // TRIGGER FUNCTIONS
+    // TRIGGER ATTACK
     // ============================================================
 
     public void TriggerAttack()
@@ -169,51 +183,35 @@ public class LeggingsAnimationsManager : MonoBehaviour
         if (leggingsAnimator == null)
             return;
 
-
-        leggingsAnimator.ResetTrigger(
-            "Attack"
-        );
-
-
-        leggingsAnimator.SetTrigger(
-            "Attack"
-        );
+        leggingsAnimator.ResetTrigger("Attack");
+        leggingsAnimator.SetTrigger("Attack");
     }
 
+    // ============================================================
+    // TRIGGER HURT
+    // ============================================================
 
     public void TriggerHurt()
     {
         if (leggingsAnimator == null)
             return;
 
-
-        leggingsAnimator.ResetTrigger(
-            "Hurt"
-        );
-
-
-        leggingsAnimator.SetTrigger(
-            "Hurt"
-        );
+        leggingsAnimator.ResetTrigger("Hurt");
+        leggingsAnimator.SetTrigger("Hurt");
     }
 
+    // ============================================================
+    // TRIGGER DIE
+    // ============================================================
 
     public void TriggerDie()
     {
         if (leggingsAnimator == null)
             return;
 
-
-        leggingsAnimator.ResetTrigger(
-            "Die"
-        );
-
-
-        leggingsAnimator.SetTrigger(
-            "Die"
-        );
+        leggingsAnimator.ResetTrigger("Die");
+        leggingsAnimator.SetTrigger("Die");
     }
-
 
     // ============================================================
     // RESPAWN RESET
@@ -224,49 +222,30 @@ public class LeggingsAnimationsManager : MonoBehaviour
         if (leggingsAnimator == null)
             return;
 
-
         currentLeggingsTier =
-            PlayerPrefs.GetInt(
-                "LeggingsTier",
-                0
-            );
-
+            PlayerPrefs.GetInt("LeggingsTier", 0);
 
         ApplyLeggings();
 
-
-        // Don't attempt to reset an inactive Tier 0 leggings object
         if (currentLeggingsTier == 0)
             return;
 
-
         leggingsAnimator.Rebind();
-
-
         leggingsAnimator.Update(0f);
 
+        leggingsAnimator.Play("Idle", 0, 0f);
 
-        leggingsAnimator.Play(
-            "Idle",
-            0,
-            0f
-        );
-
-
-        leggingsAnimator.speed =
-            1f;
+        leggingsAnimator.speed = 1f;
     }
 
-
     // ============================================================
-    // ANIMATION EVENT FUNCTIONS
+    // ANIMATION EVENTS
     // ============================================================
 
     public void DealAttackDamage()
     {
         // Intentionally empty.
     }
-
 
     public void EndAttack()
     {

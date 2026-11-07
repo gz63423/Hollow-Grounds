@@ -474,13 +474,13 @@ public class ActiveDragUI : MonoBehaviour,
     // REFRESH UI
     // =========================================================
 
+
     public void RefreshUI()
     {
         UpdatePowerupIndex();
 
-        UpdateSlotImage();
-
-
+        // Only update this tab's equip buttons here.
+        // The shared bottom slot should have one owner.
         if (activeEquip != null)
         {
             activeEquip.RefreshUI();
@@ -488,98 +488,19 @@ public class ActiveDragUI : MonoBehaviour,
     }
 
 
+
     // =========================================================
     // UPDATE SLOT IMAGE
     // =========================================================
 
+
     private void UpdateSlotImage()
     {
-        if (activeSlotImage == null)
-            return;
-
-
-        // =====================================================
-        // NO ACTIVE MANAGER
-        // =====================================================
-
-        if (ActivePowerupManager.Instance == null)
-        {
-            SetEmptySlot();
-            return;
-        }
-
-
-        // =====================================================
-        // GET THE ACTUAL EQUIPPED POWERUP
-        // =====================================================
-
-        int equippedIndex =
-            ActivePowerupManager.Instance
-                .GetPowerupInSlot(0);
-
-
-        // =====================================================
-        // SLOT IS ACTUALLY EMPTY
-        // =====================================================
-
-        if (equippedIndex == -1)
-        {
-            SetEmptySlot();
-            return;
-        }
-
-
-        // =====================================================
-        // IMPORTANT:
-        //
-        // NEVER USE THIS TAB'S powerupIndex TO CHOOSE
-        // THE EQUIPPED ICON.
-        //
-        // The shared manager is the ONLY source of truth.
-        // =====================================================
-
-        Sprite icon =
-            ActivePowerupManager.Instance
-                .GetPowerupIcon(equippedIndex);
-
-
-        // =====================================================
-        // FALLBACK
-        //
-        // This is only used if the shared icon table doesn't
-        // contain the equipped powerup.
-        // =====================================================
-
-        if (icon == null &&
-            equippedIndex == powerupIndex &&
-            powerupIcon != null)
-        {
-            icon =
-                powerupIcon.sprite;
-        }
-
-
-        // =====================================================
-        // DISPLAY EQUIPPED ICON
-        // =====================================================
-
-        if (icon != null)
-        {
-            activeSlotImage.sprite =
-                icon;
-
-            activeSlotImage.enabled =
-                true;
-        }
-
-
-        // =====================================================
-        // IMPORTANT:
-        //
-        // If the slot is occupied but the icon is missing,
-        // DO NOT replace it with the empty-slot sprite.
-        // =====================================================
+        // Intentionally do not update the shared bottom slot here.
+        // ActiveDragUnequip is responsible for displaying the
+        // currently equipped powerup.
     }
+
 
 
     // =========================================================

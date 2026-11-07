@@ -971,7 +971,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -447}
-  m_SizeDelta: {x: 586, y: 94.4}
+  m_SizeDelta: {x: 1048.6, y: 94.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &595130349
 MonoBehaviour:
@@ -993,12 +993,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'WASD / arrow keys to move
-
-    Left mouse click to attack
-
-    Shift to
-    sprint'
+  m_text: "move - WASD / arrow keys              attack - Left mouse click\n\n  Sprint
+    - Left shift              activate powerup - 1"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa78b33eae11b1c45957121fbd6b60ae, type: 2}
   m_sharedMaterial: {fileID: -125681412054658788, guid: aa78b33eae11b1c45957121fbd6b60ae, type: 2}
@@ -1025,8 +1021,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

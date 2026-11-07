@@ -20,6 +20,9 @@ public class RebirthUIManager : MonoBehaviour
 
     [Header("Rebirth Requirement Tabs")]
 
+    [Tooltip("Entire UI tab for Rebirth 1.")]
+    public GameObject rebirth1Tab;
+
     [Tooltip("Entire UI tab for Rebirth 2.")]
     public GameObject rebirth2Tab;
 
@@ -32,7 +35,7 @@ public class RebirthUIManager : MonoBehaviour
     [Tooltip("Entire UI tab for Rebirth 5.")]
     public GameObject rebirth5Tab;
 
-    [Tooltip("Shown after Rebirth 5 has been reached.")]
+    [Tooltip("Shown after the maximum rebirth has been reached.")]
     public GameObject maxRebirthTab;
 
 
@@ -42,16 +45,9 @@ public class RebirthUIManager : MonoBehaviour
 
     [Header("Misc UI")]
 
-    [Tooltip("Normal UI object. Hidden when the Max Rebirth tab is displayed.")]
     public GameObject miscObject1;
-
-    [Tooltip("Normal UI object. Hidden when the Max Rebirth tab is displayed.")]
     public GameObject miscObject2;
-
-    [Tooltip("Normal UI object. Hidden when the Max Rebirth tab is displayed.")]
     public GameObject miscObject3;
-
-    [Tooltip("Normal UI object. Hidden when the Max Rebirth tab is displayed.")]
     public GameObject miscObject4;
 
 
@@ -61,6 +57,7 @@ public class RebirthUIManager : MonoBehaviour
 
     [Header("Rebirth Buttons")]
 
+    public Button rebirth1Button;
     public Button rebirth2Button;
     public Button rebirth3Button;
     public Button rebirth4Button;
@@ -73,11 +70,21 @@ public class RebirthUIManager : MonoBehaviour
 
     [Header("Requirement Sprites")]
 
-    [Tooltip("Sprite used when a requirement is completed.")]
     public Sprite checkmarkSprite;
-
-    [Tooltip("Sprite used when a requirement is NOT completed.")]
     public Sprite xSprite;
+
+
+    // ============================================================
+    // REBIRTH 1 INDICATORS
+    // ============================================================
+
+    [Header("Rebirth 1 Requirement Indicators")]
+
+    public Image rebirth1HouseIndicator;
+    public Image rebirth1HelmetIndicator;
+    public Image rebirth1ChestplateIndicator;
+    public Image rebirth1LeggingsIndicator;
+    public Image rebirth1BootsIndicator;
 
 
     // ============================================================
@@ -138,7 +145,6 @@ public class RebirthUIManager : MonoBehaviour
 
     private IEnumerator Start()
     {
-        // Wait until RebirthManager exists.
         while (RebirthManager.Instance == null)
         {
             yield return null;
@@ -163,7 +169,6 @@ public class RebirthUIManager : MonoBehaviour
             return;
         }
 
-
         int currentRebirth =
             RebirthManager.Instance.CurrentRebirth;
 
@@ -171,12 +176,28 @@ public class RebirthUIManager : MonoBehaviour
         // ========================================================
         // DEMO MAX REBIRTH
         // ========================================================
-        // In Demo mode, Rebirth 2 is the final rebirth.
-        // Once Rebirth 2 has been reached, show the Max Rebirth tab.
 
         if (demo && currentRebirth >= 2)
         {
             ShowMaxRebirthUI();
+            return;
+        }
+
+
+        // ========================================================
+        // EXTERNAL REBIRTH 2 UNLOCK
+        // ========================================================
+        // If another script has already unlocked Rebirth 2,
+        // Rebirth 1 must not hide or override that tab.
+
+        if (currentRebirth == 0 &&
+            rebirth2Tab != null &&
+            rebirth2Tab.activeSelf)
+        {
+            SetMiscUI(true);
+
+            if (rebirth1Tab != null)
+                rebirth1Tab.SetActive(false);
 
             return;
         }
@@ -185,6 +206,9 @@ public class RebirthUIManager : MonoBehaviour
         // ========================================================
         // HIDE ALL TABS FIRST
         // ========================================================
+
+        if (rebirth1Tab != null)
+            rebirth1Tab.SetActive(false);
 
         if (rebirth2Tab != null)
             rebirth2Tab.SetActive(false);
@@ -210,11 +234,25 @@ public class RebirthUIManager : MonoBehaviour
 
 
         // ========================================================
+        // SHOW REBIRTH 1
+        // CURRENT REBIRTH = 0
+        // ========================================================
+
+        if (currentRebirth == 0)
+        {
+            if (rebirth1Tab != null)
+                rebirth1Tab.SetActive(true);
+
+            UpdateRebirth1UI();
+        }
+
+
+        // ========================================================
         // SHOW REBIRTH 2
         // CURRENT REBIRTH = 1
         // ========================================================
 
-        if (currentRebirth == 1)
+        else if (currentRebirth == 1)
         {
             if (rebirth2Tab != null)
                 rebirth2Tab.SetActive(true);
@@ -278,6 +316,48 @@ public class RebirthUIManager : MonoBehaviour
 
 
     // ============================================================
+    // REBIRTH 1 UI
+    // ============================================================
+
+    private void UpdateRebirth1UI()
+    {
+        int requiredHouse =
+            RebirthManager.Instance.requiredHouseLevels[1];
+
+        int requiredArmor =
+            RebirthManager.Instance.requiredArmorTiers[1];
+
+        UpdateIndicator(
+            rebirth1HouseIndicator,
+            PlayerPrefs.GetInt("HouseLevel", 0) >= requiredHouse
+        );
+
+        UpdateIndicator(
+            rebirth1HelmetIndicator,
+            PlayerPrefs.GetInt("HelmetTier", 0) >= requiredArmor
+        );
+
+        UpdateIndicator(
+            rebirth1ChestplateIndicator,
+            PlayerPrefs.GetInt("ChestplateTier", 0) >= requiredArmor
+        );
+
+        UpdateIndicator(
+            rebirth1LeggingsIndicator,
+            PlayerPrefs.GetInt("LeggingsTier", 0) >= requiredArmor
+        );
+
+        UpdateIndicator(
+            rebirth1BootsIndicator,
+            PlayerPrefs.GetInt("BootsTier", 0) >= requiredArmor
+        );
+
+        if (rebirth1Button != null)
+            rebirth1Button.interactable = true;
+    }
+
+
+    // ============================================================
     // REBIRTH 2 UI
     // ============================================================
 
@@ -288,7 +368,6 @@ public class RebirthUIManager : MonoBehaviour
 
         int requiredArmor =
             RebirthManager.Instance.requiredArmorTiers[2];
-
 
         UpdateIndicator(
             rebirth2HouseIndicator,
@@ -315,12 +394,8 @@ public class RebirthUIManager : MonoBehaviour
             PlayerPrefs.GetInt("BootsTier", 0) >= requiredArmor
         );
 
-
-        // Keep button bright/clickable.
         if (rebirth2Button != null)
-        {
             rebirth2Button.interactable = true;
-        }
     }
 
 
@@ -335,7 +410,6 @@ public class RebirthUIManager : MonoBehaviour
 
         int requiredArmor =
             RebirthManager.Instance.requiredArmorTiers[3];
-
 
         UpdateIndicator(
             rebirth3HouseIndicator,
@@ -362,12 +436,8 @@ public class RebirthUIManager : MonoBehaviour
             PlayerPrefs.GetInt("BootsTier", 0) >= requiredArmor
         );
 
-
-        // Keep button bright/clickable.
         if (rebirth3Button != null)
-        {
             rebirth3Button.interactable = true;
-        }
     }
 
 
@@ -382,7 +452,6 @@ public class RebirthUIManager : MonoBehaviour
 
         int requiredArmor =
             RebirthManager.Instance.requiredArmorTiers[4];
-
 
         UpdateIndicator(
             rebirth4HouseIndicator,
@@ -409,12 +478,8 @@ public class RebirthUIManager : MonoBehaviour
             PlayerPrefs.GetInt("BootsTier", 0) >= requiredArmor
         );
 
-
-        // Keep button bright/clickable.
         if (rebirth4Button != null)
-        {
             rebirth4Button.interactable = true;
-        }
     }
 
 
@@ -429,7 +494,6 @@ public class RebirthUIManager : MonoBehaviour
 
         int requiredArmor =
             RebirthManager.Instance.requiredArmorTiers[5];
-
 
         UpdateIndicator(
             rebirth5HouseIndicator,
@@ -456,12 +520,8 @@ public class RebirthUIManager : MonoBehaviour
             PlayerPrefs.GetInt("BootsTier", 0) >= requiredArmor
         );
 
-
-        // Keep button bright/clickable.
         if (rebirth5Button != null)
-        {
             rebirth5Button.interactable = true;
-        }
     }
 
 
@@ -469,25 +529,14 @@ public class RebirthUIManager : MonoBehaviour
     // UPDATE CHECKMARK / X
     // ============================================================
 
-    private void UpdateIndicator(
-        Image indicator,
-        bool requirementMet
-    )
+    private void UpdateIndicator(Image indicator, bool requirementMet)
     {
         if (indicator == null)
             return;
 
-
-        if (requirementMet)
-        {
-            indicator.sprite =
-                checkmarkSprite;
-        }
-        else
-        {
-            indicator.sprite =
-                xSprite;
-        }
+        indicator.sprite = requirementMet
+            ? checkmarkSprite
+            : xSprite;
     }
 
 
@@ -517,7 +566,8 @@ public class RebirthUIManager : MonoBehaviour
 
     private void ShowMaxRebirthUI()
     {
-        // Hide normal rebirth tabs.
+        if (rebirth1Tab != null)
+            rebirth1Tab.SetActive(false);
 
         if (rebirth2Tab != null)
             rebirth2Tab.SetActive(false);
@@ -532,7 +582,8 @@ public class RebirthUIManager : MonoBehaviour
             rebirth5Tab.SetActive(false);
 
 
-        // Hide normal buttons.
+        if (rebirth1Button != null)
+            rebirth1Button.gameObject.SetActive(false);
 
         if (rebirth2Button != null)
             rebirth2Button.gameObject.SetActive(false);
@@ -547,12 +598,7 @@ public class RebirthUIManager : MonoBehaviour
             rebirth5Button.gameObject.SetActive(false);
 
 
-        // Hide misc UI.
-
         SetMiscUI(false);
-
-
-        // Show max rebirth tab.
 
         if (maxRebirthTab != null)
             maxRebirthTab.SetActive(true);
@@ -574,11 +620,6 @@ public class RebirthUIManager : MonoBehaviour
             return;
         }
 
-
-        // ========================================================
-        // DEMO MAX REBIRTH CHECK
-        // ========================================================
-
         if (demo &&
             RebirthManager.Instance.CurrentRebirth >= 2)
         {
@@ -587,13 +628,8 @@ public class RebirthUIManager : MonoBehaviour
             );
 
             RefreshUI();
-
             return;
         }
-
-
-        // Requirements are not met.
-        // Button stays bright, but nothing happens.
 
         if (!RebirthManager.Instance.CanRebirth())
         {
@@ -604,19 +640,12 @@ public class RebirthUIManager : MonoBehaviour
             return;
         }
 
-
-        // Perform the rebirth.
-
         bool success =
             RebirthManager.Instance.PerformRebirth();
 
-
         if (success)
         {
-            Debug.Log(
-                "Rebirth successful!"
-            );
-
+            Debug.Log("Rebirth successful!");
             RefreshUI();
         }
     }
@@ -631,3 +660,4 @@ public class RebirthUIManager : MonoBehaviour
         RefreshUI();
     }
 }
+

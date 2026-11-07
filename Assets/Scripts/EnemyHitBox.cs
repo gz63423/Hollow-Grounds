@@ -12,9 +12,6 @@ public class EnemyHitbox : MonoBehaviour
     public Collider2D damageCollider;
 
 
-    // ============================================================
-    // DAMAGE METHOD THAT REPORTS SUCCESS
-    // ============================================================
 
     public bool TryTakeDamage(
     float damage,
@@ -33,17 +30,12 @@ public class EnemyHitbox : MonoBehaviour
             ).normalized;
 
 
-        // ==========================================
-        // NORMAL ENEMY
-        // ==========================================
-
         if (enemy != null)
         {
             if (enemy.Health <= 0f)
                 return false;
 
-            // Count the FULL damage dealt.
-            // Example: 10 damage against 1 HP = 10 damage recorded.
+
             if (DamageDealt.Instance != null)
                 DamageDealt.Instance.AddDamage(damage);
 
@@ -57,9 +49,6 @@ public class EnemyHitbox : MonoBehaviour
         }
 
 
-        // ==========================================
-        // RANGED ENEMY
-        // ==========================================
 
         if (rangedEnemy != null)
         {
@@ -79,10 +68,6 @@ public class EnemyHitbox : MonoBehaviour
             return true;
         }
 
-
-        // ==========================================
-        // BOSS
-        // ==========================================
 
         if (boss != null)
         {
@@ -107,9 +92,6 @@ public class EnemyHitbox : MonoBehaviour
     }
 
 
-    // ============================================================
-    // ORIGINAL METHOD KEPT FOR COMPATIBILITY
-    // ============================================================
 
     public void TakeDamage(
         float damage,

@@ -1847,7 +1847,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &300239067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2056,7 +2056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &324751939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2155,10 +2155,11 @@ MonoBehaviour:
   wavesSceneIndex: 2
   rebirthIntroSceneIndex: 10
   rebirthSaveSceneIndex: 12
-  rebirthRewardSceneIndex: 13
+  initialDelay: 4
   transitionDuration: 15
   finalBlackHold: 0
-  rebirthButtonTransitionDuration: 3
+  transitionSFX: {fileID: 8300000, guid: 35ccb706abfb7cc40bb1218b13221965, type: 3}
+  transitionSFXVolume: 0.8
   columns: 128
   rows: 72
   pixelsPerBurst: 5
@@ -2172,8 +2173,6 @@ MonoBehaviour:
   pixelPrefab: {fileID: 0}
   pixelContainer: {fileID: 130127235}
   randomBurstDelay: 0.001
-  transitionSFX: {fileID: 8300000, guid: 35ccb706abfb7cc40bb1218b13221965, type: 3}
-  transitionSFXVolume: 0.8
 --- !u!1 &334020103
 GameObject:
   m_ObjectHideFlags: 0
@@ -3505,7 +3504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &519420029
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3656,7 +3655,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &541859651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4555,7 +4554,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &619394801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4896,7 +4895,7 @@ RectTransform:
   m_Father: {fileID: 1043735922}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5055,7 +5054,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!156049354 &646188276
 Grid:
   m_ObjectHideFlags: 0
@@ -6589,7 +6588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &830849877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6983,7 +6982,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &887722321
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9913,7 +9912,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1194822722
 Transform:
   m_ObjectHideFlags: 0
@@ -11202,7 +11201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1358156939
 Transform:
   m_ObjectHideFlags: 0
@@ -11512,7 +11511,7 @@ RectTransform:
   m_Father: {fileID: 222700250}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -11775,7 +11774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1449321477
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11998,7 +11997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1464034650
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12088,6 +12087,10 @@ MonoBehaviour:
   runSpeed: 0.4
   runKey: 304
   animator: {fileID: 1464034658}
+  movementEnabled: 1
+  attacksEnabled: 1
+  sprintEnabled: 1
+  unlimitedStamina: 0
   maxStamina: 200
   stamina: 0
   runStaminaDrainPerSecond: 20
@@ -12102,6 +12105,8 @@ MonoBehaviour:
   bootsHPBonus: 0
   helmetManager: {fileID: 2039788360}
   chestplateManager: {fileID: 0}
+  leggingsManager: {fileID: 0}
+  bootsManager: {fileID: 0}
   money: 10
   spawnPoint: {fileID: 2132893789}
   respawnTime: 3
@@ -12116,6 +12121,8 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
+  attackBufferTime: 0.2
+  attackSpeedMultiplier: 1
   attackKnockbackForce: 0.05
   attackKnockbackDuration: 0.15
   sr: {fileID: 1464034650}
@@ -12523,7 +12530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1488211214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15569,7 +15576,7 @@ RectTransform:
   m_Father: {fileID: 2072826989}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -22906,7 +22913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2132893789
 Transform:
   m_ObjectHideFlags: 0
@@ -22938,7 +22945,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2137468644
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -146,16 +146,13 @@ public class PoisonPowerupEffects : MonoBehaviour
 
     public void PlayPoisonActivationSound()
     {
-        if (poisonActivationSound == null)
-            return;
-
-        AudioSource.PlayClipAtPoint(
-            poisonActivationSound,
-            Camera.main != null
-                ? Camera.main.transform.position
-                : transform.position,
-            poisonActivationVolume
-        );
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayPowerupSFX(
+                poisonActivationSound,
+                poisonActivationVolume
+            );
+        }
     }
 
 

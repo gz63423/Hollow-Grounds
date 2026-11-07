@@ -4,18 +4,11 @@ using UnityEngine.UI;
 
 public class ActiveEquip : MonoBehaviour
 {
-    // =========================================================
-    // POWERUP
-    // =========================================================
-
     [Header("Powerup")]
 
     public int powerupIndex;
 
 
-    // =========================================================
-    // EQUIP BUTTON
-    // =========================================================
 
     [Header("Equip Button")]
 
@@ -24,9 +17,6 @@ public class ActiveEquip : MonoBehaviour
     public TMP_Text equipButtonText;
 
 
-    // =========================================================
-    // UNEQUIP BUTTON
-    // =========================================================
 
     [Header("Unequip Button")]
 
@@ -35,9 +25,7 @@ public class ActiveEquip : MonoBehaviour
     public TMP_Text unequipButtonText;
 
 
-    // =========================================================
-    // UNITY
-    // =========================================================
+
 
     private void OnEnable()
     {
@@ -84,9 +72,9 @@ public class ActiveEquip : MonoBehaviour
     }
 
 
-    // =========================================================
-    // EQUIP
-    // =========================================================
+
+    //Equip
+
 
     public void Equip()
     {
@@ -95,15 +83,6 @@ public class ActiveEquip : MonoBehaviour
 
         if (!IsUnlocked())
             return;
-
-        /*
-         * IMPORTANT:
-         *
-         * Do NOT check HasEmptySlot().
-         *
-         * The new system intentionally replaces whatever is already
-         * equipped.
-         */
 
         bool equipped =
             ActivePowerupManager.Instance.EquipPowerup(
@@ -118,9 +97,7 @@ public class ActiveEquip : MonoBehaviour
     }
 
 
-    // =========================================================
-    // UNEQUIP
-    // =========================================================
+
 
     public void Unequip()
     {
@@ -133,9 +110,6 @@ public class ActiveEquip : MonoBehaviour
     }
 
 
-    // =========================================================
-    // UNLOCK CHECK
-    // =========================================================
 
     public bool IsUnlocked()
     {
@@ -177,9 +151,9 @@ public class ActiveEquip : MonoBehaviour
     }
 
 
-    // =========================================================
-    // REFRESH
-    // =========================================================
+
+    // Refres
+
 
     public void RefreshUI()
     {
@@ -209,23 +183,12 @@ public class ActiveEquip : MonoBehaviour
         }
         else
         {
-            /*
-             * Another powerup may already be equipped.
-             *
-             * That is completely fine.
-             *
-             * Clicking this Equip button will replace it.
-             */
-
             SetEquipVisible(true);
             SetUnequipVisible(false);
         }
     }
 
 
-    // =========================================================
-    // BUTTON VISIBILITY
-    // =========================================================
 
     private void SetEquipVisible(bool visible)
     {
@@ -241,9 +204,6 @@ public class ActiveEquip : MonoBehaviour
     }
 
 
-    // =========================================================
-    // SLOT
-    // =========================================================
 
     public int GetCurrentSlot()
     {
@@ -254,9 +214,7 @@ public class ActiveEquip : MonoBehaviour
     }
 
 
-    // =========================================================
-    // NAME
-    // =========================================================
+
 
     public string GetPowerupName()
     {

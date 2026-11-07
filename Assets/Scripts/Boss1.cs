@@ -36,15 +36,13 @@ public class Boss1 : MonoBehaviour
 
     private Coroutine knockbackCoroutine;
 
-    // =========================================================
-    // POISON
-    // =========================================================
+    //Poison
 
     private Coroutine poisonCoroutine;
 
-    // =========================================================
-    // SPAWN ORDER
-    // =========================================================
+
+
+
 
     private long spawnOrder;
 
@@ -53,31 +51,25 @@ public class Boss1 : MonoBehaviour
         return spawnOrder;
     }
 
-    // =========================================================
-    // PLAYER KNOCKBACK
-    // =========================================================
+    //Knockback
 
     [Header("Player Knockback")]
     public float playerKnockbackForce = 6f;
     public float playerKnockbackDuration = 0.2f;
 
-    // =========================================================
-    // DEATH FADE
-    // =========================================================
+
 
     [Header("Death Fade")]
     public float fadeDuration = 1.5f;
 
-    // =========================================================
-    // MONEY REWARD
-    // =========================================================
+
+
+    //Bounty
 
     [Header("Money Reward")]
     public float moneyReward = 0.01f;
 
-    // =========================================================
-    // MONEY POPUP
-    // =========================================================
+
 
     [Header("Money Popup")]
     public GameObject moneyPopupPrefab;
@@ -86,17 +78,14 @@ public class Boss1 : MonoBehaviour
 
     private float moneyPopupAnchorOriginalX;
 
-    // =========================================================
-    // ENEMY UNLOCK POPUP
-    // =========================================================
+
 
     [Header("Enemy Unlock Popup")]
     public GameObject enemyUnlockPopupPrefab;
     public Transform enemyUnlockPopupAnchor;
 
-    // =========================================================
-    // SOULSTONE REWARD
-    // =========================================================
+
+
 
     [Header("Soulstone Reward")]
     [Range(0f, 100f)]
@@ -104,9 +93,8 @@ public class Boss1 : MonoBehaviour
 
     public int soulstoneDropAmount = 10;
 
-    // =========================================================
-    // SOULSTONE POPUP
-    // =========================================================
+
+
 
     [Header("Soulstone Popup")]
     public GameObject soulstonePopupPrefab;
@@ -115,9 +103,9 @@ public class Boss1 : MonoBehaviour
 
     private float soulstonePopupAnchorOriginalX;
 
-    // =========================================================
-    // COMPONENTS
-    // =========================================================
+
+
+    //Components
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -126,9 +114,9 @@ public class Boss1 : MonoBehaviour
 
     private EnemyHitFlash hitFlash;
 
-    // =========================================================
-    // TARGETING
-    // =========================================================
+
+
+    //AI Logic
 
     public Transform currentTarget { get; private set; }
     public float Health { get; private set; }
@@ -150,16 +138,16 @@ public class Boss1 : MonoBehaviour
 
     private bool targetingHouse = false;
 
-    // =========================================================
-    // FREEZE
-    // =========================================================
+
+
+    //Freeze
 
     private bool isFrozen = false;
     private float previousAnimatorSpeed = 1f;
 
-    // =========================================================
-    // AWAKE
-    // =========================================================
+
+
+
 
     void Awake()
     {
@@ -201,9 +189,7 @@ public class Boss1 : MonoBehaviour
         }
     }
 
-    // =========================================================
-    // START
-    // =========================================================
+
 
     void Start()
     {
@@ -241,9 +227,7 @@ public class Boss1 : MonoBehaviour
         }
     }
 
-    // =========================================================
-    // UPDATE
-    // =========================================================
+
 
     void Update()
     {
@@ -295,9 +279,7 @@ public class Boss1 : MonoBehaviour
         }
     }
 
-    // =========================================================
-    // FIXED UPDATE
-    // =========================================================
+
 
     void FixedUpdate()
     {
@@ -395,9 +377,7 @@ public class Boss1 : MonoBehaviour
         }
     }
 
-    // =========================================================
-    // FREEZE CONTROL
-    // =========================================================
+
 
     public void SetFrozen(
         bool frozen)
@@ -438,10 +418,8 @@ public class Boss1 : MonoBehaviour
         }
     }
 
-    // =========================================================
-    // TARGETING
-    // =========================================================
 
+    //AI
     public void ChooseTarget()
     {
         if (!targetingHouse &&
@@ -520,9 +498,7 @@ public class Boss1 : MonoBehaviour
             house?.transform;
     }
 
-    // =========================================================
-    // ATTACK
-    // =========================================================
+
 
     void TryAttack()
     {
@@ -710,9 +686,7 @@ public class Boss1 : MonoBehaviour
         }
     }
 
-    // =========================================================
-    // COLLISIONS
-    // =========================================================
+
 
     void OnCollisionEnter2D(
         Collision2D collision)
@@ -760,9 +734,7 @@ public class Boss1 : MonoBehaviour
         );
     }
 
-    // =========================================================
-    // POISON
-    // =========================================================
+
 
     public void ApplyPoison(
         float damagePerSecond,
@@ -837,9 +809,8 @@ public class Boss1 : MonoBehaviour
             null;
     }
 
-    // =========================================================
-    // FLIP
-    // =========================================================
+
+    //Sprite Fli[
 
     public void FlipTowards(
         Vector2 targetPos)
@@ -897,9 +868,9 @@ public class Boss1 : MonoBehaviour
         }
     }
 
-    // =========================================================
-    // DAMAGE
-    // =========================================================
+    
+    
+    //DMG
 
     public void TakeDamage(
         float amount)
@@ -936,9 +907,9 @@ public class Boss1 : MonoBehaviour
         }
     }
 
-    // =========================================================
-    // KNOCKBACK
-    // =========================================================
+
+
+
 
     public void ApplyKnockback(
         Vector2 direction)
@@ -1047,9 +1018,9 @@ public class Boss1 : MonoBehaviour
         }
     }
 
-    // =========================================================
-    // DEATH
-    // =========================================================
+    
+
+    //Death
 
     void Die()
     {
@@ -1203,9 +1174,7 @@ public class Boss1 : MonoBehaviour
         );
     }
 
-    // =========================================================
-    // FINISH DEATH
-    // =========================================================
+
 
     public void FinishDeath()
     {

@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
@@ -29,6 +30,10 @@ public class Player : MonoBehaviour
     [Tooltip("If enabled, stamina stays full and sprint does not drain stamina.")]
     public bool unlimitedStamina = false;
 
+    public bool IsSceneReady =>
+    !sceneResetting &&
+    !reconnectingToScene;
+
     [Header("Stamina")]
     public float maxStamina = 100f;
     public float stamina;
@@ -47,9 +52,6 @@ public class Player : MonoBehaviour
     public float leggingsHPBonus;
     public float bootsHPBonus;
 
-    // ============================================================
-    // ENEMY ATTACK KNOCKBACK
-    // ============================================================
 
     [Header("Enemy Attack Knockback")]
     private Coroutine enemyKnockbackCoroutine;
@@ -88,14 +90,12 @@ public class Player : MonoBehaviour
     }
 
     public event System.Action<float> OnMoneyChanged;
+    public event Action OnPlayerAttack;
 
     [Header("Respawn")]
     public Transform spawnPoint;
     public float respawnTime = 3f;
 
-    // ============================================================
-    // SCENE RECONNECT
-    // ============================================================
 
     [Header("Scene Reconnect")]
     [Tooltip("The name of the spawn point in the scene. Leave this as the name of your existing spawn point.")]
@@ -103,8 +103,7 @@ public class Player : MonoBehaviour
 
     private bool reconnectingToScene;
 
-    // Prevents old death/respawn routines from surviving a
-    // house-caused scene reload.
+
     private bool sceneResetting;
 
     [Header("References")]
@@ -128,13 +127,21 @@ public class Player : MonoBehaviour
     private float attackBufferTimer;
     private bool bufferedAttackRunning;
 
+    [Header("Buffered Attack Synchronization")]
+    [Tooltip("Small delay before a buffered attack starts, giving all armor animation managers time to receive the same trigger.")]
+    public float bufferedAttackStartDelay = 0.06f;
+
+    [Tooltip("If enabled, all armor attack triggers are sent together after the buffered-attack delay.")]
+    public bool synchronizeBufferedArmorAttacks = true;
+
+    private Coroutine bufferedAttackStartCoroutine;
+    private int attackRequestVersion;
+
     [Header("Attack Animation")]
     [Tooltip("Attack speed multiplier. 1 = normal speed, 1.25 = 25% faster, 2 = twice as fast.")]
     public float attackSpeedMultiplier = 1f;
 
-    // ============================================================
-    // ATTACK KNOCKBACK
-    // ============================================================
+    //Knockback
 
     [Header("Attack Knockback")]
     public float attackKnockbackForce = 1.5f;
@@ -147,15 +154,9 @@ public class Player : MonoBehaviour
     private bool isDead;
     private bool isAttacking;
 
-    // ============================================================
-    // DEATH / RESPAWN
-    // ============================================================
 
     private Coroutine deathRespawnCoroutine;
 
-    // ============================================================
-    // GAMEPLAY DISABLED
-    // ============================================================
 
     private bool gameplayDisabled;
     public bool GameplayDisabled => gameplayDisabled;
@@ -226,15 +227,11 @@ public class Player : MonoBehaviour
 
         LoadArmorStats();
 
-        // ========================================================
-        // LOAD ATTACK SPEED UPGRADE
-        // ========================================================
+        //Attack Speed
 
         LoadAttackSpeedStats();
 
-        // ========================================================
-        // LOAD ATTACK DAMAGE UPGRADE
-        // ========================================================
+        //Attack Damage
 
         LoadAttackDamageStats();
 
@@ -271,6 +268,8 @@ public class Player : MonoBehaviour
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        CancelBufferedAttackStart();
     }
 
     // ============================================================
@@ -282,23 +281,10 @@ public class Player : MonoBehaviour
         LoadSceneMode mode
     )
     {
-        // ========================================================
-        // IMPORTANT
-        // ========================================================
-        //
-        // A new scene means any pending death respawn from the
-        // previous scene is now invalid.
-        //
-        // This is especially important when the HOUSE dies while
-        // the player is already dead.
-        // ========================================================
-
         sceneResetting = true;
 
         CancelPendingDeathRespawn();
-
-        // Don't try to reconnect during the special rebirth
-        // dialogue transition.
+        CancelBufferedAttackStart();
 
         if (reconnectingToScene)
             return;
@@ -306,6 +292,13 @@ public class Player : MonoBehaviour
         StartCoroutine(
             ReconnectToScene()
         );
+    }
+
+    private void LateUpdate()
+    {
+        // Armor animation synchronization is handled by the
+        // individual armor animation manager scripts.
+        // Do not synchronize the armor animators here.
     }
 
     // ============================================================
@@ -332,27 +325,11 @@ public class Player : MonoBehaviour
     {
         reconnectingToScene = true;
 
-        // Wait until the new scene has finished creating
-        // all of its objects.
-
         yield return null;
         yield return new WaitForEndOfFrame();
 
-        // ========================================================
-        // LOAD ATTACK SPEED UPGRADE
-        // ========================================================
-
         LoadAttackSpeedStats();
-
-        // ========================================================
-        // LOAD ATTACK DAMAGE UPGRADE
-        // ========================================================
-
         LoadAttackDamageStats();
-
-        // ========================================================
-        // FIND NEW SPAWN POINT
-        // ========================================================
 
         Transform newSpawnPoint = null;
 
@@ -368,18 +345,10 @@ public class Player : MonoBehaviour
             }
         }
 
-        // ========================================================
-        // RECONNECT SPAWN POINT
-        // ========================================================
-
         if (newSpawnPoint != null)
         {
             spawnPoint = newSpawnPoint;
         }
-
-        // ========================================================
-        // RECONNECT HOUSE
-        // ========================================================
 
         House newHouse =
             FindFirstObjectByType<House>();
@@ -395,10 +364,6 @@ public class Player : MonoBehaviour
             );
         }
 
-        // ========================================================
-        // RECONNECT ARMOR MANAGERS
-        // ========================================================
-
         helmetManager =
             GetComponentInChildren<HelmetAnimationsManager>(true);
 
@@ -411,10 +376,6 @@ public class Player : MonoBehaviour
         bootsManager =
             GetComponentInChildren<BootsAnimationsManager>(true);
 
-        // ========================================================
-        // RESET PLAYER
-        // ========================================================
-
         if (spawnPoint != null)
         {
             RespawnInstant();
@@ -424,9 +385,7 @@ public class Player : MonoBehaviour
         reconnectingToScene = false;
     }
 
-    // ============================================================
-    // ATTACK SPEED
-    // ============================================================
+    //Attack Speed (Can be changed with upgrades)
 
     public void LoadAttackSpeedStats()
     {
@@ -453,9 +412,6 @@ public class Player : MonoBehaviour
                 0.8f
             );
 
-        // Your original animation is 1 second.
-        // This makes Level 0 = 0.80 seconds.
-
         attackSpeedMultiplier =
             1f / attackTime;
 
@@ -471,9 +427,7 @@ public class Player : MonoBehaviour
         );
     }
 
-    // ============================================================
-    // ATTACK DAMAGE
-    // ============================================================
+    //DMG
 
     public void LoadAttackDamageStats()
     {
@@ -489,12 +443,6 @@ public class Player : MonoBehaviour
                 0,
                 10
             );
-
-        // Level 0 = 1 damage
-        // Level 1 = 2 damage
-        // Level 2 = 3 damage
-        // ...
-        // Level 10 = 11 damage
 
         attackDamage =
             1f + attackDamageLevel;
@@ -513,10 +461,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        // ========================================================
-        // GAMEPLAY DISABLED
-        // ========================================================
-
         if (gameplayDisabled)
             return;
 
@@ -530,16 +474,8 @@ public class Player : MonoBehaviour
             return;
         }
 
-        // ========================================================
-        // ATTACK COOLDOWN
-        // ========================================================
-
         if (attackTimer > 0f)
             attackTimer -= Time.deltaTime;
-
-        // ========================================================
-        // MOVEMENT INPUT - WASD ONLY
-        // ========================================================
 
         if (movementEnabled)
         {
@@ -569,16 +505,8 @@ public class Player : MonoBehaviour
             movement = Vector2.zero;
         }
 
-        // ========================================================
-        // WALKING STATE
-        // ========================================================
-
         bool isWalking =
             movement.sqrMagnitude > 0.001f;
-
-        // ========================================================
-        // SPRINT
-        // ========================================================
 
         bool wantsToRun =
             sprintEnabled &&
@@ -607,29 +535,23 @@ public class Player : MonoBehaviour
             isRunning
         );
 
-        // ========================================================
-        // ATTACK INPUT
-        // ========================================================
+        //Attack Input
 
         if (
             attacksEnabled &&
             Input.GetMouseButtonDown(0)
         )
         {
-            // Attack immediately if available
-
             if (
                 !isAttacking &&
-                attackTimer <= 0f
+                attackTimer <= 0f &&
+                bufferedAttackStartCoroutine == null
             )
             {
                 StartAttack(isRunning);
             }
             else
             {
-                // Attack is not available yet.
-                // Remember the click temporarily.
-
                 attackBufferTimer =
                     attackBufferTime;
 
@@ -638,9 +560,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        // ========================================================
-        // ATTACK INPUT BUFFER
-        // ========================================================
+        //Attack logic
 
         if (
             attacksEnabled &&
@@ -650,37 +570,32 @@ public class Player : MonoBehaviour
             attackBufferTimer -=
                 Time.deltaTime;
 
-            // Attack became available while
-            // the buffered input is still active.
-
             if (
                 !isAttacking &&
-                attackTimer <= 0f
+                attackTimer <= 0f &&
+                bufferedAttackStartCoroutine == null
             )
             {
-                StartAttack(
-                    bufferedAttackRunning
-                );
+                int requestVersion = attackRequestVersion;
 
-                // Clear the buffered input
+                bufferedAttackStartCoroutine =
+                    StartCoroutine(
+                        StartBufferedAttackAfterDelay(
+                            bufferedAttackRunning,
+                            requestVersion
+                        )
+                    );
 
                 attackBufferTimer = 0f;
             }
         }
 
-        // ========================================================
-        // IF ATTACKS ARE DISABLED, CLEAR BUFFER
-        // ========================================================
-
         if (!attacksEnabled)
         {
             attackBufferTimer = 0f;
             bufferedAttackRunning = false;
+            CancelBufferedAttackStart();
         }
-
-        // ========================================================
-        // FACING
-        // ========================================================
 
         UpdateFacing();
 
@@ -705,9 +620,6 @@ public class Player : MonoBehaviour
         );
     }
 
-    // ============================================================
-    // FIXED UPDATE
-    // ============================================================
 
     void FixedUpdate()
     {
@@ -763,14 +675,8 @@ public class Player : MonoBehaviour
     // UPDATE FACING
     // ============================================================
 
-    // ============================================================
-    // UPDATE FACING
-    // ============================================================
-
     void UpdateFacing()
     {
-        // If movement is disabled, completely lock the
-        // current facing direction.
         if (!movementEnabled)
         {
             return;
@@ -861,19 +767,11 @@ public class Player : MonoBehaviour
 
     void HandleStamina(bool isRunning)
     {
-        // ========================================================
-        // UNLIMITED STAMINA
-        // ========================================================
-
         if (unlimitedStamina)
         {
             stamina = maxStamina;
             return;
         }
-
-        // ========================================================
-        // NORMAL STAMINA
-        // ========================================================
 
         if (isRunning)
         {
@@ -917,24 +815,29 @@ public class Player : MonoBehaviour
         }
     }
 
-    // ============================================================
-    // ATTACK
-    // ============================================================
+    //Player Attack
 
     void StartAttack(bool running)
     {
         if (
             !attacksEnabled ||
             gameplayDisabled ||
-            sceneResetting
+            sceneResetting ||
+            isDead ||
+            isHurt
         )
         {
             return;
         }
 
+        // A normal and buffered attack both enter through this method, so the player and all armor managers receive their attack triggers from one synchronized point.
+        CancelBufferedAttackStart();
+
         Debug.Log(chestplateManager);
 
         isAttacking = true;
+
+        OnPlayerAttack?.Invoke();
 
         if (SoundManager.Instance != null)
         {
@@ -955,6 +858,85 @@ public class Player : MonoBehaviour
             "x"
         );
 
+        if (synchronizeBufferedArmorAttacks)
+        {
+            // Trigger armor managers together, after the same player attack setup. Their own scripts still control their animator synchronization.
+            TriggerAllArmorAttacks();
+        }
+        else
+        {
+            TriggerAllArmorAttacks();
+        }
+
+        animator.SetFloat(
+            "LastInputX",
+            animDirection.x
+        );
+
+        animator.SetFloat(
+            "LastInputY",
+            animDirection.y
+        );
+
+        attackTimer =
+            running
+                ? runAttackCooldown
+                : walkAttackCooldown;
+    }
+
+    private IEnumerator StartBufferedAttackAfterDelay(
+        bool running,
+        int requestVersion
+    )
+    {
+        float delay =
+            Mathf.Max(
+                0f,
+                bufferedAttackStartDelay
+            );
+
+        if (delay > 0f)
+        {
+            yield return new WaitForSeconds(delay);
+        }
+        else
+        {
+            yield return null;
+        }
+
+        bufferedAttackStartCoroutine = null;
+
+        if (
+            requestVersion != attackRequestVersion ||
+            !attacksEnabled ||
+            gameplayDisabled ||
+            sceneResetting ||
+            reconnectingToScene ||
+            isDead ||
+            isHurt ||
+            isAttacking ||
+            attackTimer > 0f
+        )
+        {
+            yield break;
+        }
+
+        StartAttack(running);
+    }
+
+    private void CancelBufferedAttackStart()
+    {
+        attackRequestVersion++;
+
+        if (bufferedAttackStartCoroutine != null)
+        {
+            StopCoroutine(bufferedAttackStartCoroutine);
+            bufferedAttackStartCoroutine = null;
+        }
+    }
+
+    private void TriggerAllArmorAttacks()
+    {
         if (helmetManager != null)
         {
             helmetManager.TriggerAttack();
@@ -974,26 +956,9 @@ public class Player : MonoBehaviour
         {
             bootsManager.TriggerAttack();
         }
-
-        animator.SetFloat(
-            "LastInputX",
-            animDirection.x
-        );
-
-        animator.SetFloat(
-            "LastInputY",
-            animDirection.y
-        );
-
-        attackTimer =
-            running
-                ? runAttackCooldown
-                : walkAttackCooldown;
     }
 
-    // ============================================================
-    // ATTACK DAMAGE
-    // ============================================================
+    //DMG
 
     public void DealAttackDamage()
     {
@@ -1063,9 +1028,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    // ============================================================
-    // ATTACK KNOCKBACK
-    // ============================================================
+    //Knockback
 
     void ApplyAttackKnockback()
     {
@@ -1169,9 +1132,7 @@ public class Player : MonoBehaviour
         animator.speed = 1f;
     }
 
-    // ============================================================
-    // DAMAGE / DEATH
-    // ============================================================
+    //DMG
 
     public void TakeDamage(int amount)
     {
@@ -1254,6 +1215,8 @@ public class Player : MonoBehaviour
 
     void ForceCancelAttack()
     {
+        CancelBufferedAttackStart();
+
         if (!isAttacking)
             return;
 
@@ -1292,9 +1255,7 @@ public class Player : MonoBehaviour
         isInvincible = false;
     }
 
-    // ============================================================
-    // DIE
-    // ============================================================
+    //Death
 
     void Die()
     {
@@ -1308,9 +1269,7 @@ public class Player : MonoBehaviour
 
         isDead = true;
 
-        // Make absolutely sure there isn't an older
-        // respawn routine still waiting.
-
+        CancelBufferedAttackStart();
         CancelPendingDeathRespawn();
 
         if (SoundManager.Instance != null)
@@ -1370,17 +1329,11 @@ public class Player : MonoBehaviour
             );
     }
 
-    // ============================================================
-    // DEATH ROUTINE
-    // ============================================================
+    //Death
 
     IEnumerator DeathRoutine()
     {
         yield return new WaitForSeconds(1f);
-
-        // The house may have been destroyed while the player
-        // was dead. If the scene is resetting, this coroutine
-        // must NOT continue.
 
         if (
             sceneResetting ||
@@ -1399,11 +1352,6 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(
                 respawnTime
             );
-
-            // Check AGAIN after the respawn delay.
-            //
-            // The house could have been destroyed during
-            // those three seconds.
 
             if (
                 sceneResetting ||
@@ -1434,16 +1382,10 @@ public class Player : MonoBehaviour
         deathRespawnCoroutine = null;
     }
 
-    // ============================================================
-    // RESPAWN
-    // ============================================================
+    //Rspawning
 
     void RespawnInstant()
     {
-        // ========================================================
-        // CANCEL ANY OLD DEATH RESPAWN
-        // ========================================================
-
         if (
             deathRespawnCoroutine != null &&
             !sceneResetting
@@ -1456,9 +1398,7 @@ public class Player : MonoBehaviour
             deathRespawnCoroutine = null;
         }
 
-        // ========================================================
-        // FIND SPAWN POINT
-        // ========================================================
+        CancelBufferedAttackStart();
 
         if (spawnPoint == null)
         {
@@ -1489,15 +1429,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        // ========================================================
-        // LOAD ARMOR
-        // ========================================================
-
         LoadArmorStats();
-
-        // ========================================================
-        // RESET PLAYER STATE
-        // ========================================================
 
         health = maxHealth;
         stamina = maxStamina;
@@ -1507,16 +1439,10 @@ public class Player : MonoBehaviour
         isInvincible = false;
         isAttacking = false;
 
-        // Clear any buffered attack when respawning
-
         attackBufferTimer = 0f;
         bufferedAttackRunning = false;
 
         animator.speed = 1f;
-
-        // ========================================================
-        // STOP ATTACK KNOCKBACK
-        // ========================================================
 
         if (attackKnockbackCoroutine != null)
         {
@@ -1527,10 +1453,6 @@ public class Player : MonoBehaviour
             attackKnockbackCoroutine = null;
         }
 
-        // ========================================================
-        // STOP ENEMY KNOCKBACK
-        // ========================================================
-
         if (enemyKnockbackCoroutine != null)
         {
             StopCoroutine(
@@ -1539,10 +1461,6 @@ public class Player : MonoBehaviour
 
             enemyKnockbackCoroutine = null;
         }
-
-        // ========================================================
-        // RESET PHYSICS
-        // ========================================================
 
         rb.linearVelocity =
             Vector2.zero;
@@ -1555,10 +1473,6 @@ public class Player : MonoBehaviour
 
         col.enabled = true;
 
-        // ========================================================
-        // RESET FACING
-        // ========================================================
-
         animDirection =
             Vector2.down;
 
@@ -1569,10 +1483,6 @@ public class Player : MonoBehaviour
 
         movement =
             Vector2.zero;
-
-        // ========================================================
-        // RESET ANIMATOR
-        // ========================================================
 
         animator.SetBool(
             "isWalking",
@@ -1644,9 +1554,7 @@ public class Player : MonoBehaviour
         );
     }
 
-    // ============================================================
-    // ENEMY KNOCKBACK
-    // ============================================================
+    //KnockBack
 
     public void ApplyEnemyKnockback(
         Vector2 direction,
@@ -1755,18 +1663,11 @@ public class Player : MonoBehaviour
         isAttacking = false;
         attackTimer = 0f;
 
-        // ========================================================
-        // CLEAR ATTACK INPUT BUFFER
-        // ========================================================
-
         attackBufferTimer = 0f;
         bufferedAttackRunning = false;
+        CancelBufferedAttackStart();
 
         animator.speed = 1f;
-
-        // ========================================================
-        // STOP ATTACK KNOCKBACK
-        // ========================================================
 
         if (attackKnockbackCoroutine != null)
         {
@@ -1777,10 +1678,6 @@ public class Player : MonoBehaviour
             attackKnockbackCoroutine = null;
         }
 
-        // ========================================================
-        // STOP ENEMY KNOCKBACK
-        // ========================================================
-
         if (enemyKnockbackCoroutine != null)
         {
             StopCoroutine(
@@ -1790,10 +1687,6 @@ public class Player : MonoBehaviour
             enemyKnockbackCoroutine = null;
         }
 
-        // ========================================================
-        // CLEAR MOVEMENT INPUT
-        // ========================================================
-
         movement =
             Vector2.zero;
 
@@ -1801,10 +1694,6 @@ public class Player : MonoBehaviour
         downHeld = false;
         leftHeld = false;
         rightHeld = false;
-
-        // ========================================================
-        // RESET ANIMATOR
-        // ========================================================
 
         animator.ResetTrigger("Attack");
 
@@ -1856,10 +1745,9 @@ public class Player : MonoBehaviour
         isAttacking = false;
         attackTimer = 0f;
 
-        // Clear any buffered attack
-
         attackBufferTimer = 0f;
         bufferedAttackRunning = false;
+        CancelBufferedAttackStart();
 
         animator.speed = 1f;
 
@@ -1878,9 +1766,7 @@ public class Player : MonoBehaviour
         );
     }
 
-    // ============================================================
-    // HEALTH
-    // ============================================================
+    //HP
 
     public void UpdateMaxHealth()
     {
@@ -1963,10 +1849,7 @@ public class Player : MonoBehaviour
         );
     }
 
-    // ============================================================
-    // MONEY FUNCTIONS
-    // ============================================================
-
+    //Money
     public void AddMoney(float amount)
     {
         Money += amount;
@@ -1998,3 +1881,4 @@ public class Player : MonoBehaviour
         return false;
     }
 }
+

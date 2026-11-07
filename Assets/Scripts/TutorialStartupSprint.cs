@@ -23,9 +23,6 @@ public partial class TutorialStartup
     [Tooltip("If enabled, the stamina bar will be enabled when sprint training begins.")]
     public bool enableStaminaBar = true;
 
-    [Tooltip("How long to wait before enabling sprinting after the sprint section begins.")]
-    public float sprintEnableDelay = 0.5f;
-
     // ============================================================
     // SPRINT TAB
     // ============================================================
@@ -48,15 +45,20 @@ public partial class TutorialStartup
     private float sprintTime;
     private bool sprintCompletionTriggered;
 
-    private Coroutine enableSprintCoroutine;
-
     // ============================================================
     // BEGIN SPRINT REQUIREMENT
     // ============================================================
 
     private void BeginSprintRequirement()
     {
+        // --------------------------------------------------------
+        // PREVENT DUPLICATE STARTS
+        // --------------------------------------------------------
+
         if (sprintRequirementActive)
+            return;
+
+        if (sprintCompletionTriggered)
             return;
 
         sprintRequirementActive = true;
@@ -65,42 +67,51 @@ public partial class TutorialStartup
         sprintCompletionTriggered = false;
 
         // --------------------------------------------------------
-        // RESET PROGRESS TEXT
+        // FIND PLAYER
         // --------------------------------------------------------
 
-        UpdateSprintProgressText();
+        FindPlayer();
 
         // --------------------------------------------------------
-        // ENABLE STAMINA BAR
+        // ENABLE MOVEMENT + SPRINT AUTOMATICALLY
         // --------------------------------------------------------
+        // This happens immediately when the final Box 3 dialogue
+        // line finishes typing. No click is required.
 
-        if (staminaBar != null)
+        if (player != null)
         {
-            if (enableStaminaBar)
-            {
-                staminaBar.gameObject.SetActive(true);
-                UpdateStaminaBar();
-            }
-            else
-            {
-                staminaBar.gameObject.SetActive(false);
-            }
+            player.movementEnabled = true;
+            player.sprintEnabled = true;
         }
 
         // --------------------------------------------------------
-        // ENABLE SPRINT TAB
+        // ENABLE STAMINA BAR AUTOMATICALLY
+        // --------------------------------------------------------
+        // The bar is enabled at the exact same point that sprint
+        // training begins.
+
+        if (staminaBar != null)
+        {
+            staminaBar.gameObject.SetActive(enableStaminaBar);
+
+            // Refresh immediately so the bar does not wait for the
+            // next Update() to receive its first value.
+            UpdateStaminaBar();
+        }
+
+        // --------------------------------------------------------
+        // SHOW SPRINT TAB AUTOMATICALLY
         // --------------------------------------------------------
 
         if (sprintTab != null)
         {
-            sprintTab.alpha = 0f;
             sprintTab.interactable = false;
             sprintTab.blocksRaycasts = false;
 
             StartCoroutine(
                 FadeCanvasGroup(
                     sprintTab,
-                    0f,
+                    sprintTab.alpha,
                     1f,
                     sprintTabFadeDuration
                 )
@@ -108,63 +119,16 @@ public partial class TutorialStartup
         }
 
         // --------------------------------------------------------
-        // ENABLE MOVEMENT
+        // RESET SPRINT PROGRESS
         // --------------------------------------------------------
 
-        FindPlayer();
-
-        if (player != null)
-        {
-            player.movementEnabled = true;
-        }
+        UpdateSprintProgressText();
 
         // --------------------------------------------------------
-        // ENABLE SPRINT AFTER DELAY
+        // CLEAR DIALOGUE INPUT STATE
         // --------------------------------------------------------
 
-        if (enableSprintCoroutine != null)
-        {
-            StopCoroutine(enableSprintCoroutine);
-        }
-
-        enableSprintCoroutine = StartCoroutine(
-            EnableSprintAfterDelay()
-        );
-    }
-
-    // ============================================================
-    // ENABLE SPRINT AFTER DELAY
-    // ============================================================
-
-    private IEnumerator EnableSprintAfterDelay()
-    {
-        float delay = Mathf.Max(
-            0f,
-            sprintEnableDelay
-        );
-
-        if (delay > 0f)
-        {
-            yield return new WaitForSecondsRealtime(
-                delay
-            );
-        }
-
-        FindPlayer();
-
-        if (player != null)
-        {
-            player.sprintEnabled = true;
-        }
-        else
-        {
-            Debug.LogError(
-                "TutorialStartup could not find the Player. " +
-                "Sprint tutorial cannot enable sprinting."
-            );
-        }
-
-        enableSprintCoroutine = null;
+        dialogueClickTimer = 0f;
     }
 
     // ============================================================
@@ -320,23 +284,15 @@ public partial class TutorialStartup
         UpdateSprintProgressText();
 
         // --------------------------------------------------------
-        // DISABLE SPRINT
+        // KEEP SPRINT ENABLED
         // --------------------------------------------------------
+        // Sprint remains enabled because it was introduced as part
+        // of the tutorial and should stay available afterward.
 
         if (player != null)
         {
-            player.sprintEnabled = false;
+            player.sprintEnabled = true;
             player.movementEnabled = true;
-        }
-
-        // --------------------------------------------------------
-        // STOP SPRINT ENABLE COROUTINE
-        // --------------------------------------------------------
-
-        if (enableSprintCoroutine != null)
-        {
-            StopCoroutine(enableSprintCoroutine);
-            enableSprintCoroutine = null;
         }
 
         // --------------------------------------------------------
@@ -376,6 +332,27 @@ public partial class TutorialStartup
         }
 
         // --------------------------------------------------------
+        // FADE BOX 3 TEXT OUT EXPLICITLY
+        // --------------------------------------------------------
+        // This is intentionally separate from the CanvasGroup fade.
+        // It fixes the case where dialogueText3 is not actually a
+        // child of dialogueBox3 in the Canvas hierarchy.
+
+        if (dialogueText3 != null)
+        {
+            yield return StartCoroutine(
+                FadeText(
+                    dialogueText3,
+                    dialogueText3.color.a,
+                    0f,
+                    dialogueBox3FadeDuration
+                )
+            );
+
+            dialogueText3.text = "";
+        }
+
+        // --------------------------------------------------------
         // FADE BOX 3 OUT
         // --------------------------------------------------------
 
@@ -395,9 +372,9 @@ public partial class TutorialStartup
         }
 
         // --------------------------------------------------------
-        // FINISH TUTORIAL DIALOGUE
+        // START DIALOGUE BOX 4 AUTOMATICALLY
         // --------------------------------------------------------
 
-        FinishDialogue();
+        StartDialogueBox4();
     }
 }

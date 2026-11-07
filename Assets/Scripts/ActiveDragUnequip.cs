@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -66,7 +67,6 @@ public class ActiveDragUnequip : MonoBehaviour,
     private void OnEnable()
     {
         Subscribe();
-
         RefreshUI();
     }
 
@@ -74,7 +74,6 @@ public class ActiveDragUnequip : MonoBehaviour,
     private void Start()
     {
         Subscribe();
-
         RefreshUI();
     }
 
@@ -82,6 +81,12 @@ public class ActiveDragUnequip : MonoBehaviour,
     private void OnDisable()
     {
         Unsubscribe();
+
+        isDragging = false;
+        draggedPowerupIndex = -1;
+        draggedSprite = null;
+
+        DestroyDragObject();
     }
 
 
@@ -117,57 +122,38 @@ public class ActiveDragUnequip : MonoBehaviour,
         if (ActivePowerupManager.Instance == null)
             return;
 
-
-        // -----------------------------------------------------
-        // READ ACTUAL SLOT
-        // -----------------------------------------------------
-
+        // Read the actual equipped powerup.
         draggedPowerupIndex =
             ActivePowerupManager.Instance.GetPowerupInSlot(
                 slotIndex
             );
 
-
         if (draggedPowerupIndex == -1)
             return;
 
-
-        // -----------------------------------------------------
-        // GET DRAG SPRITE
-        // -----------------------------------------------------
-
+        // Get the normal powerup sprite.
         draggedSprite =
-            GetPowerupSprite(draggedPowerupIndex);
-
+            ActivePowerupManager.Instance.GetPowerupIcon(
+                draggedPowerupIndex
+            );
 
         if (draggedSprite == null)
         {
             draggedSprite =
-                ActivePowerupManager.Instance.GetPowerupIcon(
-                    draggedPowerupIndex
-                );
+                GetPowerupSprite(draggedPowerupIndex);
         }
-
 
         if (draggedSprite == null)
             return;
 
-
-        // -----------------------------------------------------
-        // CANVAS
-        // -----------------------------------------------------
-
+        // Find the canvas.
         if (canvas == null)
             canvas = GetComponentInParent<Canvas>();
 
         if (canvas == null)
             return;
 
-
-        // -----------------------------------------------------
-        // CREATE DRAG OBJECT
-        // -----------------------------------------------------
-
+        // Create the drag icon.
         isDragging = true;
 
         dragObject = new GameObject(
@@ -182,16 +168,13 @@ public class ActiveDragUnequip : MonoBehaviour,
             false
         );
 
-
         RectTransform rect =
             dragObject.GetComponent<RectTransform>();
 
-        rect.sizeDelta =
-            new Vector2(
-                dragIconSize,
-                dragIconSize
-            );
-
+        rect.sizeDelta = new Vector2(
+            dragIconSize,
+            dragIconSize
+        );
 
         Image image =
             dragObject.GetComponent<Image>();
@@ -199,13 +182,13 @@ public class ActiveDragUnequip : MonoBehaviour,
         image.sprite = draggedSprite;
         image.preserveAspect = true;
         image.raycastTarget = false;
-
+        image.color = Color.white;
 
         CanvasGroup group =
             dragObject.GetComponent<CanvasGroup>();
 
         group.alpha = 0.85f;
-
+        group.blocksRaycasts = false;
 
         UpdateDragPosition(eventData);
     }
@@ -233,6 +216,9 @@ public class ActiveDragUnequip : MonoBehaviour,
         RectTransform canvasRect =
             canvas.transform as RectTransform;
 
+        if (canvasRect == null)
+            return;
+
         Camera cameraToUse = null;
 
         if (canvas.renderMode != RenderMode.ScreenSpaceOverlay)
@@ -240,15 +226,15 @@ public class ActiveDragUnequip : MonoBehaviour,
             cameraToUse = canvas.worldCamera;
         }
 
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvasRect,
             eventData.position,
             cameraToUse,
-            out Vector2 localPoint
-        );
-
-        dragObject.GetComponent<RectTransform>().localPosition =
-            localPoint;
+            out Vector2 localPoint))
+        {
+            dragObject.GetComponent<RectTransform>().localPosition =
+                localPoint;
+        }
     }
 
 
@@ -263,29 +249,19 @@ public class ActiveDragUnequip : MonoBehaviour,
 
         isDragging = false;
 
-
         bool droppedBackOnSlot =
             IsPointerOverSlot(eventData);
 
-
-        /*
-         * If released outside the slot:
-         *     unequip.
-         *
-         * If released back on the slot:
-         *     keep equipped.
-         */
-
+        // Releasing outside the slot unequips the powerup.
+        // Releasing back on the slot keeps it equipped.
         if (!droppedBackOnSlot)
         {
             UnequipDraggedPowerup();
         }
 
-
         DestroyDragObject();
 
         draggedPowerupIndex = -1;
-
         draggedSprite = null;
 
         RefreshUI();
@@ -303,7 +279,6 @@ public class ActiveDragUnequip : MonoBehaviour,
 
         if (draggedPowerupIndex == -1)
             return;
-
 
         ActivePowerupManager.Instance.UnequipPowerup(
             draggedPowerupIndex
@@ -371,79 +346,53 @@ public class ActiveDragUnequip : MonoBehaviour,
         if (slotImage == null)
             return;
 
+        ActivePowerupManager manager =
+            ActivePowerupManager.Instance;
 
-        // -----------------------------------------------------
-        // NO MANAGER
-        // -----------------------------------------------------
-
-        if (ActivePowerupManager.Instance == null)
+        if (manager == null)
         {
             SetEmpty();
             return;
         }
 
-
-        // -----------------------------------------------------
-        // READ ACTUAL SHARED SLOT
-        // -----------------------------------------------------
-
+        // Always read the actual globally equipped powerup.
         int equippedIndex =
-            ActivePowerupManager.Instance.GetPowerupInSlot(
-                slotIndex
-            );
+            manager.GetPowerupInSlot(slotIndex);
 
-
-        // -----------------------------------------------------
-        // ACTUALLY EMPTY
-        // -----------------------------------------------------
-
+        // No powerup equipped.
         if (equippedIndex == -1)
         {
             SetEmpty();
             return;
         }
 
-
-        // -----------------------------------------------------
-        // OCCUPIED
-        // -----------------------------------------------------
-
+        // Prefer the central manager's normal icon.
         Sprite sprite =
-            GetPowerupSprite(equippedIndex);
+            manager.GetPowerupIcon(equippedIndex);
 
-
-        // Try the central manager if the local sprite wasn't
-        // assigned.
-
+        // Fall back to the sprites assigned in this component.
         if (sprite == null)
         {
-            sprite =
-                ActivePowerupManager.Instance.GetPowerupIcon(
-                    equippedIndex
-                );
+            sprite = GetPowerupSprite(equippedIndex);
         }
 
-
-        // -----------------------------------------------------
-        // ICON FOUND
-        // -----------------------------------------------------
-
-        if (sprite != null)
+        // Do not replace an occupied slot with an empty icon.
+        if (sprite == null)
         {
-            slotImage.sprite = sprite;
-            slotImage.enabled = true;
+            Debug.LogWarning(
+                "[ActiveDragUnequip] Missing normal icon for " +
+                manager.GetPowerupName(equippedIndex) +
+                ". The slot remains occupied."
+            );
+
+            return;
         }
 
-
-        // -----------------------------------------------------
-        // ICON NOT FOUND
-        // -----------------------------------------------------
-        //
-        // IMPORTANT:
-        // Do NOT call SetEmpty().
-        //
-        // The slot is occupied according to the manager.
-        // -----------------------------------------------------
+        // Always display the normal, colored icon.
+        slotImage.sprite = sprite;
+        slotImage.color = Color.white;
+        slotImage.preserveAspect = true;
+        slotImage.enabled = true;
     }
 
 
@@ -458,9 +407,8 @@ public class ActiveDragUnequip : MonoBehaviour,
 
         if (emptySlotSprite != null)
         {
-            slotImage.sprite =
-                emptySlotSprite;
-
+            slotImage.sprite = emptySlotSprite;
+            slotImage.color = Color.white;
             slotImage.enabled = true;
         }
     }

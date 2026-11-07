@@ -208,8 +208,8 @@ public class DemoJourneyManager : MonoBehaviour
             new Objective(
                 "DeepFreeze",
                 "Deep Freeze",
-                "Upgrade Freeze to Level 3.",
-                3f,
+                "Upgrade Freeze to Level 2.",
+                2f,
                 40
             )
         );
@@ -219,8 +219,8 @@ public class DemoJourneyManager : MonoBehaviour
             new Objective(
                 "SoulHarvester",
                 "Soul Harvester",
-                "Activate Soul Siphon 5 times.",
-                5f,
+                "Activate Soul Siphon 3 times.",
+                3f,
                 70
             )
         );
@@ -241,8 +241,8 @@ public class DemoJourneyManager : MonoBehaviour
             new Objective(
                 "SecondChance",
                 "Second Chance",
-                "Upgrade Repair to Level 5.",
-                5f,
+                "Upgrade Repair to Level 4.",
+                4f,
                 150
             )
         );

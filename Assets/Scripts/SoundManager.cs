@@ -607,4 +607,28 @@ public class SoundManager : MonoBehaviour
                 2f
             );
     }
+
+    // ============================================================
+    // POWERUP ACTIVATION SFX
+    // ============================================================
+
+    public void PlayPowerupSFX(AudioClip clip, float volume = 1f)
+    {
+        if (audioSource == null || clip == null)
+            return;
+
+        float masterVolume = sfxVolume;
+
+        if (SettingsManager.Instance != null)
+        {
+            masterVolume =
+                SettingsManager.Instance.GetSFXVolumePercent() / 100f;
+        }
+
+        audioSource.PlayOneShot(
+            clip,
+            Mathf.Clamp01(masterVolume) *
+            Mathf.Clamp01(volume)
+        );
+    }
 }

@@ -113,16 +113,13 @@ public class RepairPowerupEffects : MonoBehaviour
 
     private void PlayActivationSound()
     {
-        if (repairActivationSound == null)
-            return;
-
-        AudioSource.PlayClipAtPoint(
-            repairActivationSound,
-            Camera.main != null
-                ? Camera.main.transform.position
-                : transform.position,
-            repairActivationVolume
-        );
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayPowerupSFX(
+                repairActivationSound,
+                repairActivationVolume
+            );
+        }
     }
 
 

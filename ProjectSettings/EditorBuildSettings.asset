@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Waves Demo Intro.unity
     guid: 45a4eb4af80d58348a1f58b1fa34888d
   - enabled: 1
+    path: Assets/Scenes/Waves Demo Attack.unity
+    guid: 1c0fd2e0e1a60e54b822a8e2211361e2
+  - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: 5587a5e5fe626ed43a3d2591aba08456
   - enabled: 1
@@ -21,11 +24,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Health Upgrades Menu.unity
     guid: 1d09b2da594f6b640b7a82997eec2618
   - enabled: 1
-    path: Assets/Scenes/Profile.unity
-    guid: 031b2ce0b07e1024580a994889c5d278
-  - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 9ef67f43862042f448ecda1b10ed27ec
+  - enabled: 1
+    path: Assets/Scenes/Profile.unity
+    guid: 031b2ce0b07e1024580a994889c5d278
   - enabled: 1
     path: Assets/Scenes/Settings.unity
     guid: bd84a60bce3e2ac4e85cb46d377f0d34
@@ -39,11 +42,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Leaderboards.unity
     guid: c578e749c284b354fb924be521b87cbe
   - enabled: 1
-    path: Assets/Scenes/RebirthMain.unity
-    guid: 36a398554cd7020428223e3e0fb3ce44
-  - enabled: 1
     path: Assets/Scenes/Waves Rebirth.unity
     guid: 8e6d778621f60bf469de91dcfa5aefc7
+  - enabled: 1
+    path: Assets/Scenes/RebirthMain.unity
+    guid: 28b4e216de3594e48baa42ee99803756
   - enabled: 1
     path: Assets/Scenes/RebirthPurchased1.unity
     guid: c32bc7b87369b2840ba0463bd9d09042
@@ -74,6 +77,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Achievements Demo.unity
     guid: 64263c844a6a52b499db6b64b7617010
+  - enabled: 1
+    path: Assets/Scenes/HelpTab.unity
+    guid: 6cb2bf013383cbb49afa9151ea40bcfa
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

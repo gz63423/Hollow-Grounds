@@ -42,16 +42,10 @@ public class EnemyRanged : MonoBehaviour
     private Coroutine knockbackCoroutine;
 
 
-    // =========================================================
-    // POISON
-    // =========================================================
 
     private Coroutine poisonCoroutine;
 
 
-    // =========================================================
-    // SPAWN ORDER
-    // =========================================================
 
     private long spawnOrder;
 
@@ -61,9 +55,6 @@ public class EnemyRanged : MonoBehaviour
     public float playerKnockbackDuration = 0.12f;
 
 
-    // =========================================================
-    // DEATH FADE
-    // =========================================================
 
     [Header("Death Fade")]
     public float fadeDuration = 1.5f;
@@ -71,17 +62,13 @@ public class EnemyRanged : MonoBehaviour
     private bool fadeStarted;
 
 
-    // =========================================================
-    // MONEY REWARD
-    // =========================================================
+    //Bounty
 
     [Header("Money Reward")]
     public float moneyReward = 0.01f;
 
 
-    // =========================================================
-    // MONEY POPUP
-    // =========================================================
+
 
     [Header("Money Popup")]
     public GameObject moneyPopupPrefab;
@@ -91,26 +78,19 @@ public class EnemyRanged : MonoBehaviour
     private float moneyPopupAnchorOriginalX;
 
 
-    // =========================================================
-    // ENEMY UNLOCK POPUP
-    // =========================================================
 
     [Header("Enemy Unlock Popup")]
     public GameObject enemyUnlockPopupPrefab;
     public Transform enemyUnlockPopupAnchor;
 
 
-    // =========================================================
-    // SOULSTONE REWARD
-    // =========================================================
+
 
     [Header("Soulstone Reward")]
     public int soulstoneDropAmount = 1;
 
 
-    // =========================================================
-    // SOULSTONE POPUP
-    // =========================================================
+
 
     [Header("Soulstone Popup")]
     public GameObject soulstonePopupPrefab;
@@ -120,9 +100,6 @@ public class EnemyRanged : MonoBehaviour
     private float soulstonePopupAnchorOriginalX;
 
 
-    // =========================================================
-    // COMPONENTS
-    // =========================================================
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -132,23 +109,15 @@ public class EnemyRanged : MonoBehaviour
     private EnemyHitFlash hitFlash;
 
 
-    // =========================================================
-    // TARGET
-    // =========================================================
+    //Targeting
 
     public Transform currentTarget { get; private set; }
 
 
-    // =========================================================
-    // HEALTH
-    // =========================================================
 
     public float Health { get; private set; }
 
 
-    // =========================================================
-    // STATE
-    // =========================================================
 
     private float attackTimer;
     private bool isDead;
@@ -168,24 +137,16 @@ public class EnemyRanged : MonoBehaviour
     private bool targetingHouse = false;
 
 
-    // =========================================================
-    // FREEZE
-    // =========================================================
+
 
     private bool isFrozen = false;
     private float previousAnimatorSpeed = 1f;
 
 
-    // =========================================================
-    // AWAKE
-    // =========================================================
+
 
     void Awake()
     {
-        // =====================================================
-        // SPAWN ORDER
-        // =====================================================
-
         spawnOrder =
             EnemySpawnOrder.GetNext();
 
@@ -207,9 +168,7 @@ public class EnemyRanged : MonoBehaviour
     }
 
 
-    // =========================================================
-    // START
-    // =========================================================
+
 
     void Start()
     {
@@ -243,9 +202,6 @@ public class EnemyRanged : MonoBehaviour
     }
 
 
-    // =========================================================
-    // UPDATE
-    // =========================================================
 
     void Update()
     {
@@ -289,9 +245,6 @@ public class EnemyRanged : MonoBehaviour
     }
 
 
-    // =========================================================
-    // FIXED UPDATE
-    // =========================================================
 
     void FixedUpdate()
     {
@@ -379,9 +332,6 @@ public class EnemyRanged : MonoBehaviour
     }
 
 
-    // =========================================================
-    // FREEZE CONTROL
-    // =========================================================
 
     public void SetFrozen(bool frozen)
     {
@@ -414,9 +364,6 @@ public class EnemyRanged : MonoBehaviour
     }
 
 
-    // =========================================================
-    // TARGETING
-    // =========================================================
 
     public void ChooseTarget()
     {
@@ -484,10 +431,6 @@ public class EnemyRanged : MonoBehaviour
             house?.transform;
     }
 
-
-    // =========================================================
-    // ATTACK
-    // =========================================================
 
     void TryAttack()
     {
@@ -575,9 +518,6 @@ public class EnemyRanged : MonoBehaviour
     }
 
 
-    // =========================================================
-    // SHOOT
-    // =========================================================
 
     public void Shoot()
     {
@@ -629,9 +569,6 @@ public class EnemyRanged : MonoBehaviour
     }
 
 
-    // =========================================================
-    // COLLISIONS
-    // =========================================================
 
     public void OnCollisionEnter2D(
         Collision2D collision)
@@ -673,10 +610,7 @@ public class EnemyRanged : MonoBehaviour
     }
 
 
-    // =========================================================
-    // FLIP
-    // =========================================================
-
+    //Flip sprite
     public void FlipTowards(
         Vector2 targetPos)
     {
@@ -734,10 +668,8 @@ public class EnemyRanged : MonoBehaviour
     }
 
 
-    // =========================================================
-    // DAMAGE
-    // =========================================================
-
+    
+    //DMG
     public void TakeDamage(float amount)
     {
         if (isDead)
@@ -772,9 +704,6 @@ public class EnemyRanged : MonoBehaviour
     }
 
 
-    // =========================================================
-    // KNOCKBACK
-    // =========================================================
 
     public void ApplyKnockback(Vector2 direction)
     {
@@ -800,9 +729,6 @@ public class EnemyRanged : MonoBehaviour
     }
 
 
-    // =========================================================
-    // POISON
-    // =========================================================
 
     public void ApplyPoison(
         float damagePerSecond,
@@ -842,9 +768,7 @@ public class EnemyRanged : MonoBehaviour
                 yield break;
             }
 
-            // =================================================
-            // WAIT ONE SECOND
-            // =================================================
+
 
             yield return new WaitForSeconds(1f);
 
@@ -854,9 +778,7 @@ public class EnemyRanged : MonoBehaviour
                 yield break;
             }
 
-            // =================================================
-            // DAMAGE ONCE PER SECOND
-            // =================================================
+
 
             TakeDamage(
                 damagePerSecond
@@ -869,19 +791,12 @@ public class EnemyRanged : MonoBehaviour
     }
 
 
-    // =========================================================
-    // SPAWN ORDER
-    // =========================================================
 
     public long GetSpawnOrder()
     {
         return spawnOrder;
     }
 
-
-    // =========================================================
-    // KNOCKBACK ROUTINE
-    // =========================================================
 
     private IEnumerator KnockbackRoutine(
         Vector2 direction)
@@ -958,9 +873,6 @@ public class EnemyRanged : MonoBehaviour
     }
 
 
-    // =========================================================
-    // DEATH
-    // =========================================================
 
     void Die()
     {
@@ -1036,9 +948,7 @@ public class EnemyRanged : MonoBehaviour
             SoundManager.Instance.PlayEnemyUnlocked();
         }
 
-        // =====================================================
-        // MONEY
-        // =====================================================
+
 
         float finalMoneyReward =
             moneyReward;
@@ -1056,9 +966,6 @@ public class EnemyRanged : MonoBehaviour
             );
         }
 
-        // =====================================================
-        // MONEY POPUP
-        // =====================================================
 
         if (moneyPopupPrefab != null)
         {
@@ -1087,18 +994,13 @@ public class EnemyRanged : MonoBehaviour
             }
         }
 
-        // =====================================================
-        // KILLS
-        // =====================================================
 
         if (EnemiesKilled.Instance != null)
         {
             EnemiesKilled.Instance.AddKill();
         }
 
-        // =====================================================
-        // NET WORTH
-        // =====================================================
+
 
         if (NetWorth.Instance != null)
         {
@@ -1107,9 +1009,7 @@ public class EnemyRanged : MonoBehaviour
             );
         }
 
-        // =====================================================
-        // XP
-        // =====================================================
+
 
         GiveXP giveXP =
             GetComponent<GiveXP>();
@@ -1119,9 +1019,7 @@ public class EnemyRanged : MonoBehaviour
             giveXP.Give();
         }
 
-        // =====================================================
-        // SOUL SIPHON
-        // =====================================================
+
 
         bool soulSiphonUnlocked =
             PlayerPrefs.GetInt(
@@ -1212,9 +1110,7 @@ public class EnemyRanged : MonoBehaviour
             }
         }
 
-        // =====================================================
-        // DEATH ANIMATION
-        // =====================================================
+
 
         animator.SetTrigger("Die");
 
@@ -1235,9 +1131,6 @@ public class EnemyRanged : MonoBehaviour
     }
 
 
-    // =========================================================
-    // FINISH DEATH
-    // =========================================================
 
     public void FinishDeath()
     {
@@ -1253,9 +1146,6 @@ public class EnemyRanged : MonoBehaviour
     }
 
 
-    // =========================================================
-    // FADE OUT
-    // =========================================================
 
     private IEnumerator FadeOutAndDestroy()
     {

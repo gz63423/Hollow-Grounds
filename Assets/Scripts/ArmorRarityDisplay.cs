@@ -6,7 +6,7 @@ public class ArmorRarityDisplay : MonoBehaviour
     [Header("One TMP for each rarity")]
     public GameObject[] rarityTexts = new GameObject[5];
 
-    // PlayerPrefs keys used by your armor scripts
+
     private readonly string[] armorKeys =
     {
         "HelmetTier",
@@ -36,7 +36,7 @@ public class ArmorRarityDisplay : MonoBehaviour
                 rarityTexts[i].SetActive(false);
         }
 
-        // If every armor piece is max level, show the final text
+
         if (helmet == 5 && chest == 5 && legs == 5 && boots == 5)
         {
             if (rarityTexts.Length >= 6 && rarityTexts[5] != null)
@@ -45,7 +45,7 @@ public class ArmorRarityDisplay : MonoBehaviour
             return;
         }
 
-        // Otherwise show the highest rarity unlocked
+
         if (highestTier > 0 && highestTier <= 5)
         {
             if (rarityTexts[highestTier - 1] != null)

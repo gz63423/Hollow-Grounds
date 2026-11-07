@@ -2,10 +2,6 @@ using UnityEngine;
 
 public static class AchievementStats
 {
-    // ============================================================
-    // TOTAL ENEMIES KILLED
-    // ============================================================
-
     public static int TotalEnemiesKilled
     {
         get => PlayerPrefs.GetInt(
@@ -31,9 +27,7 @@ public static class AchievementStats
     }
 
 
-    // ============================================================
-    // HIGHEST WAVE
-    // ============================================================
+
 
     public static int HighestWave
     {
@@ -57,9 +51,7 @@ public static class AchievementStats
     }
 
 
-    // ============================================================
-    // TOTAL MONEY EARNED
-    // ============================================================
+
 
     public static int TotalMoneyEarned
     {
@@ -89,9 +81,7 @@ public static class AchievementStats
     }
 
 
-    // ============================================================
-    // TOTAL SOULSTONES EARNED
-    // ============================================================
+
 
     public static int TotalSoulstonesEarned
     {
@@ -118,9 +108,7 @@ public static class AchievementStats
     }
 
 
-    // ============================================================
-    // TOTAL UPGRADES PURCHASED
-    // ============================================================
+
 
     public static int TotalUpgradesPurchased
     {
@@ -147,9 +135,7 @@ public static class AchievementStats
     }
 
 
-    // ============================================================
-    // TOTAL DAMAGE DEALT
-    // ============================================================
+
 
     public static long TotalDamageDealt
     {
@@ -195,9 +181,7 @@ public static class AchievementStats
     }
 
 
-    // ============================================================
-    // HIGHEST REBIRTH
-    // ============================================================
+
 
     public static int HighestRebirth
     {
@@ -221,9 +205,6 @@ public static class AchievementStats
     }
 
 
-    // ============================================================
-    // TOTAL BOSSES KILLED
-    // ============================================================
 
     public static int TotalBossesKilled
     {
@@ -250,9 +231,7 @@ public static class AchievementStats
     }
 
 
-    // ============================================================
-    // HIGHEST HOUSE LEVEL
-    // ============================================================
+
 
     public static int HighestHouseLevel
     {
@@ -264,8 +243,7 @@ public static class AchievementStats
                     1
                 );
 
-            // House starts at Level 1.
-            // This also protects old saves that may contain 0.
+            // House starts at Level 1
 
             return Mathf.Max(
                 level,
@@ -301,9 +279,7 @@ public static class AchievementStats
     }
 
 
-    // ============================================================
-    // HIGHEST ARMOR TIER
-    // ============================================================
+
 
     public static int HighestArmorTier
     {
@@ -352,8 +328,7 @@ public static class AchievementStats
                 0
             );
 
-        // The completed armor tier is determined
-        // by the lowest of the four armor pieces.
+        // The completed armor tier is determined by the lowest of the four armor pieces.
 
         int completeArmorTier =
             Mathf.Min(
@@ -369,9 +344,8 @@ public static class AchievementStats
     }
 
 
-    // ============================================================
-    // RESET
-    // ============================================================
+    //RESET
+
 
     public static void ResetAllAchievementStats()
     {

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ResetProgress : MonoBehaviour
 {
@@ -119,6 +118,8 @@ public class ResetProgress : MonoBehaviour
         // =====================================================
 
         PlayerPrefs.DeleteKey("IntroPlayed");
+
+        PlayerPrefs.DeleteKey("HasLaunchedBefore");
 
 
         // =====================================================
@@ -735,12 +736,21 @@ public class ResetProgress : MonoBehaviour
 
 
         // =====================================================
-        // RELOAD CURRENT SCENE
+        // RESET STARTUP FLAGS FOR NEXT LAUNCH
         // =====================================================
 
-        SceneManager.LoadScene(
-            SceneManager.GetActiveScene().buildIndex
+        PlayerPrefs.DeleteKey("IntroPlayed");
+        PlayerPrefs.DeleteKey("HasLaunchedBefore");
+        PlayerPrefs.DeleteKey("RebirthIntroPlayed");
+        PlayerPrefs.DeleteKey("TutorialCompleted");
+
+        PlayerPrefs.Save();
+
+        Debug.Log(
+            "FULL PROGRESS RESET COMPLETE. Current scene preserved. " +
+            "Tutorial will play on next startup."
         );
+
     }
 
 

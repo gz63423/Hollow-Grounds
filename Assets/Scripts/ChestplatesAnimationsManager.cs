@@ -12,35 +12,38 @@ public class ChestplateAnimationsManager : MonoBehaviour
 
     private int currentChestplateTier;
 
+    // ============================================================
+    // AWAKE
+    // ============================================================
 
     void Awake()
     {
         currentChestplateTier =
-            PlayerPrefs.GetInt(
-                "ChestplateTier",
-                0
-            );
+            PlayerPrefs.GetInt("ChestplateTier", 0);
 
         ApplyChestplate();
     }
 
+    // ============================================================
+    // LATE UPDATE
+    // ============================================================
 
-    void LateUpdate()
+    private void LateUpdate()
     {
-        if (chestplateAnimator == null)
-            return;
-
         SyncParameters();
     }
 
+    // ============================================================
+    // APPLY CHESTPLATE
+    // ============================================================
 
     void ApplyChestplate()
     {
         if (chestplateAnimator == null)
             return;
 
+        // TIER 0 = NO CHESTPLATE
 
-        // No chestplate equipped
         if (currentChestplateTier == 0)
         {
             if (chestplateObject != null)
@@ -49,19 +52,20 @@ public class ChestplateAnimationsManager : MonoBehaviour
             return;
         }
 
-
-        // Enable chestplate
         if (chestplateObject != null)
             chestplateObject.SetActive(true);
 
+        if (chestplateOverrides == null ||
+            chestplateOverrides.Length == 0)
+        {
+            return;
+        }
 
-        // Tier 1-5
         int index = Mathf.Clamp(
             currentChestplateTier - 1,
             0,
             chestplateOverrides.Length - 1
         );
-
 
         if (chestplateOverrides[index] != null)
         {
@@ -70,79 +74,71 @@ public class ChestplateAnimationsManager : MonoBehaviour
         }
     }
 
+    // ============================================================
+    // SYNCHRONIZE WITH PLAYER
+    // ============================================================
 
     void SyncParameters()
     {
-        Player player =
-            Player.Instance;
+        Player player = Player.Instance;
 
-
-        if (player == null)
+        if (player == null ||
+            player.animator == null ||
+            chestplateAnimator == null ||
+            !chestplateAnimator.isActiveAndEnabled)
+        {
             return;
+        }
 
+        Animator playerAnimator = player.animator;
 
-        Animator playerAnimator =
-            player.animator;
-
-
-        if (playerAnimator == null)
-            return;
-
-
-        // =========================
-        // SYNC PARAMETERS
-        // =========================
+        chestplateAnimator.speed = playerAnimator.speed;
 
         chestplateAnimator.SetFloat(
             "InputX",
             playerAnimator.GetFloat("InputX")
         );
 
-
         chestplateAnimator.SetFloat(
             "InputY",
             playerAnimator.GetFloat("InputY")
         );
-
 
         chestplateAnimator.SetFloat(
             "LastInputX",
             playerAnimator.GetFloat("LastInputX")
         );
 
-
         chestplateAnimator.SetFloat(
             "LastInputY",
             playerAnimator.GetFloat("LastInputY")
         );
-
 
         chestplateAnimator.SetBool(
             "isWalking",
             playerAnimator.GetBool("isWalking")
         );
 
-
         chestplateAnimator.SetBool(
             "isRunning",
             playerAnimator.GetBool("isRunning")
         );
 
-
-        // =========================
-        // FORCE ANIMATION SYNC
-        // =========================
+        // Synchronize the active animation state and timing.
 
         AnimatorStateInfo playerState =
             playerAnimator.GetCurrentAnimatorStateInfo(0);
 
-
-        AnimatorStateInfo chestState =
+        AnimatorStateInfo chestplateState =
             chestplateAnimator.GetCurrentAnimatorStateInfo(0);
 
+        if (playerAnimator.IsInTransition(0) ||
+            chestplateAnimator.IsInTransition(0))
+        {
+            return;
+        }
 
-        if (playerState.fullPathHash !=
-            chestState.fullPathHash)
+        if (playerState.fullPathHash != chestplateState.fullPathHash)
         {
             chestplateAnimator.Play(
                 playerState.fullPathHash,
@@ -150,75 +146,73 @@ public class ChestplateAnimationsManager : MonoBehaviour
                 playerState.normalizedTime
             );
 
-
             chestplateAnimator.Update(0f);
         }
+        else
+        {
+            float timeDifference = Mathf.Abs(
+                Mathf.Repeat(playerState.normalizedTime, 1f) -
+                Mathf.Repeat(chestplateState.normalizedTime, 1f)
+            );
 
+            if (timeDifference > 0.5f)
+                timeDifference = 1f - timeDifference;
 
-        // Keep playback identical
-        chestplateAnimator.speed =
-            playerAnimator.speed;
+            if (timeDifference > 0.02f)
+            {
+                chestplateAnimator.Play(
+                    playerState.fullPathHash,
+                    0,
+                    playerState.normalizedTime
+                );
+
+                chestplateAnimator.Update(0f);
+            }
+        }
     }
 
-
-    // =========================
-    // TRIGGERS
-    // =========================
+    // ============================================================
+    // TRIGGER ATTACK
+    // ============================================================
 
     public void TriggerAttack()
     {
         if (chestplateAnimator == null)
             return;
 
-
-        chestplateAnimator.ResetTrigger(
-            "Attack"
-        );
-
-
-        chestplateAnimator.SetTrigger(
-            "Attack"
-        );
+        chestplateAnimator.ResetTrigger("Attack");
+        chestplateAnimator.SetTrigger("Attack");
     }
 
+    // ============================================================
+    // TRIGGER HURT
+    // ============================================================
 
     public void TriggerHurt()
     {
         if (chestplateAnimator == null)
             return;
 
-
-        chestplateAnimator.ResetTrigger(
-            "Hurt"
-        );
-
-
-        chestplateAnimator.SetTrigger(
-            "Hurt"
-        );
+        chestplateAnimator.ResetTrigger("Hurt");
+        chestplateAnimator.SetTrigger("Hurt");
     }
 
+    // ============================================================
+    // TRIGGER DIE
+    // ============================================================
 
     public void TriggerDie()
     {
         if (chestplateAnimator == null)
             return;
 
-
-        chestplateAnimator.ResetTrigger(
-            "Die"
-        );
-
-
-        chestplateAnimator.SetTrigger(
-            "Die"
-        );
+        chestplateAnimator.ResetTrigger("Die");
+        chestplateAnimator.SetTrigger("Die");
     }
 
-
-    // =========================
+    // ============================================================
     // RESPAWN RESET
-    // =========================
+    // ============================================================
 
     public void ResetAnimator()
     {
@@ -226,12 +220,8 @@ public class ChestplateAnimationsManager : MonoBehaviour
             return;
 
         currentChestplateTier =
-            PlayerPrefs.GetInt(
-                "ChestplateTier",
-                0
-            );
+            PlayerPrefs.GetInt("ChestplateTier", 0);
 
-        // If no chestplate is equipped, keep it disabled
         if (currentChestplateTier == 0)
         {
             if (chestplateObject != null)
@@ -240,7 +230,6 @@ public class ChestplateAnimationsManager : MonoBehaviour
             return;
         }
 
-        // Make sure the GameObject is active before using the Animator
         if (chestplateObject != null)
             chestplateObject.SetActive(true);
 
@@ -249,24 +238,22 @@ public class ChestplateAnimationsManager : MonoBehaviour
         chestplateAnimator.Rebind();
         chestplateAnimator.Update(0f);
 
-        chestplateAnimator.Play(
-            "Idle",
-            0,
-            0f
-        );
+        chestplateAnimator.Play("Idle", 0, 0f);
 
         chestplateAnimator.speed = 1f;
     }
 
+    // ============================================================
+    // ANIMATION EVENTS
+    // ============================================================
 
     public void DealAttackDamage()
     {
-        // Intentionally empty
+        // Intentionally empty.
     }
-
 
     public void EndAttack()
     {
-        // Intentionally empty
+        // Intentionally empty.
     }
 }

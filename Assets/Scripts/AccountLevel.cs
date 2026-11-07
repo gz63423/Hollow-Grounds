@@ -17,7 +17,7 @@ public class AccountLevel : MonoBehaviour
     public float xpMultiplier = 1.25f;
 
 
-    // Current scene UI
+    //UI
     private TMP_Text levelText;
     private TMP_Text xpText;
     private Slider xpBar;

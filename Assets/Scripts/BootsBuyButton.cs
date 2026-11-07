@@ -28,7 +28,7 @@ public class BootsBuyButton : MonoBehaviour
     [Header("Boots Images")]
     public Image currentBootsImage;
 
-    // 0 = default, 1-5 = upgrades
+
     public Sprite[] bootsTierSprites = new Sprite[6];
 
 
@@ -97,7 +97,6 @@ public class BootsBuyButton : MonoBehaviour
         bool canPay = false;
 
 
-        // Gameplay scene
         if (Player.Instance != null)
         {
             float money =
@@ -121,7 +120,6 @@ public class BootsBuyButton : MonoBehaviour
         }
 
 
-        // Upgrade scene
         else
         {
             float money =

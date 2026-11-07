@@ -39,15 +39,13 @@ public class AttackDamageUpgrade : MonoBehaviour
 
     private void Start()
     {
-        // Make sure maxLevel can never exceed
-        // the number of available upgrade costs.
         maxLevel = Mathf.Clamp(
             maxLevel,
             1,
             upgradeCosts.Length
         );
 
-        // Make sure the saved level is valid.
+
         int level = Mathf.Clamp(
             CurrentLevel,
             0,
@@ -67,9 +65,7 @@ public class AttackDamageUpgrade : MonoBehaviour
         }
     }
 
-    // ============================================================
-    // CURRENT DAMAGE
-    // ============================================================
+
 
     public float GetCurrentDamage()
     {
@@ -80,9 +76,7 @@ public class AttackDamageUpgrade : MonoBehaviour
         return damage;
     }
 
-    // ============================================================
-    // NEXT DAMAGE
-    // ============================================================
+
 
     public float GetNextDamage()
     {
@@ -98,9 +92,6 @@ public class AttackDamageUpgrade : MonoBehaviour
         return nextDamage;
     }
 
-    // ============================================================
-    // CURRENT UPGRADE COST
-    // ============================================================
 
     public int GetCurrentUpgradeCost()
     {
@@ -108,14 +99,6 @@ public class AttackDamageUpgrade : MonoBehaviour
         {
             return 0;
         }
-
-        // CurrentLevel is zero-based:
-        //
-        // Level 0 -> cost for Level 1
-        // Level 1 -> cost for Level 2
-        // Level 2 -> cost for Level 3
-        //
-        // etc.
 
         if (CurrentLevel < 0 ||
             CurrentLevel >= upgradeCosts.Length)
@@ -126,9 +109,9 @@ public class AttackDamageUpgrade : MonoBehaviour
         return upgradeCosts[CurrentLevel];
     }
 
-    // ============================================================
-    // BUY UPGRADE
-    // ============================================================
+
+    //Buy
+
 
     public void BuyUpgrade()
     {
@@ -181,9 +164,7 @@ public class AttackDamageUpgrade : MonoBehaviour
 
         PlayerPrefs.Save();
 
-        // ========================================================
-        // ACHIEVEMENT: TOTAL UPGRADES
-        // ========================================================
+        //Stats
 
         AchievementStats.AddUpgradesPurchased(1);
 

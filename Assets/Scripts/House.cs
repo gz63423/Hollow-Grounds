@@ -18,16 +18,8 @@ public class House : MonoBehaviour
     public Collider2D houseCollider;
 
 
-    // ============================================================
-    // STATE
-    // ============================================================
-
     private bool houseDestroyed = false;
 
-
-    // ============================================================
-    // AWAKE
-    // ============================================================
 
     private void Awake()
     {
@@ -46,19 +38,11 @@ public class House : MonoBehaviour
     }
 
 
-    // ============================================================
-    // START
-    // ============================================================
-
     private void Start()
     {
         LoadHouseLevel();
     }
 
-
-    // ============================================================
-    // LOAD HOUSE LEVEL
-    // ============================================================
 
     private void LoadHouseLevel()
     {
@@ -76,10 +60,6 @@ public class House : MonoBehaviour
                 49
             );
 
-
-        // ========================================================
-        // GET MANUAL HP
-        // ========================================================
 
         if (HouseUpgradeData.Instance != null)
         {
@@ -99,17 +79,9 @@ public class House : MonoBehaviour
         }
 
 
-        // ========================================================
-        // SET CURRENT HEALTH
-        // ========================================================
-
         health =
             maxHealth;
 
-
-        // ========================================================
-        // UPDATE HOUSE SPRITE
-        // ========================================================
 
         UpdateHouseSprite(level);
 
@@ -120,10 +92,6 @@ public class House : MonoBehaviour
         );
     }
 
-
-    // ============================================================
-    // REFRESH HOUSE AFTER UPGRADE
-    // ============================================================
 
     public void RefreshHouseLevel()
     {
@@ -146,10 +114,6 @@ public class House : MonoBehaviour
             );
 
 
-        // ========================================================
-        // GET NEW MAX HP
-        // ========================================================
-
         if (HouseUpgradeData.Instance != null)
         {
             maxHealth =
@@ -167,22 +131,9 @@ public class House : MonoBehaviour
         }
 
 
-        // ========================================================
-        // REFRESH CURRENT HEALTH
-        // ========================================================
-        //
-        // Upgrading the house fully repairs it to its new
-        // maximum health.
-        //
-        // ========================================================
-
         health =
             maxHealth;
 
-
-        // ========================================================
-        // REFRESH SPRITE
-        // ========================================================
 
         UpdateHouseSprite(level);
 
@@ -194,9 +145,6 @@ public class House : MonoBehaviour
     }
 
 
-    // ============================================================
-    // UPDATE HOUSE SPRITE
-    // ============================================================
 
     private void UpdateHouseSprite(int level)
     {
@@ -220,18 +168,13 @@ public class House : MonoBehaviour
     }
 
 
-    // ============================================================
-    // TAKE DAMAGE
-    // ============================================================
 
     public void TakeDamage(int amount)
     {
-        // House has already been destroyed.
         if (houseDestroyed)
             return;
 
 
-        // Ignore invalid damage.
         if (amount <= 0)
             return;
 
@@ -252,9 +195,6 @@ public class House : MonoBehaviour
         );
 
 
-        // ========================================================
-        // HOUSE DESTROYED
-        // ========================================================
 
         if (health <= 0)
         {
@@ -266,9 +206,6 @@ public class House : MonoBehaviour
             );
 
 
-            // ====================================================
-            // ADD DEATH STAT
-            // ====================================================
 
             if (PlayerDeaths.Instance != null)
             {
@@ -276,9 +213,7 @@ public class House : MonoBehaviour
             }
 
 
-            // ====================================================
-            // FIRST REBIRTH INTRO CHECK
-            // ====================================================
+
 
             if (RebirthIntroManager.Instance != null)
             {
@@ -294,17 +229,11 @@ public class House : MonoBehaviour
                         "Skipping normal scene reset and starting rebirth transition."
                     );
 
-
-                    // Do NOT continue into the normal
-                    // scene reload.
                     return;
                 }
             }
 
 
-            // ====================================================
-            // NORMAL HOUSE DEATH
-            // ====================================================
 
             Debug.Log(
                 "Rebirth intro not triggered. " +
@@ -320,18 +249,13 @@ public class House : MonoBehaviour
     }
 
 
-    // ============================================================
-    // HEAL
-    // ============================================================
 
     public void Heal(int amount)
     {
-        // House has already been destroyed.
         if (houseDestroyed)
             return;
 
 
-        // Ignore invalid healing amounts.
         if (amount <= 0)
             return;
 
@@ -363,19 +287,11 @@ public class House : MonoBehaviour
     }
 
 
-    // ============================================================
-    // GET HEALTH
-    // ============================================================
-
     public int GetHealth()
     {
         return health;
     }
 
-
-    // ============================================================
-    // GET MAX HEALTH
-    // ============================================================
 
     public int GetMaxHealth()
     {

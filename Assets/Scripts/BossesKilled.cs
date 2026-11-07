@@ -27,7 +27,7 @@ public class BossesKilled : MonoBehaviour
     {
         TotalBossesKilled++;
 
-        // Update Achievement system
+        //Update Achievement
         AchievementStats.AddBossKilled();
 
         SaveBossKills();

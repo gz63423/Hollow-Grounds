@@ -99,16 +99,13 @@ public class FreezePowerupEffects : MonoBehaviour
 
     private void PlayActivationSound()
     {
-        if (freezeActivationSound == null)
-            return;
-
-        AudioSource.PlayClipAtPoint(
-            freezeActivationSound,
-            Camera.main != null
-                ? Camera.main.transform.position
-                : transform.position,
-            freezeActivationVolume
-        );
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayPowerupSFX(
+                freezeActivationSound,
+                freezeActivationVolume
+            );
+        }
     }
 
     private IEnumerator FreezeEffectCoroutine(

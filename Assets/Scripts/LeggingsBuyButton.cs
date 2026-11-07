@@ -28,7 +28,7 @@ public class LeggingsBuyButton : MonoBehaviour
     [Header("Leggings Images")]
     public Image currentLeggingsImage;
 
-    // 0 = default, 1-5 = upgrades
+
     public Sprite[] leggingsTierSprites = new Sprite[6];
 
 
@@ -97,7 +97,6 @@ public class LeggingsBuyButton : MonoBehaviour
         bool canPay = false;
 
 
-        // Gameplay scene
         if (Player.Instance != null)
         {
             float money =
@@ -121,7 +120,7 @@ public class LeggingsBuyButton : MonoBehaviour
         }
 
 
-        // Upgrade scene
+
         else
         {
             float money =

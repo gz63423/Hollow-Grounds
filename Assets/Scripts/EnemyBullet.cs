@@ -3,18 +3,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyBullet : MonoBehaviour
 {
-    // =========================================================
-    // SETTINGS
-    // =========================================================
+
 
     public int damage = 1;
     public float speed = 8f;
     public float lifeTime = 5f;
 
 
-    // =========================================================
-    // INTERNAL
-    // =========================================================
 
     private Transform target;
     private Rigidbody2D rb;
@@ -25,19 +20,11 @@ public class EnemyBullet : MonoBehaviour
     private Vector2 frozenVelocity;
 
 
-    // =========================================================
-    // AWAKE
-    // =========================================================
-
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-
-    // =========================================================
-    // START
-    // =========================================================
 
     void Start()
     {
@@ -57,20 +44,12 @@ public class EnemyBullet : MonoBehaviour
     }
 
 
-    // =========================================================
-    // SET TARGET
-    // =========================================================
-
     public void SetTarget(
         Transform newTarget)
     {
         target = newTarget;
     }
 
-
-    // =========================================================
-    // SET RANGED ENEMY
-    // =========================================================
 
     public void SetRangedEnemy(
         EnemyRanged enemy)
@@ -79,20 +58,12 @@ public class EnemyBullet : MonoBehaviour
     }
 
 
-    // =========================================================
-    // FREEZE
-    // =========================================================
-
     public void SetFrozen(
         bool frozen)
     {
         if (rb == null)
             return;
 
-
-        // =====================================================
-        // FREEZE
-        // =====================================================
 
         if (frozen)
         {
@@ -113,9 +84,6 @@ public class EnemyBullet : MonoBehaviour
         }
 
 
-        // =====================================================
-        // UNFREEZE
-        // =====================================================
 
         if (!frozen)
         {
@@ -124,21 +92,16 @@ public class EnemyBullet : MonoBehaviour
 
             isFrozen = false;
 
-            // Restore the exact velocity
             rb.linearVelocity =
                 frozenVelocity;
         }
     }
 
 
-    // =========================================================
-    // UPDATE
-    // =========================================================
 
     void Update()
     {
-        // Keep the bullet completely stationary
-        // while Freeze is active.
+        // Keep the bullet completely stationary while frozen
         if (isFrozen)
         {
             rb.linearVelocity =
@@ -147,16 +110,12 @@ public class EnemyBullet : MonoBehaviour
     }
 
 
-    // =========================================================
-    // COLLISION
-    // =========================================================
+
 
     void OnTriggerEnter2D(
         Collider2D other)
     {
-        // =====================================================
-        // PLAYER
-        // =====================================================
+
 
         Player player =
             other.GetComponent<Player>();
@@ -168,10 +127,6 @@ public class EnemyBullet : MonoBehaviour
                 damage
             );
 
-
-            // =================================================
-            // PLAYER KNOCKBACK
-            // =================================================
 
             if (rangedEnemy != null)
             {
@@ -194,9 +149,7 @@ public class EnemyBullet : MonoBehaviour
         }
 
 
-        // =====================================================
-        // HOUSE
-        // =====================================================
+
 
         House house =
             other.GetComponent<House>();
@@ -213,9 +166,6 @@ public class EnemyBullet : MonoBehaviour
         }
 
 
-        // =====================================================
-        // OTHER COLLIDERS
-        // =====================================================
 
         if (!other.isTrigger)
         {

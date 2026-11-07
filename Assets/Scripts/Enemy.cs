@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour
     [Header("Enemy Encyclopedia")]
     public EnemyType enemyType;
 
+    [Tooltip("If disabled, this enemy will not unlock in the Enemy Index when killed, and no Index unlock SFX or popup will play.")]
+    public bool enableIndexUnlock = true;
+
     [Header("Stats")]
     public float moveSpeed = 2f;
     public int damage = 1;
@@ -42,15 +45,7 @@ public class Enemy : MonoBehaviour
 
     private Coroutine knockbackCoroutine;
 
-    // =========================================================
-    // POISON
-    // =========================================================
-
     private Coroutine poisonCoroutine;
-
-    // =========================================================
-    // SPAWN ORDER
-    // =========================================================
 
     private long spawnOrder;
 
@@ -86,9 +81,8 @@ public class Enemy : MonoBehaviour
 
     private float soulstonePopupAnchorOriginalX;
 
-    // =========================================================
-    // COMPONENTS
-    // =========================================================
+
+
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -97,17 +91,13 @@ public class Enemy : MonoBehaviour
 
     private EnemyHitFlash hitFlash;
 
-    // =========================================================
-    // BLOOD EFFECT
-    // =========================================================
+
 
     [Header("Blood Effect")]
     [Tooltip("Automatically finds EnemyBloodEffect on this enemy.")]
     private EnemyBloodEffect bloodEffect;
 
-    // =========================================================
-    // TARGET
-    // =========================================================
+    //AI Logic
 
     public Transform currentTarget { get; private set; }
 
@@ -130,16 +120,12 @@ public class Enemy : MonoBehaviour
 
     private bool targetingHouse = false;
 
-    // =========================================================
-    // FREEZE
-    // =========================================================
+
 
     private bool isFrozen = false;
     private float previousAnimatorSpeed = 1f;
 
-    // =========================================================
-    // AWAKE
-    // =========================================================
+
 
     void Awake()
     {
@@ -152,9 +138,7 @@ public class Enemy : MonoBehaviour
         myCollider = GetComponent<Collider2D>();
         hitFlash = GetComponent<EnemyHitFlash>();
 
-        // =====================================================
-        // BLOOD EFFECT
-        // =====================================================
+        //New blood
 
         bloodEffect =
             GetComponent<EnemyBloodEffect>();
@@ -169,9 +153,7 @@ public class Enemy : MonoBehaviour
             house = FindFirstObjectByType<House>();
     }
 
-    // =========================================================
-    // START
-    // =========================================================
+
 
     void Start()
     {
@@ -204,9 +186,7 @@ public class Enemy : MonoBehaviour
             FlipTowards(currentTarget.position);
     }
 
-    // =========================================================
-    // UPDATE
-    // =========================================================
+
 
     void Update()
     {
@@ -249,9 +229,7 @@ public class Enemy : MonoBehaviour
             FlipTowards(currentTarget.position);
     }
 
-    // =========================================================
-    // FIXED UPDATE
-    // =========================================================
+
 
     void FixedUpdate()
     {
@@ -285,9 +263,7 @@ public class Enemy : MonoBehaviour
         float distance =
             direction.magnitude;
 
-        // =====================================================
-        // PLAYER TARGET
-        // =====================================================
+        //Targets
 
         if (!targetingHouse)
         {
@@ -322,9 +298,7 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        // =====================================================
-        // HOUSE TARGET
-        // =====================================================
+
 
         if (targetingHouse && house != null)
         {
@@ -341,9 +315,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // =========================================================
-    // FREEZE CONTROL
-    // =========================================================
+    //Freeze Powerup effect
 
     public void SetFrozen(bool frozen)
     {
@@ -375,16 +347,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // =========================================================
-    // TARGETING
-    // =========================================================
+
 
     public void ChooseTarget()
     {
-        // =====================================================
-        // PLAYER DEAD
-        // =====================================================
-
         if (player != null &&
             player.IsDead)
         {
@@ -402,17 +368,11 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        // =====================================================
-        // LOCKED TARGET
-        // =====================================================
+
 
         if (aggroLocked &&
             lockedTarget != null)
         {
-            // -------------------------------------------------
-            // PLAYER LOCK
-            // -------------------------------------------------
-
             if (lockedTarget == player?.transform)
             {
                 if (player == null ||
@@ -436,10 +396,6 @@ public class Enemy : MonoBehaviour
                 }
             }
 
-            // -------------------------------------------------
-            // HOUSE LOCK
-            // -------------------------------------------------
-
             if (lockedTarget == house?.transform)
             {
                 currentTarget =
@@ -451,18 +407,10 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        // =====================================================
-        // FIND CLOSEST TARGET
-        // =====================================================
-
         Transform closestTarget = null;
 
         float closestDistance =
             float.MaxValue;
-
-        // -----------------------------------------------------
-        // HOUSE
-        // -----------------------------------------------------
 
         if (house != null)
         {
@@ -479,9 +427,7 @@ public class Enemy : MonoBehaviour
                 houseDistance;
         }
 
-        // -----------------------------------------------------
-        // PLAYER
-        // -----------------------------------------------------
+
 
         if (player != null &&
             !player.IsDead)
@@ -502,9 +448,8 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        // =====================================================
-        // APPLY TARGET
-        // =====================================================
+
+
 
         currentTarget =
             closestTarget;
@@ -514,9 +459,8 @@ public class Enemy : MonoBehaviour
             house?.transform;
     }
 
-    // =========================================================
-    // ATTACK
-    // =========================================================
+
+
 
     void TryAttack()
     {
@@ -526,9 +470,7 @@ public class Enemy : MonoBehaviour
             isFrozen)
             return;
 
-        // =====================================================
-        // PLAYER
-        // =====================================================
+
 
         if (!targetingHouse &&
             player != null &&
@@ -547,9 +489,6 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        // =====================================================
-        // HOUSE
-        // =====================================================
 
         if (targetingHouse &&
             house != null &&
@@ -585,9 +524,6 @@ public class Enemy : MonoBehaviour
             isFrozen)
             return;
 
-        // =====================================================
-        // PLAYER ATTACK CANCEL
-        // =====================================================
 
         if (!targetingHouse &&
             player != null)
@@ -626,10 +562,6 @@ public class Enemy : MonoBehaviour
         if (target == null)
             return;
 
-        // =====================================================
-        // HOUSE
-        // =====================================================
-
         if (target ==
             house?.transform &&
             house != null)
@@ -647,9 +579,6 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        // =====================================================
-        // PLAYER
-        // =====================================================
 
         if (target ==
             player?.transform &&
@@ -696,9 +625,6 @@ public class Enemy : MonoBehaviour
         isAttacking = false;
     }
 
-    // =========================================================
-    // COLLISIONS
-    // =========================================================
 
     void OnCollisionEnter2D(
         Collision2D collision)
@@ -710,9 +636,6 @@ public class Enemy : MonoBehaviour
             house?.houseCollider)
             return;
 
-        // =====================================================
-        // PLAYER HAS PRIORITY IF CLOSER
-        // =====================================================
 
         if (player != null &&
             !player.IsDead)
@@ -729,8 +652,7 @@ public class Enemy : MonoBehaviour
                     house.transform.position
                 );
 
-            // Do NOT force the enemy onto the house
-            // if the player is actually closer.
+            // Dont force the enemy onto the house if the player is actually closer.
 
             if (playerDistance < houseDistance)
             {
@@ -742,10 +664,6 @@ public class Enemy : MonoBehaviour
                 return;
             }
         }
-
-        // =====================================================
-        // HOUSE TARGET
-        // =====================================================
 
         targetingHouse = true;
 
@@ -808,9 +726,8 @@ public class Enemy : MonoBehaviour
         );
     }
 
-    // =========================================================
-    // FLIP
-    // =========================================================
+
+
 
     public void FlipTowards(
         Vector2 targetPos)
@@ -862,54 +779,50 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // =========================================================
-    // DAMAGE
-    // =========================================================
+
+    //DMG
 
     public void TakeDamage(float amount)
+    {
+        TakeDamageInternal(amount, true);
+    }
+
+    private void TakeDamageInternal(
+        float amount,
+        bool triggerPlayerAggro)
     {
         if (isDead)
             return;
 
-        // =====================================================
-        // PLAYER AGGRO
-        // =====================================================
 
-        if (player != null &&
+        if (triggerPlayerAggro &&
+            player != null &&
             !player.IsDead)
         {
-            currentTarget =
-                player.transform;
-
+            currentTarget = player.transform;
             targetingHouse = false;
 
             aggroLocked = true;
-            lockedTarget =
-                player.transform;
+            lockedTarget = player.transform;
 
             isAttacking = false;
 
             animator.ResetTrigger("Attack");
 
-            rb.linearVelocity =
-                Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
         }
+
+
 
         hitFlash?.Flash();
 
-        float actualDamage =
-            Mathf.Min(
-                amount,
-                Health
-            );
+        float actualDamage = Mathf.Min(amount, Health);
 
         Health -= actualDamage;
 
         if (DamageDealt.Instance != null)
         {
-            DamageDealt.Instance.AddDamage(
-                actualDamage
-            );
+            DamageDealt.Instance.AddDamage(actualDamage);
         }
 
         if (healthBarInstance != null)
@@ -917,20 +830,19 @@ public class Enemy : MonoBehaviour
             healthBarInstance.Show();
         }
 
-        // =====================================================
-        // BLOOD HIT EFFECT
-        // =====================================================
 
         if (actualDamage > 0f)
         {
             bloodEffect?.PlayHitEffect();
         }
 
+
         if (Health <= 0f)
         {
             Die();
         }
     }
+
 
     // =========================================================
     // KNOCKBACK
@@ -959,9 +871,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // =========================================================
-    // POISON
-    // =========================================================
+
 
     public void ApplyPoison(
         float damagePerSecond,
@@ -986,6 +896,7 @@ public class Enemy : MonoBehaviour
             );
     }
 
+
     private IEnumerator PoisonRoutine(
         float damagePerSecond,
         float duration)
@@ -1008,8 +919,10 @@ public class Enemy : MonoBehaviour
                 yield break;
             }
 
-            TakeDamage(
-                damagePerSecond
+            //apply poison damage without forcing player
+            TakeDamageInternal(
+                damagePerSecond,
+                false
             );
 
             elapsed += 1f;
@@ -1018,18 +931,14 @@ public class Enemy : MonoBehaviour
         poisonCoroutine = null;
     }
 
-    // =========================================================
-    // SPAWN ORDER
-    // =========================================================
+
 
     public long GetSpawnOrder()
     {
         return spawnOrder;
     }
 
-    // =========================================================
-    // KNOCKBACK ROUTINE
-    // =========================================================
+
 
     private IEnumerator KnockbackRoutine(
         Vector2 direction)
@@ -1103,9 +1012,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // =========================================================
-    // DEATH
-    // =========================================================
+
 
     void Die()
     {
@@ -1114,9 +1021,7 @@ public class Enemy : MonoBehaviour
 
         isDead = true;
 
-        // =====================================================
-        // BLOOD DEATH EFFECT
-        // =====================================================
+        //Blood
 
         bloodEffect?.PlayDeathEffect();
 
@@ -1145,53 +1050,56 @@ public class Enemy : MonoBehaviour
             SoundManager.Instance.PlayEnemyDeath();
         }
 
-        bool wasAlreadyUnlocked =
-            EnemyInfoUI.IsEnemyUnlocked(
-                (int)enemyType
+        //Index
+
+        if (enableIndexUnlock)
+        {
+            bool wasAlreadyUnlocked =
+                EnemyInfoUI.IsEnemyUnlocked(
+                    (int)enemyType
+                );
+
+            EnemyInfoUI.UnlockEnemy(
+                (int)enemyType,
+                transform.position
             );
 
-        EnemyInfoUI.UnlockEnemy(
-            (int)enemyType,
-            transform.position
-        );
-
-        if (!wasAlreadyUnlocked &&
-            enemyUnlockPopupPrefab != null)
-        {
-            GameObject popup =
-                Instantiate(
-                    enemyUnlockPopupPrefab,
-                    Vector3.zero,
-                    Quaternion.identity
-                );
-
-            EnemyUnlockPopup unlockPopup =
-                popup.GetComponent<
-                    EnemyUnlockPopup>();
-
-            if (unlockPopup != null)
+            if (!wasAlreadyUnlocked &&
+                enemyUnlockPopupPrefab != null)
             {
-                Vector3 popupPosition =
-                    enemyUnlockPopupAnchor != null
-                        ? enemyUnlockPopupAnchor.position
-                        : transform.position;
+                GameObject popup =
+                    Instantiate(
+                        enemyUnlockPopupPrefab,
+                        Vector3.zero,
+                        Quaternion.identity
+                    );
 
-                unlockPopup.Setup(
-                    "NEW SPECIMEN DISCOVERED!",
-                    popupPosition
-                );
+                EnemyUnlockPopup unlockPopup =
+                    popup.GetComponent<
+                        EnemyUnlockPopup>();
+
+                if (unlockPopup != null)
+                {
+                    Vector3 popupPosition =
+                        enemyUnlockPopupAnchor != null
+                            ? enemyUnlockPopupAnchor.position
+                            : transform.position;
+
+                    unlockPopup.Setup(
+                        "NEW SPECIMEN DISCOVERED!",
+                        popupPosition
+                    );
+                }
+            }
+
+            if (!wasAlreadyUnlocked &&
+                SoundManager.Instance != null)
+            {
+                SoundManager.Instance.PlayEnemyUnlocked();
             }
         }
 
-        if (!wasAlreadyUnlocked &&
-            SoundManager.Instance != null)
-        {
-            SoundManager.Instance.PlayEnemyUnlocked();
-        }
-
-        // =====================================================
-        // MONEY REWARD
-        // =====================================================
+        //Bounty
 
         float finalMoneyReward =
             moneyReward;
@@ -1221,9 +1129,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        // =====================================================
-        // MONEY POPUP
-        // =====================================================
+
 
         if (moneyPopupPrefab != null)
         {
@@ -1252,9 +1158,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        // =====================================================
-        // ENEMIES KILLED
-        // =====================================================
+
 
         if (EnemiesKilled.Instance != null)
         {
@@ -1279,9 +1183,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        // =====================================================
-        // NET WORTH
-        // =====================================================
+
 
         if (NetWorth.Instance != null)
         {
@@ -1290,9 +1192,7 @@ public class Enemy : MonoBehaviour
             );
         }
 
-        // =====================================================
-        // XP
-        // =====================================================
+        //XP
 
         GiveXP giveXP =
             GetComponent<GiveXP>();
@@ -1302,9 +1202,6 @@ public class Enemy : MonoBehaviour
             giveXP.Give();
         }
 
-        // =====================================================
-        // SOUL SIPHON
-        // =====================================================
 
         bool soulSiphonUnlocked =
             PlayerPrefs.GetInt(
@@ -1440,9 +1337,6 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        // =====================================================
-        // START DEATH ANIMATION
-        // =====================================================
 
         animator.SetTrigger("Die");
 
@@ -1452,15 +1346,8 @@ public class Enemy : MonoBehaviour
             Vector2.zero;
 
         OnEnemyDestroyed?.Invoke();
-
-        // DO NOT DESTROY HERE.
-        // The Die animation calls FinishDeath()
-        // through an Animation Event.
     }
 
-    // =========================================================
-    // ANIMATION EVENT
-    // =========================================================
 
     public void FinishDeath()
     {
@@ -1472,9 +1359,6 @@ public class Enemy : MonoBehaviour
         );
     }
 
-    // =========================================================
-    // DEATH FADE
-    // =========================================================
 
     private IEnumerator FadeOutAndDestroy()
     {

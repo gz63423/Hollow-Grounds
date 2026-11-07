@@ -32,7 +32,7 @@ public class AttackSpeedUpgradeUI : MonoBehaviour
 
         int currentLevel = upgrade.CurrentLevel;
 
-        // MAX LEVEL
+        //Maxed
         if (currentLevel >= upgrade.maxLevel)
         {
             if (costText != null)
@@ -52,7 +52,7 @@ public class AttackSpeedUpgradeUI : MonoBehaviour
             return;
         }
 
-        // COST
+
         int cost = upgrade.GetCurrentUpgradeCost();
 
         if (costText != null)
@@ -60,7 +60,6 @@ public class AttackSpeedUpgradeUI : MonoBehaviour
             costText.text = cost.ToString();
         }
 
-        // CURRENT AND NEXT SPEED
         float currentAttackTime = upgrade.GetCurrentAttackTime();
         float nextAttackTime = upgrade.GetNextAttackTime();
 

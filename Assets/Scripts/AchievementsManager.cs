@@ -5,9 +5,8 @@ public class AchievementManager : MonoBehaviour
 {
     public static AchievementManager Instance { get; private set; }
 
-    // ============================================================
-    // ACHIEVEMENT DATA
-    // ============================================================
+    //Data
+
 
     [System.Serializable]
     public class Achievement
@@ -18,7 +17,7 @@ public class AchievementManager : MonoBehaviour
         public float requirement;
         public int soulstoneReward;
 
-        // Used by AchievementCategoryStars.cs
+        // Used by AchievementCategoryStars
         public bool claimed;
 
         public Achievement(
@@ -44,9 +43,7 @@ public class AchievementManager : MonoBehaviour
     private readonly Dictionary<string, bool> claimed =
         new Dictionary<string, bool>();
 
-    // ============================================================
-    // UNITY
-    // ============================================================
+
 
     private void Awake()
     {
@@ -67,19 +64,9 @@ public class AchievementManager : MonoBehaviour
 
     private void Start()
     {
-        // Check every achievement against the player's
-        // currently saved lifetime statistics.
-        //
-        // This is especially important for future updates.
-        // If a new achievement is added and the player has
-        // already exceeded its requirement, it will immediately
-        // be recognized as completed when the game starts.
         UpdateAchievementStates();
     }
 
-    // ============================================================
-    // CREATE ACHIEVEMENTS
-    // ============================================================
 
     private void CreateAchievements()
     {
@@ -626,9 +613,6 @@ public class AchievementManager : MonoBehaviour
         );
     }
 
-    // ============================================================
-    // PROGRESS
-    // ============================================================
 
     public float GetProgress(string id)
     {
@@ -749,9 +733,7 @@ public class AchievementManager : MonoBehaviour
         return 0f;
     }
 
-    // ============================================================
-    // UPDATE ACHIEVEMENT STATES
-    // ============================================================
+
 
     public void UpdateAchievementStates()
     {
@@ -782,13 +764,11 @@ public class AchievementManager : MonoBehaviour
             }
         }
 
-        // Refresh after checking ALL achievements.
+        // Refresh after checking achievements
         RefreshAllAchievementUI();
     }
 
-    // ============================================================
-    // GET ACHIEVEMENT
-    // ============================================================
+
 
     public Achievement GetAchievement(string id)
     {
@@ -801,9 +781,7 @@ public class AchievementManager : MonoBehaviour
         return null;
     }
 
-    // ============================================================
-    // CLAIMED
-    // ============================================================
+
 
     public bool IsClaimed(string id)
     {
@@ -816,9 +794,7 @@ public class AchievementManager : MonoBehaviour
         ) == 1;
     }
 
-    // ============================================================
-    // CLAIM ACHIEVEMENT
-    // ============================================================
+
 
     public bool ClaimAchievement(string id)
     {
@@ -871,7 +847,7 @@ public class AchievementManager : MonoBehaviour
 
         PlayerPrefs.Save();
 
-        // Update both the dictionary AND the achievement itself.
+        // Update both the dictionary and the achievement itself
         claimed[id] = true;
         achievement.claimed = true;
 
@@ -888,9 +864,7 @@ public class AchievementManager : MonoBehaviour
         return true;
     }
 
-    // ============================================================
-    // LOAD CLAIMED STATES
-    // ============================================================
+
 
     private void LoadClaimedStates()
     {
@@ -911,9 +885,7 @@ public class AchievementManager : MonoBehaviour
         }
     }
 
-    // ============================================================
-    // RESET ALL ACHIEVEMENTS
-    // ============================================================
+
 
     public void ResetAllAchievements()
     {
@@ -932,9 +904,7 @@ public class AchievementManager : MonoBehaviour
         RefreshAllAchievementUI();
     }
 
-    // ============================================================
-    // REFRESH UI
-    // ============================================================
+
 
     private void RefreshAllAchievementUI()
     {
